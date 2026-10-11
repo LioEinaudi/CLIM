@@ -1,11 +1,11 @@
 # CLIM Agent Guard v0.1.3
 
-## 🛑 The Illusion of "99% Detection Rate": Track 1 Pilot Study
+## 🛑 Valid Tool Calls, Invalid Authority
 
 We ran **720 controlled execution-boundary trials** across **LangGraph (1.2.14)** and **CrewAI (1.15.25)** to answer a simple question: *If an invalid tool call is proposed, does it actually cause harm in a real system?*
 
 * **No LLMs were involved**; we used fixed, verified tool proposals and isolated sandboxes to measure actual filesystem side effects.
-* **The data is fully reproducible** without a GPU or API key (see [Reproduction](#reproduction)).
+
 
 ### Summary of Results
 
@@ -20,8 +20,8 @@ We ran **720 controlled execution-boundary trials** across **LangGraph (1.2.14)*
 
 ### Key Takeaways
 
-1. **Block Rate `\neq` Safety Rate**: In Arm A (no application authorization), **60% of invalid proposals produced real, irreversible file changes**. The remaining 40% were stopped solely by the underlying filesystem sandbox, *not* by any security logic. 
-2. **Frameworks Are Fine, Explicit Boundaries Are Missing**: Both LangGraph's native interrupt/resume mechanism and CrewAI's tool hooks (Arms B & C) achieved **0% unauthorized effects** when an explicit policy was provided. The problem isn't the framework—it's that most deployments lack a dedicated, state-bound authorization layer.
+1. **Block Rate `\neq` Safety Rate**: In Arm A (no application authorization), **60% of invalid proposals produced measured unauthorized filesystem effects**. The remaining 40% were stopped solely by the underlying filesystem sandbox, *not* by any security logic. 
+2. **Frameworks Are Fine, Explicit Boundaries Are Missing**: Both LangGraph's native interrupt/resume mechanism and CrewAI's tool hooks (Arms B & C) achieved **0% unauthorized effects** when an explicit policy was provided. 
 3. **Execution Integrity Requires More Than a Gateway Verdict**: A gateway logging a `BLOCK` does not guarantee safety if retry loops, timeouts, or state mismatches bypass the gate. CLIM bridges this gap by enforcing deterministic contracts and verifying post-execution effects.
 
 *Read the full technical report in [`docs/track1_execution_boundary_study.md`](docs/track1_execution_boundary_study.md).*
