@@ -257,6 +257,4 @@ Tests cover explicit contracts, argument binding, state freshness, retry/idempot
 - **v0.2 (planned) — Residual diagnostics:** explore semantic drift, sequence changes and partial-effect mismatch without replacing explicit contract enforcement.
 - **v0.3 (planned) — Differential validation:** compare matched runs across models, prompts, runtimes and configurations, tracking the first observable divergence.
 
-## License
 
-Apache-2.0. See [LICENSE](LICENSE).
