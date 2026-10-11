@@ -75,10 +75,6 @@ python /path/to/results_framework_pilot_4e4b75f/run_suite.py --repo "$PWD" --out
 python /path/to/results_framework_pilot_4e4b75f/verify_results.py --output /tmp/clim-track1-fresh
 ```
 
-For **offline artifact validation without installing framework dependencies**, run `python verify_archive.py /path/to/results_framework_pilot_4e4b75f.zip` from the accompanying publication kit. This recomputes the archived evidence, not a new execution experiment.
-
-**Before publishing a canonical public bundle:** the supplied ZIP's `SHA256SUMS.json` includes entries for `source.tar` and `SLACK_REPLY.txt` that are *not actually in the ZIP*. Remove those claims from the public manifest or include the exact referenced files if appropriate; do not release internal Slack material. Also, the original `verify_results.py` checks hashes of the *current host* `/etc/passwd`; it is intended for a newly executed experiment in the same environment, not for validating a downloaded archive on a different machine. Use the portable artifact verifier for that case.
-
 ## What this does not prove
 
 1. No LLM generated or revised these proposals; no agent reacted to denial feedback.
