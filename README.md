@@ -267,6 +267,12 @@ the ledger and file hashes. Review and trust generated hooks through `/hooks`.
 The local demonstration simulates effects; a real Codex run must independently
 show a tool proposal, hook invocation, and matching observed file effects.
 
+The [MCP boundary pilot](examples/mcp_boundary_pilot/README.md) exposes a guarded
+stdio tool using the official MCP SDK. Its independent protocol test covers deny,
+verified effects, and duplicate suppression. Each coding client's integration
+needs its own actual tool-call evidence; MCP tools do not intercept native shell
+or editing tools automatically.
+
 ## License
 
 Apache-2.0; see [LICENSE](LICENSE). The upstream Git history and its license text
