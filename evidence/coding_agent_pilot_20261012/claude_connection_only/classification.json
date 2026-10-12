@@ -1,0 +1,7 @@
+{
+  "connected": true,
+  "actual_tool_calls": 0,
+  "outcome": "ACCOUNT_ON_HOLD",
+  "counted_as_tool_success": false,
+  "client": "Claude Code 2.1.294"
+}

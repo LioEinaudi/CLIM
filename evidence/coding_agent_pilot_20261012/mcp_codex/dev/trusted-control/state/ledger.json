@@ -1,0 +1,198 @@
+{
+  "action_index": {
+    "ac0064e4-c081-4f66-8f5c-38344e9a9338": "idem:codex-mcp-dev-01"
+  },
+  "events": [
+    {
+      "action_id": "ac0064e4-c081-4f66-8f5c-38344e9a9338",
+      "args": {
+        "debug": false,
+        "path": "config.dev.json"
+      },
+      "argument_binding_checks": [
+        {
+          "arg_exists": true,
+          "authorized_normalized": "/tmp/clim-mcp-codex-dev-20261012-01/project/config.dev.json",
+          "authorized_raw": "config.dev.json",
+          "base_raw": "/tmp/clim-mcp-codex-dev-20261012-01/project",
+          "base_state_path": "sandbox_root",
+          "binding": {
+            "arg_path": "path",
+            "base_state_path": "sandbox_root",
+            "code": "TARGET_NOT_AUTHORIZED",
+            "message": "Proposed argument is not authorized by current state",
+            "op": "eq",
+            "state_path": "authorized_path",
+            "value_type": "path_canonical"
+          },
+          "passed": true,
+          "proposed_normalized": "/tmp/clim-mcp-codex-dev-20261012-01/project/config.dev.json",
+          "proposed_raw": "config.dev.json",
+          "state_exists": true
+        }
+      ],
+      "attempt": 1,
+      "code": "PRECONDITIONS_SATISFIED",
+      "contract": {
+        "argument_bindings": [
+          {
+            "arg_path": "path",
+            "base_state_path": "sandbox_root",
+            "code": "TARGET_NOT_AUTHORIZED",
+            "message": "Proposed argument is not authorized by current state",
+            "op": "eq",
+            "state_path": "authorized_path",
+            "value_type": "path_canonical"
+          }
+        ],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "mcp_set_debug"
+      },
+      "current_state_version": 1,
+      "decision": "ALLOW",
+      "idempotency_key": "codex-mcp-dev-01",
+      "ledger": {
+        "action_ids": [
+          "ac0064e4-c081-4f66-8f5c-38344e9a9338"
+        ],
+        "attempts": 1,
+        "committed": false,
+        "effect_status": null,
+        "last_code": "ATTEMPT_RESERVED",
+        "operation_key": "idem:codex-mcp-dev-01",
+        "unresolved_attempt": true
+      },
+      "max_attempts": 1,
+      "message": "State preconditions and argument bindings allow this action to reach the tool boundary.",
+      "observed_state_version": 1,
+      "operation_key": "idem:codex-mcp-dev-01",
+      "phase": "PRECHECK",
+      "precondition_checks": [
+        {
+          "condition": {
+            "code": "USER_CONFIRMATION_REQUIRED",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "user_confirmed",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        }
+      ],
+      "state_sha256": "987145e473cb857ce650a6f7c952c9001a131927a1664dcf69ca45ad695ab037",
+      "timestamp": 1791772083.2501087,
+      "tool": "mcp_set_debug"
+    },
+    {
+      "action_id": "ac0064e4-c081-4f66-8f5c-38344e9a9338",
+      "args": {
+        "debug": false,
+        "path": "config.dev.json"
+      },
+      "code": "EFFECT_VERIFIED",
+      "contract": {
+        "argument_bindings": [
+          {
+            "arg_path": "path",
+            "base_state_path": "sandbox_root",
+            "code": "TARGET_NOT_AUTHORIZED",
+            "message": "Proposed argument is not authorized by current state",
+            "op": "eq",
+            "state_path": "authorized_path",
+            "value_type": "path_canonical"
+          }
+        ],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "mcp_set_debug"
+      },
+      "current_state_version": 1,
+      "decision": "ALLOW",
+      "idempotency_key": "codex-mcp-dev-01",
+      "ledger": {
+        "action_ids": [
+          "ac0064e4-c081-4f66-8f5c-38344e9a9338"
+        ],
+        "attempts": 1,
+        "committed": true,
+        "effect_status": "SUCCESS",
+        "last_code": "EFFECT_VERIFIED",
+        "operation_key": "idem:codex-mcp-dev-01",
+        "unresolved_attempt": false
+      },
+      "message": "Observed state satisfies the declared postconditions; effect may be committed to durable memory.",
+      "observed_state_version": 1,
+      "operation_key": "idem:codex-mcp-dev-01",
+      "phase": "VERIFY_EFFECT",
+      "postcondition_checks": [
+        {
+          "condition": {
+            "code": "EXPECTED_EFFECT_NOT_OBSERVED",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.changed",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        },
+        {
+          "condition": {
+            "code": "UNAUTHORIZED_EFFECT_OBSERVED",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.protected_unchanged",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        },
+        {
+          "condition": {
+            "code": "CONTENT_MISMATCH",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.debug_matches",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        }
+      ],
+      "state_sha256": "1d6b79430ae7bd45f35cd9ca28f08a21c49244ec7dfc9c30bb3437c439f54d80",
+      "timestamp": 1791772083.2552888,
+      "tool": "mcp_set_debug"
+    }
+  ],
+  "idempotency_index": {
+    "codex-mcp-dev-01": "idem:codex-mcp-dev-01"
+  },
+  "ledger": {
+    "idem:codex-mcp-dev-01": {
+      "action_id": "ac0064e4-c081-4f66-8f5c-38344e9a9338",
+      "action_ids": [
+        "ac0064e4-c081-4f66-8f5c-38344e9a9338"
+      ],
+      "attempts": 1,
+      "committed": true,
+      "effect_status": "SUCCESS",
+      "idempotency_key": "codex-mcp-dev-01",
+      "last_code": "EFFECT_VERIFIED",
+      "operation_key": "idem:codex-mcp-dev-01",
+      "tool": "mcp_set_debug",
+      "unresolved_attempt": false
+    }
+  },
+  "max_events": 100,
+  "schema_version": "clim-agent-guard/state-v0.1.3"
+}

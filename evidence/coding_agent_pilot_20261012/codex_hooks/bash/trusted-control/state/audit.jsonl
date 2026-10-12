@@ -1,0 +1,1 @@
+{"code": "ADAPTER_DENY", "decision": "BLOCK", "phase": "PRE", "reason": "ValueError: Only native apply_patch is supported; Bash and other tools denied", "session": "01a12de1-72d0-7aa2-ae7e-05a21b954f95", "tool_name": "Bash", "tool_use_id": "exec-9fe91553-565d-4992-a552-4e229f0a17f6"}

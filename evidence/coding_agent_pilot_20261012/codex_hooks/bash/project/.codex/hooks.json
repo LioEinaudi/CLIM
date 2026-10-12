@@ -1,0 +1,31 @@
+{
+  "description": "CLIM pilot: only update config.dev.json with apply_patch; deny Bash",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(apply_patch|Bash)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/root/mine/CLIM/.venv/bin/python /root/mine/CLIM/examples/codex_boundary_pilot/hook.py pre",
+            "timeout": 15,
+            "statusMessage": "CLIM file boundary pilot"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^(apply_patch|Bash)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/root/mine/CLIM/.venv/bin/python /root/mine/CLIM/examples/codex_boundary_pilot/hook.py post",
+            "timeout": 15,
+            "statusMessage": "CLIM file boundary pilot"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "kind": "REAL_MCP_STDIO_SDK_CLIENT_NO_LLM",
+  "accepted": true,
+  "records": [
+    {
+      "phase": "CONNECTED",
+      "protocol_version": "2026-07-28",
+      "server_info": {
+        "name": "CLIM boundary pilot",
+        "title": null,
+        "version": "",
+        "description": null,
+        "website_url": null,
+        "icons": null
+      },
+      "tools": [
+        "clim_set_debug"
+      ]
+    },
+    {
+      "case": "prod_deny",
+      "tool_name": "clim_set_debug",
+      "arguments": {
+        "path": "config.prod.json",
+        "debug": false,
+        "operation_id": "smoke-prod"
+      },
+      "result": {
+        "_meta": {
+          "io.modelcontextprotocol/serverInfo": {
+            "name": "CLIM boundary pilot",
+            "version": ""
+          }
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool clim_set_debug: CLIM: TARGET_NOT_AUTHORIZED"
+          }
+        ],
+        "isError": true,
+        "resultType": "complete"
+      }
+    },
+    {
+      "case": "dev_allow",
+      "tool_name": "clim_set_debug",
+      "arguments": {
+        "path": "config.dev.json",
+        "debug": false,
+        "operation_id": "smoke-dev"
+      },
+      "result": {
+        "_meta": {
+          "io.modelcontextprotocol/serverInfo": {
+            "name": "CLIM boundary pilot",
+            "version": ""
+          }
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"transport\": \"MCP_SERVER_GUARD\",\n  \"server_instance\": \"fe8c38e0-cc65-4b19-b767-986eddbe91c8\",\n  \"attempt_id\": \"d4c09620-d0a9-4cfc-93d9-f773b5e0c87e\",\n  \"operation_id\": \"smoke-dev\",\n  \"arguments\": {\n    \"path\": \"config.dev.json\",\n    \"debug\": false,\n    \"operation_id\": \"smoke-dev\"\n  },\n  \"decision\": \"ALLOW\",\n  \"code\": \"EFFECT_VERIFIED\",\n  \"file_hashes_after\": {\n    \"config.dev.json\": \"ad27eb0888f603e5ec5a27c78ab13c906c8af5acd5e4479e42f4bd36b26edfc7\",\n    \"config.prod.json\": \"ada010a86261ed90353c19383bdc4a914d38e0569f8f3e59668ca86256ecafd7\"\n  }\n}"
+          }
+        ],
+        "structuredContent": {
+          "transport": "MCP_SERVER_GUARD",
+          "server_instance": "fe8c38e0-cc65-4b19-b767-986eddbe91c8",
+          "attempt_id": "d4c09620-d0a9-4cfc-93d9-f773b5e0c87e",
+          "operation_id": "smoke-dev",
+          "arguments": {
+            "path": "config.dev.json",
+            "debug": false,
+            "operation_id": "smoke-dev"
+          },
+          "decision": "ALLOW",
+          "code": "EFFECT_VERIFIED",
+          "file_hashes_after": {
+            "config.dev.json": "ad27eb0888f603e5ec5a27c78ab13c906c8af5acd5e4479e42f4bd36b26edfc7",
+            "config.prod.json": "ada010a86261ed90353c19383bdc4a914d38e0569f8f3e59668ca86256ecafd7"
+          }
+        },
+        "isError": false,
+        "resultType": "complete"
+      }
+    },
+    {
+      "case": "duplicate_deny",
+      "tool_name": "clim_set_debug",
+      "arguments": {
+        "path": "config.dev.json",
+        "debug": false,
+        "operation_id": "smoke-dev"
+      },
+      "result": {
+        "_meta": {
+          "io.modelcontextprotocol/serverInfo": {
+            "name": "CLIM boundary pilot",
+            "version": ""
+          }
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool clim_set_debug: CLIM: DUPLICATE_SIDE_EFFECT"
+          }
+        ],
+        "isError": true,
+        "resultType": "complete"
+      }
+    }
+  ],
+  "before_hashes": {
+    "config.dev.json": "ada010a86261ed90353c19383bdc4a914d38e0569f8f3e59668ca86256ecafd7",
+    "config.prod.json": "ada010a86261ed90353c19383bdc4a914d38e0569f8f3e59668ca86256ecafd7"
+  },
+  "after_hashes": {
+    "config.dev.json": "ad27eb0888f603e5ec5a27c78ab13c906c8af5acd5e4479e42f4bd36b26edfc7",
+    "config.prod.json": "ada010a86261ed90353c19383bdc4a914d38e0569f8f3e59668ca86256ecafd7"
+  }
+}

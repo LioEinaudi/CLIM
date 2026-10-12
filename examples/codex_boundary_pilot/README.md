@@ -2,7 +2,7 @@
 
 **Integration candidate for CLIM v0.1.3.** Copy `examples/codex_boundary_pilot/` to your existing CLIM repository. No changes to `clim_agent_guard/core.py` are required.
 
-> Status: **official Hook JSON protocol verified, local hook-process integration tests passed; no real Codex CLI run performed in the author's test environment.** This is an experimental bridge, not a production security product.
+> Status: **three real Codex CLI 0.162.1 controls passed on 2026-10-12**: protected production patch denied, authorized development patch effect verified, and shell write denied. See [recorded evidence](../../docs/coding_agent_boundary_pilot_results_20261012.md). This remains an experimental bridge.
 
 ## Purpose
 

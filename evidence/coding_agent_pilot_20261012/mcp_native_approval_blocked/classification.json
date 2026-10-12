@@ -1,0 +1,6 @@
+{
+  "outcome": "CLIENT_APPROVAL_BLOCKED",
+  "clim_invoked": false,
+  "counted_as_clim_success": false,
+  "reason": "MCP tool call requires approval, but approval policy is never."
+}

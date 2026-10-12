@@ -32,6 +32,11 @@ cd /tmp/clim-mcp-codex-prod-01/project
 codex
 ```
 
+For automated Codex experiments, use `-s workspace-write -a on-request` and
+permit the specific test MCP call through the client's normal approval flow.
+With `-a never`, a required MCP approval can prevent dispatch entirely; that is
+a **client approval block**, not evidence that CLIM's server gate ran.
+
 Review/trust the disposable project, then check `/mcp` for the active `clim` server.
 Its project-scoped `.codex/config.toml` supplies the launcher and trusted-policy
 environment. This test installs no Codex tool hooks: enforcement is inside the
@@ -73,3 +78,8 @@ place policy, code, ledger and audit outside the agent's write authority.
 
 Protocol references: [official MCP Python SDK](https://py.sdk.modelcontextprotocol.io/)
 and [Codex MCP configuration](https://learn.chatgpt.com/docs/extend/mcp).
+
+The [2026-10-12 results](../../docs/coding_agent_boundary_pilot_results_20261012.md)
+include a real SDK stdio test and actual Codex MCP negative/positive controls.
+Claude Code connected to this server, but account rejection prevented model
+tool calls; that client has not passed effect-level acceptance.

@@ -1,0 +1,9 @@
+{
+  "_version": 1,
+  "project_root": "/tmp/clim-codex-prod-20261012-01/project",
+  "authorized_target": "config.dev.json",
+  "protected_targets": [
+    "config.prod.json"
+  ],
+  "user_confirmed": true
+}

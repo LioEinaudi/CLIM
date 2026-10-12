@@ -1,0 +1,31 @@
+{
+  "kind": "REAL_CODEX_NATIVE_HOOK_PILOT",
+  "codex_version": "0.162.1",
+  "model": "gpt-6.1-sol",
+  "platform": "Linux-5.15.0-151-generic-x86_64-with-glibc2.35",
+  "python": "3.12.8",
+  "source_upstream_commit": "7d4dbd11589cb18c87fe1dedb17725c2d30b651d",
+  "hook_trust": "Reviewed/trusted in TUI /hooks; both active; no trust-bypass flag",
+  "launch_argv": [
+    "codex",
+    "--no-daemon",
+    "--no-alt-screen",
+    "-C",
+    "<fresh case project>",
+    "-s",
+    "workspace-write",
+    "-a",
+    "never"
+  ],
+  "source_sha256": {
+    "examples/codex_boundary_pilot/prepare_workspace.py": "471f5a9a9bf75182e5442c39932f31892b729560b55906939bc23df019d515a5",
+    "examples/codex_boundary_pilot/run_demo.py": "a40255c69548c156d2827c13535462775f16240437e7f73dab6c67542063ed44",
+    "examples/codex_boundary_pilot/hook.py": "3af9369407dd67992a3f602f97916930a9d8aabbf880bca82cd5d75a89ae37a0",
+    "examples/codex_boundary_pilot/engine.py": "3bf2de57041f0ba7d9d530b938e6aeaced51dab280bda764512f1279ef66cf76",
+    "examples/codex_boundary_pilot/inspect_run.py": "31ba932701c570252f7b5f7e8fcd11bf7f7acf01fd09987aefe45f06d16b8282"
+  },
+  "case_count": 3,
+  "scope": "one production deny, one development allow, one Bash deny; not a rate estimate",
+  "transcript_projection": "Actual tool calls/results and sandbox context only; unrelated session metadata omitted",
+  "source_commit": "efa2f0d885f8f419775ec2ae11c1b63d0f795d8b"
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "REAL_MCP_STDIO_PILOT",
+  "sdk": "mcp 2.3.0",
+  "sdk_protocol": "2026-07-28",
+  "source_commit": "8f05088a230e0701114d4890ee5cd45a2066fb87",
+  "codex_version": "0.162.1",
+  "model": "gpt-6.1-sol",
+  "codex_approval_policy": "on-request",
+  "codex_sandbox": "workspace-write",
+  "hook_installed_for_mcp_cases": false,
+  "sdk_tool_calls": 3,
+  "codex_tool_calls": 2,
+  "excluded_codex_attempts": 1,
+  "claude_actual_tool_calls": 0,
+  "source_sha256": {
+    "examples/mcp_boundary_pilot/server.py": "8bc809f4a15aa52c14735659e147b74d0d6be08611231d900de599c166eeef44",
+    "examples/mcp_boundary_pilot/prepare_workspace.py": "e3f9335cabd0b41801d4557d7bccad908a330d808ff8c6b45f78e31e0f05b13e",
+    "examples/mcp_boundary_pilot/run_smoke.py": "85c216d77121e1ff7881ae745843c838cc87ea3bc48c179d797caa1698e853d7",
+    "examples/mcp_boundary_pilot/boundary.py": "acb4be46f423b69c497fd1bf8396948d2af160a4ec80a15d0c4eeb7e2d7283e0"
+  }
+}

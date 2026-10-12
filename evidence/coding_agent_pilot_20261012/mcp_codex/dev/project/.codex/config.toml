@@ -1,0 +1,9 @@
+[mcp_servers.clim]
+command = "/root/mine/CLIM/.venv/bin/python"
+args = ["/root/mine/CLIM/examples/mcp_boundary_pilot/server.py"]
+cwd = "/tmp/clim-mcp-codex-dev-20261012-01/project"
+required = true
+startup_timeout_sec = 30
+[mcp_servers.clim.env]
+CLIM_MCP_POLICY = "/tmp/clim-mcp-codex-dev-20261012-01/trusted-control/policy.json"
+CLIM_MCP_STATE_DIR = "/tmp/clim-mcp-codex-dev-20261012-01/trusted-control/state"

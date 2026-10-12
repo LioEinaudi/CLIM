@@ -273,6 +273,10 @@ verified effects, and duplicate suppression. Each coding client's integration
 needs its own actual tool-call evidence; MCP tools do not intercept native shell
 or editing tools automatically.
 
+The [2026-10-12 coding-agent results](docs/coding_agent_boundary_pilot_results_20261012.md)
+record three actual Codex Hook controls and two actual Codex MCP controls, with
+portable verification of requests, receipts, CLIM decisions and copied file effects.
+
 ## License
 
 Apache-2.0; see [LICENSE](LICENSE). The upstream Git history and its license text
