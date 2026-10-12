@@ -257,4 +257,19 @@ Tests cover explicit contracts, argument binding, state freshness, retry/idempot
 - **v0.2 (planned) — Residual diagnostics:** explore semantic drift, sequence changes and partial-effect mismatch without replacing explicit contract enforcement.
 - **v0.3 (planned) — Differential validation:** compare matched runs across models, prompts, runtimes and configurations, tracking the first observable divergence.
 
+## Codex execution hooks
+
+The [Codex boundary pilot](examples/codex_boundary_pilot/README.md) connects native
+`PreToolUse` / `PostToolUse` events to CLIM's precheck and effect verification.
+Its disposable experiment permits one development-config patch, blocks protected
+production-config patches and Bash, and records raw hook input/output alongside
+the ledger and file hashes. Review and trust generated hooks through `/hooks`.
+The local demonstration simulates effects; a real Codex run must independently
+show a tool proposal, hook invocation, and matching observed file effects.
+
+## License
+
+Apache-2.0; see [LICENSE](LICENSE). The upstream Git history and its license text
+are retained. Source: [ZC502/clim-agent-guard](https://github.com/ZC502/clim-agent-guard).
+
 

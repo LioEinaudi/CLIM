@@ -18,3 +18,6 @@ dev = ["pytest>=8"]
 
 [tool.setuptools.packages.find]
 include = ["clim_agent_guard*"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "benchmarks/framework_pilot"]
