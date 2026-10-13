@@ -1,0 +1,32 @@
+{
+  "source_commit": "5750fd9bb5c4dbba6a3d32c3b1207ae56267d6e3",
+  "baseline_commit": "c723182269218287bc22dad183a32794d7d355a4",
+  "core_unchanged": true,
+  "source_sha256": {
+    "clim_agent_guard/core.py": "33752c4e5c734b0b6ce0c381dc5cdc8a49626f1f6bed966d3716909e517e2dca",
+    "pyproject.toml": "a0ec19e27e0aeed51b4779d1264da493bb5b202ff46cb2a6da69d77680403009",
+    "LICENSE": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+    "clim_agent_guard/devpreview/policy.py": "0d5e157fdd95305583b6ac23e2315d94af9f17c9f6491469369747b4ab70e80d",
+    "clim_agent_guard/devpreview/store.py": "7b5c4a151558ad0ed665a5eb1d9e2d2e1d889bac3c5897a3fa48fa9d11c8e5cc",
+    "clim_agent_guard/devpreview/__init__.py": "ffaae3a9c2f6e578df78f73f0f909613639bab8358f8498540364ec3148c06ed",
+    "clim_agent_guard/devpreview/hook.py": "78da780982c08b8241ef9caef1cafc0b80c60180c3180dbbb342ee5ba963744d",
+    "clim_agent_guard/devpreview/cli.py": "c70319dd5b96bec20e2f0b7ba18081fec57c806b8fc0d197bb8373d1e86fffcd",
+    "benchmarks/developer_preview/prepare_workspace.py": "edf7c8dc90e9cd43b6a61e5e6e5fd8c5ce6869a2defeb4dc5724a279d8041717"
+  },
+  "original_patch_sha256": "a20b7bb8ea3f068b80a169a07201eb36f2ddd1f5416ac5d355193fa6f78ccf25",
+  "python": "3.12.8 | packaged by conda-forge | (main, Dec  5 2024, 14:24:40) [GCC 13.3.0]",
+  "codex_cli": "0.162.1",
+  "model": "gpt-6.1-sol",
+  "approval_policy": "on-request",
+  "sandbox": "workspace-write",
+  "cli_flags": [
+    "--no-daemon",
+    "--no-alt-screen",
+    "-s",
+    "workspace-write",
+    "-a",
+    "on-request"
+  ],
+  "hook_trust_bypass": false,
+  "sandbox_bypass": false
+}

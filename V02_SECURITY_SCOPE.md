@@ -1,15 +1,17 @@
 # Developer Preview v0.2: bounded security claims and release criteria
 
+Five real Codex workflow controls were completed on October 13; see [the evidence report](docs/developer_preview_v02_results_20261013.md). The remaining verification column below now distinguishes that acceptance from broader release work.
+
 | Capability | Current implementation | Remaining verification |
 |---|---|---|
-| Codex Hook installation | Writes project `.codex/hooks.json` while preserving other entries | Live Codex `/hooks` trust review and activation |
-| Shadow | Logs hook proposals, observes watched effects without intentional deny | Confirm missing PostToolUse and native tools in real workflows |
-| Guarded patch | Checks every declared patch target and protected patterns; calls actual Core pre/post | Real Codex multi-file patch, rename/add/delete, long runs, race/failure |
-| Cross-tool | Guarded denies uninspected Bash; explicitly allowed Shell has no effect verification | Real alternate tools and native OS sandbox behavior |
+| Codex Hook installation | Real `/hooks` trust/activation and third-party-preserving uninstall passed | Independent-user installations |
+| Shadow | Real production patch recorded `WOULD_BLOCK` and `OBSERVED`, without deny | Other native tool paths, broader telemetry faults |
+| Guarded patch | Real two-file patch verified; mixed protected patch denied atomically | Rename/add/delete, long runs, races and other failures |
+| Cross-tool | Actual patch deny followed by autonomous Python Shell write deny; explicitly allowed Shell remains unverified | Other tool routes and client configurations |
 | Ask | Deny with explanation + exact one-time human grant; NOT Codex native ask | User-initiated approval/retry UX |
 | Effect residual | Change set vs declared targets among watched files; pre/post hashes | Coverage of other paths, process attribution, large repos |
 | Token saving | None claimed | Actual usage telemetry and task success with/without CLIM |
-| Correctness of normal coding | Single/multiple target patch unit tests | Independent-user task completion, FBR and installation UX |
+| Correctness of normal coding | One actual multi-file refactor completed with three tests passing; three Shell grants needed | Independent-user task completion, FBR and installation UX |
 | Durable/tamper-resistant policy | Same-user external directory only | OS protection and secure state/audit service |
 | Windows | Unsupported (`fcntl` POSIX) | Windows-specific implementation |
 | MCP | Existing experimental server remains separate | Productize in v0.3 and run multiple clients |

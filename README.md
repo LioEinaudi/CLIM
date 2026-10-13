@@ -302,3 +302,5 @@ clim report --today
 **What it can currently do:** Block supported `apply_patch` changes to protected paths; allow normal multiple-target patches; report actual changes to watched files; deny uncovered Shell commands in strict mode. It does not protect unhooked tool routes, provide an OS privilege boundary, silently install trusted hooks, analyze arbitrary Shell effects, or guarantee false-positive-free workflows.
 
 [Full installation, limitations, uninstallation and real Codex acceptance](docs/developer_preview_v02.md). Previous 720-trial LangGraph/CrewAI benchmarks remain available as supporting research, **not** the main product experience.
+
+[October 13 real workflow results and portable evidence](docs/developer_preview_v02_results_20261013.md): multi-file refactor, autonomous alternate-tool attempt, development-target recovery, missing-post reconciliation, Shadow and uninstall controls. The normal workflow needed three exact Shell grants; this preview still has approval friction.

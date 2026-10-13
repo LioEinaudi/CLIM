@@ -1,0 +1,29 @@
+{
+  "_version": 3,
+  "explicit_overrides": [],
+  "mode": "guarded",
+  "permissions_notice": "Host controls these rules; not model prompts.",
+  "project_root": "/tmp/clim-v02-live-20261013/cross_tool/project",
+  "protected": [
+    ".env",
+    ".env.*",
+    "**/.env",
+    "**/.env.*",
+    "config.prod.*",
+    "**/config.prod.*",
+    "**/prod/**",
+    "prod/**",
+    "**/*.pem",
+    "*.pem",
+    "**/*.key",
+    "*.key",
+    ".git/**",
+    ".codex/**",
+    ".clim/**",
+    ".clim.json",
+    "tests/**",
+    "src/__init__.py"
+  ],
+  "schema": "clim-developer-policy/v0.2",
+  "shell_allow_exact": []
+}

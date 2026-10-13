@@ -1,0 +1,97 @@
+{
+  "events": 5,
+  "counts": {
+    "BLOCK": 3,
+    "ALLOW": 2,
+    "WOULD_BLOCK": 0,
+    "WOULD_ALLOW": 0,
+    "RECONCILIATION_ACKNOWLEDGED": 0,
+    "OBSERVED": 0,
+    "UNKNOWN": 0,
+    "ALLOW_UNVERIFIED": 0
+  },
+  "recent": [
+    {
+      "authorized": false,
+      "code": "TARGET_NOT_AUTHORIZED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "TARGET_NOT_AUTHORIZED: config.prod.json",
+      "session_id": "01a13403-d22b-7d12-99fe-0e9a807f70b0",
+      "targets": [
+        "config.prod.json"
+      ],
+      "timestamp": "2026-10-13T06:47:29.421657+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-c0e7590f-27eb-4cf0-91de-b714dd28fa31"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_UNINSPECTED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a13403-d22b-7d12-99fe-0e9a807f70b0",
+      "targets": [],
+      "timestamp": "2026-10-13T06:47:51.652616+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-3612bb4e-8fde-44d1-bae4-a9530e115879"
+    },
+    {
+      "authorized": true,
+      "code": "PRECONDITIONS_SATISFIED",
+      "complete": true,
+      "decision": "ALLOW",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "TARGET_AUTHORIZED",
+      "session_id": "01a13403-d22b-7d12-99fe-0e9a807f70b0",
+      "snapshot_count": 4,
+      "targets": [
+        "config.dev.json"
+      ],
+      "timestamp": "2026-10-13T06:48:01.179603+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-747b6b3f-2991-4765-838f-241ee7649d57"
+    },
+    {
+      "code": "EFFECT_VERIFIED",
+      "decision": "ALLOW",
+      "effect": {
+        "changed_paths": [
+          "config.dev.json"
+        ],
+        "evidence_complete": true,
+        "expected_changed": true,
+        "policy_unchanged": true,
+        "scope_valid": true,
+        "unauthorized_changed_paths": [],
+        "uncertain_paths": []
+      },
+      "enforced": true,
+      "phase": "POST",
+      "policy_unchanged": true,
+      "timestamp": "2026-10-13T06:48:01.281289+00:00",
+      "tool_use_id": "exec-747b6b3f-2991-4765-838f-241ee7649d57"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_UNINSPECTED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a13403-d22b-7d12-99fe-0e9a807f70b0",
+      "targets": [],
+      "timestamp": "2026-10-13T06:48:26.769274+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-8b7f1d00-e95e-45a0-a452-91f02cce6f93"
+    }
+  ]
+}

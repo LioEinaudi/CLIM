@@ -1,0 +1,8 @@
+{
+  "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/a.py": "83827dc5504d80c34c6cb9f9a9aabf7153836960493c7f71413bc9ea88d20f3a",
+  "src/b.py": "21506c8ddf361fed29b15fa176bd4c82a52d92b1c63526a55fd9677b9cffb40f",
+  "tests/test_app.py": "654ac9a9301a66dca5fc061305bd4a7b7343d70bdf84dfb5c267ef829830f5e5",
+  "config.prod.json": "a07d3dd5bbef4c0697a84fc04ae3034213c8db90e26a046a43d6466e82dd93cb",
+  "config.dev.json": "a07d3dd5bbef4c0697a84fc04ae3034213c8db90e26a046a43d6466e82dd93cb"
+}

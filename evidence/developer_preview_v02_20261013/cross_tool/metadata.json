@@ -1,0 +1,46 @@
+{
+  "case": "cross_tool",
+  "project": "/tmp/clim-v02-live-20261013/cross_tool/project",
+  "store": "/tmp/clim-v02-live-20261013/cross_tool/state/projects/24a7de63214762367729",
+  "operators": [
+    {
+      "args": [
+        "init",
+        "codex"
+      ],
+      "stdout": "CLIM installed for Codex (mode: shadow).\nProject: /tmp/clim-v02-live-20261013/cross_tool/project\nPolicy: /tmp/clim-v02-live-20261013/cross_tool/state/projects/24a7de63214762367729/policy.json\nNext: launch Codex, open /hooks and explicitly review/trust both project hooks.\nThen run: clim doctor --project /tmp/clim-v02-live-20261013/cross_tool/project\nWARNING: same-user policy/ledger are NOT an OS security boundary.\n",
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "mode",
+        "guarded"
+      ],
+      "stdout": "Mode: guarded\n",
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "protect",
+        "tests/**",
+        "src/__init__.py"
+      ],
+      "stdout": "Updated protect paths: tests/**, src/__init__.py\n",
+      "exit_code": 0
+    }
+  ],
+  "session_ids": [
+    "01a13402-b801-7963-b63b-c5fc6838995d"
+  ],
+  "cli_command": [
+    "codex",
+    "--no-daemon",
+    "--no-alt-screen",
+    "-s",
+    "workspace-write",
+    "-a",
+    "on-request",
+    "-C",
+    "/tmp/clim-v02-live-20261013/cross_tool/project"
+  ]
+}

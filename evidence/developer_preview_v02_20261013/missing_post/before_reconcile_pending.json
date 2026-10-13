@@ -1,0 +1,17 @@
+{
+  "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7": {
+    "before": {
+      "config.prod.json": "a07d3dd5bbef4c0697a84fc04ae3034213c8db90e26a046a43d6466e82dd93cb",
+      "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/a.py": "83827dc5504d80c34c6cb9f9a9aabf7153836960493c7f71413bc9ea88d20f3a",
+      "tests/test_app.py": "654ac9a9301a66dca5fc061305bd4a7b7343d70bdf84dfb5c267ef829830f5e5"
+    },
+    "complete": true,
+    "mode": "guarded",
+    "policy_version": 3,
+    "targets": [
+      "src/a.py"
+    ],
+    "tool_use_id": "exec-443d049f-fea9-423b-9210-22f7fd2ac720"
+  }
+}

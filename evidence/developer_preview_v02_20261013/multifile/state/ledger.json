@@ -1,0 +1,149 @@
+{
+  "action_index": {
+    "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c"
+  },
+  "events": [
+    {
+      "action_id": "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "args": {
+        "paths": [
+          "src/a.py",
+          "src/b.py"
+        ]
+      },
+      "argument_binding_checks": [],
+      "attempt": 1,
+      "code": "PRECONDITIONS_SATISFIED",
+      "contract": {
+        "argument_bindings": [],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "codex_patch"
+      },
+      "current_state_version": 3,
+      "decision": "ALLOW",
+      "idempotency_key": "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "ledger": {
+        "action_ids": [
+          "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c"
+        ],
+        "attempts": 1,
+        "committed": false,
+        "effect_status": null,
+        "last_code": "ATTEMPT_RESERVED",
+        "operation_key": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+        "unresolved_attempt": true
+      },
+      "max_attempts": 1,
+      "message": "State preconditions and argument bindings allow this action to reach the tool boundary.",
+      "observed_state_version": 3,
+      "operation_key": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "phase": "PRECHECK",
+      "precondition_checks": [],
+      "state_sha256": "192616864737cbdce2df28780570e166710cab6bdb804fada8086cd379a9550c",
+      "timestamp": 1791873940.6649826,
+      "tool": "codex_patch"
+    },
+    {
+      "action_id": "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "args": {
+        "paths": [
+          "src/a.py",
+          "src/b.py"
+        ]
+      },
+      "code": "EFFECT_VERIFIED",
+      "contract": {
+        "argument_bindings": [],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "codex_patch"
+      },
+      "current_state_version": 3,
+      "decision": "ALLOW",
+      "idempotency_key": "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "ledger": {
+        "action_ids": [
+          "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c"
+        ],
+        "attempts": 1,
+        "committed": true,
+        "effect_status": "SUCCESS",
+        "last_code": "EFFECT_VERIFIED",
+        "operation_key": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+        "unresolved_attempt": false
+      },
+      "message": "Observed state satisfies the declared postconditions; effect may be committed to durable memory.",
+      "observed_state_version": 3,
+      "operation_key": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "phase": "VERIFY_EFFECT",
+      "postcondition_checks": [
+        {
+          "condition": {
+            "code": "EXPECTED_CHANGE_MISSING",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.expected_changed",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        },
+        {
+          "condition": {
+            "code": "UNAUTHORIZED_EFFECT_OBSERVED",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.scope_valid",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        },
+        {
+          "condition": {
+            "code": "EFFECT_EVIDENCE_INCOMPLETE",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.evidence_complete",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        }
+      ],
+      "state_sha256": "a7008abaed2d0ed2777d6423ce234ce68a9a131a92e582b8532ecf3978b29457",
+      "timestamp": 1791873940.7981105,
+      "tool": "codex_patch"
+    }
+  ],
+  "idempotency_index": {
+    "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c"
+  },
+  "ledger": {
+    "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c": {
+      "action_id": "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "action_ids": [
+        "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c"
+      ],
+      "attempts": 1,
+      "committed": true,
+      "effect_status": "SUCCESS",
+      "idempotency_key": "8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "last_code": "EFFECT_VERIFIED",
+      "operation_key": "idem:8b714ac9c82429971a18bf92f08d012dbfe94485f053cbb0e6a71352f6054e0c",
+      "tool": "codex_patch",
+      "unresolved_attempt": false
+    }
+  },
+  "max_events": 100,
+  "schema_version": "clim-agent-guard/state-v0.1.3"
+}

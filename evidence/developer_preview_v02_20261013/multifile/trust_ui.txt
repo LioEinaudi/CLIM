@@ -1,0 +1,1 @@
+Codex native /hooks review; inspected installed Python module commands and external store.

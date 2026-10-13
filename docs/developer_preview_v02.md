@@ -1,6 +1,6 @@
 # CLIM Developer Preview v0.2 (Codex Native Hooks)
 
-**Status: merge-ready experimental implementation; not yet independently exercised by live Codex CLI.**
+**Status: experimental implementation exercised in five real Codex workflow controls. See [the October 13 results](developer_preview_v02_results_20261013.md), including Shell approval friction and missing-post recovery.**
 
 **Product message:** Keep your coding agent inside the file boundaries you approve.
 

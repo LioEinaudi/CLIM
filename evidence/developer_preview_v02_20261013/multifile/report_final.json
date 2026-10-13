@@ -1,0 +1,157 @@
+{
+  "events": 11,
+  "counts": {
+    "BLOCK": 3,
+    "ALLOW": 2,
+    "WOULD_BLOCK": 0,
+    "WOULD_ALLOW": 0,
+    "RECONCILIATION_ACKNOWLEDGED": 0,
+    "OBSERVED": 0,
+    "UNKNOWN": 0,
+    "ALLOW_UNVERIFIED": 3
+  },
+  "recent": [
+    {
+      "authorized": false,
+      "code": "SHELL_UNINSPECTED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "targets": [],
+      "timestamp": "2026-10-13T06:43:36.753848+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-49f30e6e-7528-4e98-a2b6-3307ebd398a2"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_APPROVED_UNVERIFIED",
+      "decision": "ALLOW_UNVERIFIED",
+      "granted_once": true,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "targets": [],
+      "timestamp": "2026-10-13T06:44:48.593791+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-a8e17309-5abf-46dd-ab6a-2ed54819681a"
+    },
+    {
+      "decision": "UNMATCHED",
+      "phase": "POST",
+      "timestamp": "2026-10-13T06:44:48.699134+00:00",
+      "tool_use_id": "exec-a8e17309-5abf-46dd-ab6a-2ed54819681a"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_UNINSPECTED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "targets": [],
+      "timestamp": "2026-10-13T06:45:00.639287+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-bc691c27-eee7-4829-82f7-8f10596bdfcc"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_APPROVED_UNVERIFIED",
+      "decision": "ALLOW_UNVERIFIED",
+      "granted_once": true,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "targets": [],
+      "timestamp": "2026-10-13T06:45:35.572219+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-8851ce88-7f4b-4693-8c3e-e6a4de5a3228"
+    },
+    {
+      "decision": "UNMATCHED",
+      "phase": "POST",
+      "timestamp": "2026-10-13T06:45:35.690021+00:00",
+      "tool_use_id": "exec-8851ce88-7f4b-4693-8c3e-e6a4de5a3228"
+    },
+    {
+      "authorized": true,
+      "code": "PRECONDITIONS_SATISFIED",
+      "complete": true,
+      "decision": "ALLOW",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "TARGET_AUTHORIZED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "snapshot_count": 5,
+      "targets": [
+        "src/a.py",
+        "src/b.py"
+      ],
+      "timestamp": "2026-10-13T06:45:40.668645+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-b9188cd9-6937-451b-b202-e9ce1d615ba2"
+    },
+    {
+      "code": "EFFECT_VERIFIED",
+      "decision": "ALLOW",
+      "effect": {
+        "changed_paths": [
+          "src/a.py",
+          "src/b.py"
+        ],
+        "evidence_complete": true,
+        "expected_changed": true,
+        "policy_unchanged": true,
+        "scope_valid": true,
+        "unauthorized_changed_paths": [],
+        "uncertain_paths": []
+      },
+      "enforced": true,
+      "phase": "POST",
+      "policy_unchanged": true,
+      "timestamp": "2026-10-13T06:45:40.802315+00:00",
+      "tool_use_id": "exec-b9188cd9-6937-451b-b202-e9ce1d615ba2"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_UNINSPECTED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "targets": [],
+      "timestamp": "2026-10-13T06:45:44.695438+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-c4413cee-4f23-4cd0-808f-296a44b1f510"
+    },
+    {
+      "authorized": false,
+      "code": "SHELL_APPROVED_UNVERIFIED",
+      "decision": "ALLOW_UNVERIFIED",
+      "granted_once": true,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "SHELL_UNINSPECTED",
+      "session_id": "01a133ff-36e1-75d2-98e9-3f2a6fceeb16",
+      "targets": [],
+      "timestamp": "2026-10-13T06:46:33.857195+00:00",
+      "tool": "shell",
+      "tool_use_id": "exec-199b37ac-346b-40db-b598-da4f30e304a1"
+    },
+    {
+      "decision": "UNMATCHED",
+      "phase": "POST",
+      "timestamp": "2026-10-13T06:46:34.019671+00:00",
+      "tool_use_id": "exec-199b37ac-346b-40db-b598-da4f30e304a1"
+    }
+  ]
+}

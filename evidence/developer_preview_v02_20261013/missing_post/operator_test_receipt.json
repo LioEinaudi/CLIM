@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "stdout": "",
+  "stderr": "test_empty (test_app.AppTest.test_empty) ... ok\ntest_negative (test_app.AppTest.test_negative) ... ok\ntest_values (test_app.AppTest.test_values) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+  "exit_code": 0
+}

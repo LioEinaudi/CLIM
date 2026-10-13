@@ -1,0 +1,66 @@
+{
+  "events": 3,
+  "counts": {
+    "BLOCK": 1,
+    "ALLOW": 0,
+    "WOULD_BLOCK": 1,
+    "WOULD_ALLOW": 0,
+    "RECONCILIATION_ACKNOWLEDGED": 0,
+    "OBSERVED": 1,
+    "UNKNOWN": 0,
+    "ALLOW_UNVERIFIED": 0
+  },
+  "recent": [
+    {
+      "authorized": false,
+      "code": "TARGET_NOT_AUTHORIZED",
+      "decision": "BLOCK",
+      "granted_once": false,
+      "mode": "guarded",
+      "phase": "PRE",
+      "policy_reason": "TARGET_NOT_AUTHORIZED: config.prod.json",
+      "session_id": "01a13406-dfcd-7e03-8fce-b188503a60ab",
+      "targets": [
+        "config.prod.json",
+        "src/a.py"
+      ],
+      "timestamp": "2026-10-13T06:50:48.129555+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-66d0c6f8-3263-43f5-8f85-7563574f5127"
+    },
+    {
+      "authorized": false,
+      "decision": "WOULD_BLOCK",
+      "enforced": false,
+      "granted_once": false,
+      "mode": "shadow",
+      "phase": "PRE",
+      "policy_reason": "TARGET_NOT_AUTHORIZED: config.prod.json",
+      "session_id": "01a13406-dfcd-7e03-8fce-b188503a60ab",
+      "targets": [
+        "config.prod.json"
+      ],
+      "timestamp": "2026-10-13T07:05:37.362405+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-b5d19cb7-5b05-48a9-8608-ada7e525d9d2"
+    },
+    {
+      "decision": "OBSERVED",
+      "effect": {
+        "changed_paths": [
+          "config.prod.json"
+        ],
+        "evidence_complete": true,
+        "expected_changed": true,
+        "policy_unchanged": true,
+        "scope_valid": true,
+        "unauthorized_changed_paths": [],
+        "uncertain_paths": []
+      },
+      "enforced": false,
+      "phase": "POST",
+      "timestamp": "2026-10-13T07:05:37.459387+00:00",
+      "tool_use_id": "exec-b5d19cb7-5b05-48a9-8608-ada7e525d9d2"
+    }
+  ]
+}

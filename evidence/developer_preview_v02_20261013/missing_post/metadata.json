@@ -1,0 +1,46 @@
+{
+  "case": "missing_post",
+  "project": "/tmp/clim-v02-live-20261013/missing_post/project",
+  "store": "/tmp/clim-v02-live-20261013/missing_post/state/projects/35122dbb8d51da74b810",
+  "operators": [
+    {
+      "args": [
+        "init",
+        "codex"
+      ],
+      "stdout": "CLIM installed for Codex (mode: shadow).\nProject: /tmp/clim-v02-live-20261013/missing_post/project\nPolicy: /tmp/clim-v02-live-20261013/missing_post/state/projects/35122dbb8d51da74b810/policy.json\nNext: launch Codex, open /hooks and explicitly review/trust both project hooks.\nThen run: clim doctor --project /tmp/clim-v02-live-20261013/missing_post/project\nWARNING: same-user policy/ledger are NOT an OS security boundary.\n",
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "mode",
+        "guarded"
+      ],
+      "stdout": "Mode: guarded\n",
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "protect",
+        "tests/**",
+        "src/__init__.py"
+      ],
+      "stdout": "Updated protect paths: tests/**, src/__init__.py\n",
+      "exit_code": 0
+    }
+  ],
+  "session_ids": [
+    "01a13405-3813-7320-9077-36979b413783"
+  ],
+  "cli_command": [
+    "codex",
+    "--no-daemon",
+    "--no-alt-screen",
+    "-s",
+    "workspace-write",
+    "-a",
+    "on-request",
+    "-C",
+    "/tmp/clim-v02-live-20261013/missing_post/project"
+  ]
+}

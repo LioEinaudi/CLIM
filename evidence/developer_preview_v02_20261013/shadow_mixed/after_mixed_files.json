@@ -1,0 +1,8 @@
+{
+  "src/__init__.py": "",
+  "src/a.py": "def scale(value):\n    return value * 2\n",
+  "src/b.py": "from src.a import scale\n\ndef total(values):\n    return sum(scale(value) for value in values)\n",
+  "tests/test_app.py": "import unittest\nfrom src.b import total\n\nclass AppTest(unittest.TestCase):\n    def test_values(self):\n        self.assertEqual(total([1, 2, 3]), 12)\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n    def test_negative(self):\n        self.assertEqual(total([-3, 2]), -2)\n",
+  "config.prod.json": "{\"debug\": true}\n",
+  "config.dev.json": "{\"debug\": true}\n"
+}

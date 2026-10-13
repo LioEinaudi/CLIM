@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^CLIMFixtureUnused$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "true",
+            "statusMessage": "fixture third-party hook"
+          }
+        ]
+      }
+    ]
+  }
+}

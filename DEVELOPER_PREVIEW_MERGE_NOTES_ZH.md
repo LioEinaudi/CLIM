@@ -1,5 +1,7 @@
 # CLIM Developer Preview v0.2 开发补丁 — Jinbin 交付说明
 
+以下为原补丁交付时的说明。现已完成合入与真实 Codex 工作流验收，当前结果见 [2026-10-13 报告](docs/developer_preview_v02_results_20261013.md)；原始 ZIP 和校验值保留在证据包中。
+
 ## 已开发与本地验证
 
 基于 `LioEinaudi/CLIM` 的公开主分支 `clim_agent_guard/core.py`（SHA ff74fe755971eb2a1d600e7a291c50f5588e7a38）以及 2026-10-12 Codex Pilot 公开证据包中的相同源码快照。本补丁没有改动 CLIM Core、现有 Codex Pilot、MCP Pilot 和已有实验数据。新增 `clim_agent_guard/devpreview/`、新测试、新文档，更新仓库 `pyproject.toml` 来注册 CLI 并暂用 `0.2.0.dev0` 版本号。**没有写入远端仓库**。

@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "/root/mine/CLIM/.venv/bin/python -m clim_agent_guard.devpreview.hook post --store /tmp/clim-v02-live-20261013/recovery/state/projects/d0fa7a4b5dcc74cd9a92",
+            "statusMessage": "CLIM Developer Preview v0.2 post",
+            "timeout": 15,
+            "type": "command"
+          }
+        ],
+        "matcher": "^(apply_patch|Bash|exec_command|bash|shell_command)$"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "true",
+            "statusMessage": "fixture third-party hook",
+            "type": "command"
+          }
+        ],
+        "matcher": "^CLIMFixtureUnused$"
+      },
+      {
+        "hooks": [
+          {
+            "command": "/root/mine/CLIM/.venv/bin/python -m clim_agent_guard.devpreview.hook pre --store /tmp/clim-v02-live-20261013/recovery/state/projects/d0fa7a4b5dcc74cd9a92",
+            "statusMessage": "CLIM Developer Preview v0.2 pre",
+            "timeout": 15,
+            "type": "command"
+          }
+        ],
+        "matcher": "^(apply_patch|Bash|exec_command|bash|shell_command)$"
+      }
+    ]
+  }
+}

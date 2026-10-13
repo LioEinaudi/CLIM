@@ -1,0 +1,267 @@
+{
+  "action_index": {
+    "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+    "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7": "idem:67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+    "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8": "idem:89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8"
+  },
+  "events": [
+    {
+      "action_id": "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+      "args": {
+        "paths": [
+          "src/a.py"
+        ]
+      },
+      "argument_binding_checks": [],
+      "attempt": 1,
+      "code": "PRECONDITIONS_SATISFIED",
+      "contract": {
+        "argument_bindings": [],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "codex_patch"
+      },
+      "current_state_version": 3,
+      "decision": "ALLOW",
+      "idempotency_key": "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+      "ledger": {
+        "action_ids": [
+          "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7"
+        ],
+        "attempts": 1,
+        "committed": false,
+        "effect_status": null,
+        "last_code": "ATTEMPT_RESERVED",
+        "operation_key": "idem:67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+        "unresolved_attempt": true
+      },
+      "max_attempts": 1,
+      "message": "State preconditions and argument bindings allow this action to reach the tool boundary.",
+      "observed_state_version": 3,
+      "operation_key": "idem:67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+      "phase": "PRECHECK",
+      "precondition_checks": [],
+      "state_sha256": "192616864737cbdce2df28780570e166710cab6bdb804fada8086cd379a9550c",
+      "timestamp": 1791874180.0972087,
+      "tool": "codex_patch"
+    },
+    {
+      "action_id": "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+      "args": {
+        "paths": [
+          "src/b.py"
+        ]
+      },
+      "argument_binding_checks": [],
+      "attempt": 1,
+      "code": "PRECONDITIONS_SATISFIED",
+      "contract": {
+        "argument_bindings": [],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "codex_patch"
+      },
+      "current_state_version": 3,
+      "decision": "ALLOW",
+      "idempotency_key": "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+      "ledger": {
+        "action_ids": [
+          "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8"
+        ],
+        "attempts": 1,
+        "committed": false,
+        "effect_status": null,
+        "last_code": "ATTEMPT_RESERVED",
+        "operation_key": "idem:89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+        "unresolved_attempt": true
+      },
+      "max_attempts": 1,
+      "message": "State preconditions and argument bindings allow this action to reach the tool boundary.",
+      "observed_state_version": 3,
+      "operation_key": "idem:89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+      "phase": "PRECHECK",
+      "precondition_checks": [],
+      "state_sha256": "192616864737cbdce2df28780570e166710cab6bdb804fada8086cd379a9550c",
+      "timestamp": 1791874349.9311423,
+      "tool": "codex_patch"
+    },
+    {
+      "action_id": "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "args": {
+        "paths": [
+          "src/b.py"
+        ]
+      },
+      "argument_binding_checks": [],
+      "attempt": 1,
+      "code": "PRECONDITIONS_SATISFIED",
+      "contract": {
+        "argument_bindings": [],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "codex_patch"
+      },
+      "current_state_version": 3,
+      "decision": "ALLOW",
+      "idempotency_key": "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "ledger": {
+        "action_ids": [
+          "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae"
+        ],
+        "attempts": 1,
+        "committed": false,
+        "effect_status": null,
+        "last_code": "ATTEMPT_RESERVED",
+        "operation_key": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+        "unresolved_attempt": true
+      },
+      "max_attempts": 1,
+      "message": "State preconditions and argument bindings allow this action to reach the tool boundary.",
+      "observed_state_version": 3,
+      "operation_key": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "phase": "PRECHECK",
+      "precondition_checks": [],
+      "state_sha256": "192616864737cbdce2df28780570e166710cab6bdb804fada8086cd379a9550c",
+      "timestamp": 1791875235.1484084,
+      "tool": "codex_patch"
+    },
+    {
+      "action_id": "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "args": {
+        "paths": [
+          "src/b.py"
+        ]
+      },
+      "code": "EFFECT_VERIFIED",
+      "contract": {
+        "argument_bindings": [],
+        "effect_type": "write",
+        "irreversible": false,
+        "max_retries": 0,
+        "on_unknown_effect": "reconcile",
+        "require_idempotency_key": true,
+        "requires_fresh_state": true,
+        "tool": "codex_patch"
+      },
+      "current_state_version": 3,
+      "decision": "ALLOW",
+      "idempotency_key": "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "ledger": {
+        "action_ids": [
+          "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae"
+        ],
+        "attempts": 1,
+        "committed": true,
+        "effect_status": "SUCCESS",
+        "last_code": "EFFECT_VERIFIED",
+        "operation_key": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+        "unresolved_attempt": false
+      },
+      "message": "Observed state satisfies the declared postconditions; effect may be committed to durable memory.",
+      "observed_state_version": 3,
+      "operation_key": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "phase": "VERIFY_EFFECT",
+      "postcondition_checks": [
+        {
+          "condition": {
+            "code": "EXPECTED_CHANGE_MISSING",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.expected_changed",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        },
+        {
+          "condition": {
+            "code": "UNAUTHORIZED_EFFECT_OBSERVED",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.scope_valid",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        },
+        {
+          "condition": {
+            "code": "EFFECT_EVIDENCE_INCOMPLETE",
+            "message": "State condition failed",
+            "op": "eq",
+            "path": "observed.evidence_complete",
+            "value": true
+          },
+          "observed": true,
+          "passed": true
+        }
+      ],
+      "state_sha256": "a7008abaed2d0ed2777d6423ce234ce68a9a131a92e582b8532ecf3978b29457",
+      "timestamp": 1791875235.2529545,
+      "tool": "codex_patch"
+    }
+  ],
+  "idempotency_index": {
+    "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+    "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7": "idem:67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+    "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8": "idem:89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8"
+  },
+  "ledger": {
+    "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae": {
+      "action_id": "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "action_ids": [
+        "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae"
+      ],
+      "attempts": 1,
+      "committed": true,
+      "effect_status": "SUCCESS",
+      "idempotency_key": "4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "last_code": "EFFECT_VERIFIED",
+      "operation_key": "idem:4331bd6047eedc10168202663f9c74c91abdd443d775cf8e9fb991a635e3d7ae",
+      "tool": "codex_patch",
+      "unresolved_attempt": false
+    },
+    "idem:67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7": {
+      "action_id": "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+      "action_ids": [
+        "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7"
+      ],
+      "attempts": 1,
+      "committed": false,
+      "effect_status": null,
+      "idempotency_key": "67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+      "last_code": "ATTEMPT_RESERVED",
+      "operation_key": "idem:67f9179c572adf2ad9d26f0b6b507133fc9eec1d57675c17a8621a1190dc85b7",
+      "tool": "codex_patch",
+      "unresolved_attempt": true
+    },
+    "idem:89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8": {
+      "action_id": "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+      "action_ids": [
+        "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8"
+      ],
+      "attempts": 1,
+      "committed": false,
+      "effect_status": null,
+      "idempotency_key": "89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+      "last_code": "ATTEMPT_RESERVED",
+      "operation_key": "idem:89f0a5ea4b079d4ef448b4dfa474bce6876673c96a0e1955575f261a3e9d5bc8",
+      "tool": "codex_patch",
+      "unresolved_attempt": true
+    }
+  },
+  "max_events": 100,
+  "schema_version": "clim-agent-guard/state-v0.1.3"
+}
