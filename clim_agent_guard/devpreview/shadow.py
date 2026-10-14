@@ -164,7 +164,9 @@ def prepare(event, root, store, policy, key):
     for name, meta in before.items():
         if meta['coverage']!='complete':coverage['gaps'].append({'reason':meta['coverage'],'path':name})
     authority = policy.get('shadow_authorized')
-    required = policy.get('shadow_required')
+    # Required patch effects do not imply that a read/version/test command must
+    # change those files. Shell resource/intent semantics remain unparsed.
+    required = policy.get('shadow_required') if p['tool']=='apply_patch' else None
     baseline = git_dirty(root,watch)
     signals = []
     dirty_touched = sorted(set(p['E_proposed'] or []) & set(baseline['dirty_paths']))

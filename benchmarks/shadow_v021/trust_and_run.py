@@ -48,11 +48,15 @@ def trust(record):
                 os.write(master,b'\x1b[1;1R\x1b[?1;2c');replied=True
         clean=ANSI.sub('',raw.decode(errors='replace'))
         if stage==0 and 'Trust and continue' in clean:
-            os.write(master,b'\r');stage=1
+            time.sleep(1)
+            os.write(master,b'\x1b[1;1R\x1b[?1;2c\r');stage=1
+            print(json.dumps({'trust_action':record['label'],'action':'folder_review_enter'}),flush=True)
         if stage<=1 and 'Hooks need review' in clean:
-            os.write(master,b'\r');stage=2
+            time.sleep(1);os.write(master,b'\r');stage=2
+            print(json.dumps({'trust_action':record['label'],'action':'open_native_hook_review'}),flush=True)
         if stage==2 and re.search(r't\s+trust all',clean):
-            os.write(master,b't');stage=3
+            time.sleep(1);os.write(master,b't');stage=3
+            print(json.dumps({'trust_action':record['label'],'action':'trust_inspected_definitions'}),flush=True)
         if stage==3 and re.search(r'PreToolUse\s+1\s+1',clean) and re.search(r'PostToolUse\s+1\s+1',clean):
             active=True;break
         if stage==1 and 'Hooks need review' not in clean and 'GPT-6.1-Sol' in clean:
@@ -92,7 +96,19 @@ def execute(record):
          'origin':'ACTUAL_CODEX_CLI','paired_arm':'shadow' if record['shadow'] else 'native'})
     save(base/'after.json',oracle.capture(str(project),str(base/'inventory.json')))
     before=oracle.load(base/'before.json');after=oracle.load(base/'after.json')
-    save(base/'independent_oracle.json',oracle.effect_compare(before,after,[],record['E_authorized'],record['E_required']))
+    proposals=[]
+    if record['shadow']:
+        audit=Path(record['store'])/'events.jsonl'
+        if audit.exists():
+            for line in audit.read_text().splitlines():
+                entry=json.loads(line)
+                if entry.get('phase')=='PRE' and entry.get('E_proposed') is not None:
+                    proposals.extend(entry['E_proposed'])
+    comparison=oracle.effect_compare(before,after,sorted(set(proposals)),record['E_authorized'],record['E_required'])
+    comparison['proposal_source']='ACTUAL_CLIM_PRE_TRANSPORT' if record['shadow'] else 'UNKNOWN_NATIVE_ONLY'
+    if not proposals:
+        comparison['R_proposal']=None
+    save(base/'independent_oracle.json',comparison)
     if (base/'target').exists():save(base/'target_after.json',oracle.capture(str(base/'target'),str(base/'target_inventory.json')))
     for kind,args in [('status',['status','--porcelain=v1']),('diff',['diff','--no-ext-diff','--no-textconv'])]:
         result=subprocess.run(['git','-C',str(project),*args],capture_output=True,text=True,check=True)

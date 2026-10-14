@@ -71,6 +71,7 @@ class Shadow(unittest.TestCase):
         self.assertEqual(pre(event,self.store),{});result=self.after(event)
         self.assertIn('RISK_SIGNAL',result['signals']);self.assertNotIn('EFFECT_OBSERVED',result['signals'])
         self.assertIsNone(result['effect']['R_proposal'])
+        self.assertIsNone(result['effect']['R_missing'])
     def test_S5_registered_third_file_and_unknown_authority(self):
         self.register(['src/a.py','src/b.py','src/c.py'],['src/a.py','src/b.py'],['src/a.py','src/b.py'])
         event=self.event('s5',('src/a.py','src/b.py'));pre(event,self.store)
