@@ -157,6 +157,10 @@ def cmd_doctor(args):
     except (ValueError,json.JSONDecodeError) as e:
         result['warnings'].append('Malformed Codex hooks: '+str(e))
     pending=read_json(store/'pending.json',{})
+    from .shadow import gaps_for_pending, last_window_gaps
+    result['coverage_gaps']=gaps_for_pending(store)
+    result['last_window_coverage_gaps']=last_window_gaps(store)
+    result['shadow_observation']={k:policy.get(k) for k in ('shadow_inventory','shadow_authorized','shadow_required')} if result['mode'] else {}
     result['checks']['no_unverified_pending']=not bool(pending)
     result['checks']['no_incident']=not (store/'incident.json').exists()
     result['checks']['codex_on_path']=bool(shutil.which('codex'))
@@ -186,7 +190,31 @@ def cmd_report(args):
                 events.append(e)
             except (ValueError,KeyError):continue
     stats={k:sum(1 for e in events if e.get('decision')==k) for k in ('BLOCK','ALLOW','WOULD_BLOCK','WOULD_ALLOW','RECONCILIATION_ACKNOWLEDGED','OBSERVED','UNKNOWN','ALLOW_UNVERIFIED')}
-    print(json.dumps({'events':len(events),'counts':stats,'recent':events[-min(args.limit,50):]},indent=2,ensure_ascii=False))
+    from .shadow import gaps_for_pending
+    print(json.dumps({'schema':'clim-developer-report/v0.2.1','events':len(events),'counts':stats,
+        'coverage_gaps':gaps_for_pending(store),'redaction_applied':True,
+        'retention':'Until explicit uninstall --purge-state; existing legacy logs are not rewritten.',
+        'recent':events[-min(args.limit,50):]},indent=2,ensure_ascii=False))
+
+
+def cmd_observe(args):
+    """Register external host truth; never derive authority from agent proposals."""
+    from .shadow import names
+    root=_root(args.project);store=project_store(root)
+    def load_paths(path):
+        if path is None:return None
+        file=Path(path).resolve(strict=True)
+        if file.is_relative_to(root):raise ValueError('Observation/authority inputs must be outside the agent project')
+        raw=json.loads(file.read_text());raw=raw.get('paths') if isinstance(raw,dict) else raw
+        if not isinstance(raw,list) or len(raw)>10000:raise ValueError('Expected at most 10000 registered paths')
+        return sorted(set(names(root,p) for p in raw))
+    with locked(store):
+        policy=config_at(store)
+        policy.update(shadow_inventory=load_paths(args.inventory),shadow_authorized=load_paths(args.authorized),
+                      shadow_required=load_paths(args.required))
+        policy['_version']+=1
+        atomic_write(store/'policy.json',policy)
+    print('Host Shadow observation registered. Authority is independent of tool proposals; Shadow does not enforce it.')
 
 
 def cmd_reconcile(args):
@@ -293,11 +321,14 @@ def main(argv=None):
     allow=sub.add_parser('allow');allow.add_argument('paths',nargs='+');allow.add_argument('--project',default='.')
     permit=sub.add_parser('permit-once');permit.add_argument('--path',action='append',dest='paths');permit.add_argument('--command');permit.add_argument('--project',default='.')
     rec=sub.add_parser('reconcile');rec.add_argument('--project',default='.');rec.add_argument('--acknowledge',action='store_true')
+    obs=sub.add_parser('observe');obs.add_argument('--project',default='.')
+    obs.add_argument('--inventory',required=True);obs.add_argument('--authorized');obs.add_argument('--required')
     args=p.parse_args(argv)
     try:
         if args.cmd=='demo':cmd_demo(args)
         elif args.cmd=='init':cmd_init(args)
         elif args.cmd=='uninstall':cmd_uninstall(args)
+        elif args.cmd=='observe':cmd_observe(args)
         elif args.cmd=='doctor':return cmd_doctor(args)
         elif args.cmd=='mode':cmd_mode(args)
         elif args.cmd=='report':cmd_report(args)

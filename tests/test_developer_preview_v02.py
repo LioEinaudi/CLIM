@@ -196,7 +196,9 @@ class Preview(unittest.TestCase):
         actual=json.loads(proc.stdout)
         self.assertEqual(actual['hookSpecificOutput']['permissionDecision'],'deny')
         transport=json.loads((self.store/'hook_events.jsonl').read_text().splitlines()[-1])
-        self.assertEqual(transport['input'],event)
+        self.assertEqual(transport['input']['tool_use_id'],event['tool_use_id'])
+        self.assertTrue(transport['redaction_applied'])
+        self.assertNotIn('command',transport['input']['tool_input'])
         self.assertEqual(transport['output'],actual)
         self.assertEqual((self.proj/'config.prod.json').read_text(),'old')
 

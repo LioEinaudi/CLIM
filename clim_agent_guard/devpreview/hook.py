@@ -10,6 +10,7 @@ import json
 import os
 import shlex
 import sys
+import time
 from pathlib import Path
 from typing import Any
 from clim_agent_guard.core import ActionProposal, Decision, EffectStatus, IntegrityGuard, StateCondition, ToolContract
@@ -115,13 +116,8 @@ def pre(event: dict, store: Path) -> dict:
                     'session_id':event.get('session_id'),'targets':paths,'policy_reason':reason,
                     'authorized':authorized,'granted_once':grant}
         if mode=='shadow':
-            if kind=='apply_patch' and paths:
-                names,complete=monitored_paths(root,pol,paths)
-                pending[key]={'targets':paths,'before':snapshot(root,names), 'complete':complete,
-                              'policy_version':pol['_version'],'mode':'shadow','tool_use_id':use}
-                atomic_write(store/'pending.json',pending)
-            append_audit(store, {**event_base,'decision':'WOULD_ALLOW' if authorized else 'WOULD_BLOCK', 'enforced':False})
-            return {}  # Deliberately no model-visible advice in shadow mode.
+            from .shadow import prepare
+            return prepare(event,root,store,pol,key)
         if pending:
             append_audit(store,{**event_base,'decision':'BLOCK','code':'PENDING_EFFECT'})
             return denial('PENDING_EFFECT',detail='An earlier tool result is unverified. Run `clim doctor`.')
@@ -170,6 +166,9 @@ def post(event: dict, store: Path) -> dict:
     with locked(store):
         pol=config_at(store)
         _state(event,pol,root,store)
+        if pol['mode']=='shadow':
+            from .shadow import finish
+            return finish(event,root,store,pol,key)
         pending=read_json(store/'pending.json',{})
         entry=pending.get(key)
         if entry is None:
@@ -218,6 +217,8 @@ def main(argv=None):
     ap.add_argument('--store', type=Path,required=True)
     args=ap.parse_args(argv)
     event = None
+    error_type = None
+    started = time.perf_counter_ns()
     try:
         raw=sys.stdin.buffer.read(MAX_EVENT+1)
         if len(raw)>MAX_EVENT: raise ValueError('Oversized hook event')
@@ -225,25 +226,37 @@ def main(argv=None):
         if not isinstance(event,dict): raise ValueError('Invalid hook event')
         reply=pre(event,args.store) if args.phase=='pre' else post(event,args.store)
     except Exception as e:
+        error_type = type(e).__name__
         # A hook transport error is not approval. Codex may ignore hook errors;
         # native OS sandbox and permissions remain necessary.
         if args.phase=='pre':
             # Shadow is observational: do not change tool behavior for a telemetry fault.
             try: is_shadow = config_at(args.store).get('mode') == 'shadow'
             except Exception: is_shadow = False
-            reply = {} if is_shadow else denial('HOOK_ERROR',detail=str(e)[:180])
-        else: reply=_response_error('HOOK_ERROR: '+str(e)[:180])
+            reply = {} if is_shadow else denial('HOOK_ERROR',detail=type(e).__name__)
+        else:
+            try: is_shadow = config_at(args.store).get('mode') == 'shadow'
+            except Exception: is_shadow = False
+            reply = {} if is_shadow else _response_error('HOOK_ERROR: '+type(e).__name__)
     try:
         with locked(args.store):
-            append_audit(args.store, {'phase':args.phase, 'input':event, 'output':reply},
+            from .shadow import transport
+            if error_type:
+                append_audit(args.store, {'phase':'TELEMETRY','decision':'UNKNOWN','code':'HOOK_ERROR',
+                    'error_type':error_type,'coverage_gaps':[{'reason':'telemetry_error'}],
+                    'session_id':(event or {}).get('session_id'),'tool_use_id':(event or {}).get('tool_use_id')})
+            record=transport(event,reply,args.phase,(time.perf_counter_ns()-started)/1e6)
+            record['telemetry_error']=error_type
+            append_audit(args.store, record,
                          filename='hook_events.jsonl')
     except Exception as e:
+        print('CLIM_TELEMETRY_GAP: '+type(e).__name__,file=sys.stderr)
         try: is_shadow = config_at(args.store).get('mode') == 'shadow'
         except Exception: is_shadow = False
         if args.phase == 'pre' and not is_shadow:
-            reply = denial('HOOK_RECORD_ERROR', detail=str(e)[:180])
-        elif args.phase == 'post':
-            reply = _response_error('HOOK_RECORD_ERROR: '+str(e)[:180])
+            reply = denial('HOOK_RECORD_ERROR', detail=type(e).__name__)
+        elif args.phase == 'post' and not is_shadow:
+            reply = _response_error('HOOK_RECORD_ERROR: '+type(e).__name__)
     print(json.dumps(reply,ensure_ascii=False))
 
 if __name__=='__main__':

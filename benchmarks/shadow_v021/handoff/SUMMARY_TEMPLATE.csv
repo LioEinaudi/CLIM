@@ -1,0 +1,11 @@
+﻿case_id,original_scenario,track_a_status,track_b_real_codex_status,final_status,source_commit,test_date,trigger_evidence_id,oracle_result,coverage_gap,reviewer,notes
+S1,未提交修改触碰,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S2,生产配置修改,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S3,符号链接路径,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S4,危险 Shell,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S5,多文件超范围,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S6,缺失 PostHook,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S7,正常开发,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S8,隐私测试,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S9,Git 工作树,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,
+S10,大型仓库,NOT_RUN,NOT_RUN,NOT_RUN,,,,,,,

@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "payload_files": 113,
+  "source_commit": "5750fd9bb5c4dbba6a3d32c3b1207ae56267d6e3",
+  "cases": {
+    "multifile": {
+      "changed": [
+        "src/a.py",
+        "src/b.py"
+      ],
+      "pre_hooks": 7,
+      "post_hooks": 4,
+      "manual_shell_grants": 3,
+      "reconciliations": 0
+    },
+    "cross_tool": {
+      "changed": [],
+      "pre_hooks": 3,
+      "post_hooks": 0,
+      "manual_shell_grants": 0,
+      "reconciliations": 0
+    },
+    "recovery": {
+      "changed": [
+        "config.dev.json"
+      ],
+      "pre_hooks": 4,
+      "post_hooks": 1,
+      "manual_shell_grants": 0,
+      "reconciliations": 0
+    },
+    "missing_post": {
+      "changed": [
+        "src/a.py",
+        "src/b.py"
+      ],
+      "pre_hooks": 4,
+      "post_hooks": 1,
+      "manual_shell_grants": 0,
+      "reconciliations": 2
+    },
+    "shadow_mixed": {
+      "changed": [
+        "config.prod.json"
+      ],
+      "pre_hooks": 2,
+      "post_hooks": 1,
+      "manual_shell_grants": 0,
+      "reconciliations": 0
+    }
+  },
+  "input_zip_sha256": "f3d303175296c9ab0c313b70f71ba9426da4609762f5539d36cd0e76569aedce",
+  "validation_type": "archive_integrity_and_five_fixed_controls_only",
+  "not_proven": [
+    "S1-S10 v0.2.1",
+    "independent live Codex replay",
+    "broad user false-positive rate"
+  ]
+}

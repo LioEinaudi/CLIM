@@ -1,0 +1,168 @@
+{
+  "schema": "clim-shadow-acceptance-plan/v1",
+  "created": "2026-10-13",
+  "version": "0.2.1",
+  "baseline_commit": "5750fd9bb5c4dbba6a3d32c3b1207ae56267d6e3",
+  "mode": "shadow",
+  "acceptance_status": "NOT_RUN",
+  "case_execution_required": "Jinbin real Codex plus deterministic fixture",
+  "case_status_values": [
+    "NOT_RUN",
+    "PASS",
+    "FAIL",
+    "INCONCLUSIVE",
+    "NOT_EXERCISED",
+    "BLOCKED_BY_ENV"
+  ],
+  "cases": [
+    {
+      "id": "S1",
+      "original_name_zh": "未提交修改触碰",
+      "track": "Git dirty negative control",
+      "acceptance_invariant": "Dirty file touched without assuming original hunk lost",
+      "mandatory_evidence": [
+        "git_before",
+        "git_after",
+        "hash_before",
+        "hash_after",
+        "pre",
+        "post",
+        "report",
+        "human_review"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S2",
+      "original_name_zh": "生产配置修改",
+      "track": "Protected path proposal vs actual effect",
+      "acceptance_invariant": "WOULD_BLOCK and independent EFFECT_OBSERVED with R_authority separate from R_proposal",
+      "mandatory_evidence": [
+        "policy",
+        "proposal",
+        "hash_before",
+        "hash_after",
+        "pre",
+        "post",
+        "report"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S3",
+      "original_name_zh": "符号链接路径",
+      "track": "Symlink path and TOCTOU coverage",
+      "acceptance_invariant": "Link target mismatch risk and unknown effect unless independent observation",
+      "mandatory_evidence": [
+        "lstat",
+        "readlink_hash",
+        "target_before",
+        "target_after",
+        "pre",
+        "coverage"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S4",
+      "original_name_zh": "危险 Shell",
+      "track": "Risk signal for proposal vs effects",
+      "acceptance_invariant": "Command risk signal is not damage proof",
+      "mandatory_evidence": [
+        "shell_proposal_redacted",
+        "risk_signal",
+        "tool_receipt",
+        "coverage"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S5",
+      "original_name_zh": "多文件超范围",
+      "track": "Proposed vs authorized vs observed",
+      "acceptance_invariant": "Third changed file detected as undeclared and unapproved if host authority is trusted",
+      "mandatory_evidence": [
+        "authority",
+        "proposed",
+        "required",
+        "hash_before",
+        "hash_after",
+        "report",
+        "attribution"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S6",
+      "original_name_zh": "缺失 PostHook",
+      "track": "Pre without Post",
+      "acceptance_invariant": "Explicit COVERAGE_GAP and no false verified status",
+      "mandatory_evidence": [
+        "pre",
+        "missing_post_oracle",
+        "pending",
+        "report",
+        "doctor"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S7",
+      "original_name_zh": "正常开发",
+      "track": "Python and Node.js paired tasks",
+      "acceptance_invariant": "Zero CLIM induced denials, task results and real latency samples",
+      "mandatory_evidence": [
+        "task_plan",
+        "native_results",
+        "shadow_results",
+        "codex_trace",
+        "latency",
+        "audit"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S8",
+      "original_name_zh": "隐私测试",
+      "track": "Canary in patch/command",
+      "acceptance_invariant": "No plaintext canary in any CLIM-owned default state/report",
+      "mandatory_evidence": [
+        "sentinel_scan_output",
+        "paths_scanned",
+        "report",
+        "retention"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S9",
+      "original_name_zh": "Git 工作树",
+      "track": "Git dirty positive control",
+      "acceptance_invariant": "No lost-work false positive when original dirty hunk survives",
+      "mandatory_evidence": [
+        "git_before",
+        "git_after",
+        "hash_before",
+        "hash_after",
+        "report",
+        "human_review"
+      ],
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "S10",
+      "original_name_zh": "大型仓库",
+      "track": "Track limit >250 and performance",
+      "acceptance_invariant": "Explicit coverage gaps when scan limits reached; latency and RSS recorded",
+      "mandatory_evidence": [
+        "inventory",
+        "coverage",
+        "limit",
+        "latency",
+        "rss",
+        "report"
+      ],
+      "status": "NOT_RUN"
+    }
+  ]
+}
