@@ -61,7 +61,8 @@ def trust(record):
             active=True;break
         if stage==1 and 'Hooks need review' not in clean and 'GPT-6.1-Sol' in clean:
             os.write(master,b'/hooks');time.sleep(0.2);os.write(master,b'\r');stage=2
-    if active:os.write(master,b'\x1b')
+    if active:
+        os.write(master,b'\x1b');time.sleep(0.4)
     os.write(master,b'\x03')
     try:proc.wait(timeout=10)
     except subprocess.TimeoutExpired:proc.terminate();proc.wait(timeout=5)

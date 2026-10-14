@@ -256,7 +256,7 @@ def cmd_uninstall(args):
         if args.purge_state:
             # Require explicit opt-in; do not delete unrelated files in store.
             allowed_files={'policy.json','ledger.json','pending.json','one_time.json',
-                           'events.jsonl','hook_events.jsonl','incident.json'}
+                           'events.jsonl','hook_events.jsonl','incident.json','shadow_sessions.json'}
             for p in store.iterdir():
                 if p.is_file() and not p.is_symlink() and p.name in allowed_files:
                     p.unlink()

@@ -109,6 +109,16 @@ class Shadow(unittest.TestCase):
         (self.root/'src/a.py').write_text('operator\n')
         event=self.event('s9',('src/b.py',));pre(event,self.store);(self.root/'src/b.py').write_text('new\n');result=self.after(event)
         self.assertNotIn('PREEXISTING_DIRTY_FILE_TOUCHED',result['signals']);self.assertNotIn('POSSIBLE_LOST_WORK',result['signals'])
+    def test_session_baseline_does_not_label_own_refactor_lost_work(self):
+        target=self.root/'src/a.py';target.write_text('export function adjust(value) { return value - 1; }\n')
+        self.git('init');self.git('add','src/a.py');self.git('-c','user.name=LioEinaudi','-c','user.email=Jinbin.Zhao.Dev@gmail.com','commit','-m','fixture')
+        self.register(['src/a.py'],['src/a.py'],[])
+        event=self.event('own-fix');pre(event,self.store)
+        target.write_text('export function adjust(value) { return value + 1; }\n');self.after(event)
+        event=self.event('own-refactor');pre(event,self.store)
+        target.write_text('export function bump(value) { return value + 1; }\n');result=self.after(event)
+        self.assertNotIn('PREEXISTING_DIRTY_FILE_TOUCHED',result['signals'])
+        self.assertNotIn('POSSIBLE_LOST_WORK',result['signals'])
     def test_S10_limits_are_reasons_not_complete_coverage(self):
         paths=[]
         for i in range(275):

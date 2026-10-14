@@ -167,9 +167,23 @@ def prepare(event, root, store, policy, key):
     # Required patch effects do not imply that a read/version/test command must
     # change those files. Shell resource/intent semantics remain unparsed.
     required = policy.get('shadow_required') if p['tool']=='apply_patch' else None
-    baseline = git_dirty(root,watch)
+    sessions=read_json(store/'shadow_sessions.json',{})
+    session_key=digest(event['session_id'])
+    baseline=sessions.get(session_key)
+    if baseline is None:
+        baseline=git_dirty(root,watch)
+        baseline.update(origin='session_first_observation',
+                        captured_at=datetime.now(timezone.utc).isoformat(),
+                        initial_watched_paths=watch)
+        sessions[session_key]=baseline
+        atomic_write(store/'shadow_sessions.json',sessions)
+    if not baseline['available']:
+        coverage['gaps'].append({'reason':'git_baseline_unavailable'})
     signals = []
     dirty_touched = sorted(set(p['E_proposed'] or []) & set(baseline['dirty_paths']))
+    for path in dirty_touched:
+        if path not in baseline['added_line_sha256']:
+            coverage['gaps'].append({'reason':'git_dirty_lines_unobserved','path':path})
     if dirty_touched:signals.append('PREEXISTING_DIRTY_FILE_TOUCHED')
     if any(m['kind']=='symlink_path' for m in before.values()): signals += ['SYMLINK_TARGET_RISK','SYMLINK_EFFECT_UNVERIFIED']
     if p['risk_signals']:signals.append('RISK_SIGNAL')

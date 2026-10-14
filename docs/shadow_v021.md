@@ -25,7 +25,9 @@ build outputs and virtual environments. Reports name actual scan limits,
 oversize/unreadable/link paths and missing callbacks. Shell risk cues describe
 proposal text; the adapter does not parse arbitrary Shell resource semantics.
 
-Git baseline records dirty names and added-line hashes, never private diff text.
+Git baseline is fixed at the first observation of each native session. It records
+dirty names and added-line hashes, never private diff text. Later edits by the
+same agent do not become a new user dirty baseline.
 Touching a dirty file is a risk signal. A disappeared baseline line yields
 `POSSIBLE_LOST_WORK`, with uncertain attribution; unchanged or retained hunks
 are not labelled lost work. This is not a line-level authorization engine.
