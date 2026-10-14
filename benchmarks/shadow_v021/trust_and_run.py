@@ -33,7 +33,9 @@ def trust(record):
     base=Path(record['base']);master,slave=pty.openpty()
     fcntl.ioctl(slave,termios.TIOCSWINSZ,struct.pack('HHHH',45,180,0,0))
     cmd=['codex',*FLAGS,'--no-alt-screen','-C',record['project'],'-s','workspace-write']
-    proc=subprocess.Popen(cmd,stdin=slave,stdout=slave,stderr=slave,env={**os.environ,'TERM':'xterm-256color'},start_new_session=True)
+    def controlling_terminal():
+        os.setsid();fcntl.ioctl(0,termios.TIOCSCTTY,0)
+    proc=subprocess.Popen(cmd,stdin=slave,stdout=slave,stderr=slave,env={**os.environ,'TERM':'xterm-256color'},preexec_fn=controlling_terminal)
     os.close(slave);raw=b'';stage=0;active=False;deadline=time.monotonic()+90;replied=False
     while time.monotonic()<deadline and proc.poll() is None:
         ready,_,_=select.select([master],[],[],0.2)
@@ -41,6 +43,7 @@ def trust(record):
             try:chunk=os.read(master,65536)
             except OSError:break
             raw+=chunk
+            (base/'trust_ui_in_progress_private.txt').write_bytes(raw)
             if not replied:
                 os.write(master,b'\x1b[1;1R\x1b[?1;2c');replied=True
         clean=ANSI.sub('',raw.decode(errors='replace'))
@@ -115,7 +118,9 @@ def main():
     args=parser.parse_args();plan=json.loads((args.root/'registered_matrix.json').read_text())
     records=[r for r in plan['records'] if not args.labels or r['label'] in args.labels]
     for record in records:
-        if args.trust and record['shadow'] and not (Path(record['base'])/'trust.json').exists():
+        prior=Path(record['base'])/'trust.json'
+        already=prior.exists() and json.loads(prior.read_text()).get('status')=='TRUSTED_ACTIVE'
+        if args.trust and record['shadow'] and not already:
             trust(record);print(json.dumps({'trusted':record['label']}),flush=True)
         if args.run and not (Path(record['base'])/'execution.json').exists():execute(record)
 
