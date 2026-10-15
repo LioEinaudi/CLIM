@@ -12,9 +12,14 @@ from unittest.mock import patch
 HERE=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('shadow_bundle_verifier',HERE/'verify_evidence.py')
 checker=importlib.util.module_from_spec(spec);spec.loader.exec_module(checker)
-BUNDLE=Path(os.environ.get('CLIM_SHADOW_EVIDENCE','/root/mine/gh-drafts/clim-agent-guard/clim_shadow_v021_acceptance_20261014_review'))
+BUNDLE=Path(os.environ['CLIM_SHADOW_EVIDENCE']) if os.environ.get('CLIM_SHADOW_EVIDENCE') else None
 
-@unittest.skipUnless(BUNDLE.is_dir(),'Set CLIM_SHADOW_EVIDENCE to the private reviewed bundle to run archive acceptance tests')
+def bundle_available():
+    try:return BUNDLE is not None and BUNDLE.is_dir()
+    except OSError:return False
+
+
+@unittest.skipUnless(bundle_available(),'Set CLIM_SHADOW_EVIDENCE to an accessible private reviewed bundle to run archive acceptance tests')
 class BundleTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)

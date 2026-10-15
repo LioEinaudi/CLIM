@@ -43,6 +43,14 @@ python scripts/run_repo_tests.py --out test-results/pytest.xml
 随后加入的 3 项公开归档测试不依赖私有数据。远端最终提交的实际 CI 结果另行记录，
 不把工作流模板或本机执行冒充 GitHub Actions 已成功。
 
+首轮真实 CI 暴露了历史私有归档测试的默认 `/root/...` 路径问题：普通用户在
+`Path.is_dir()` 检查阶段即遇到 PermissionError，导致收集失败，回归尚未执行。
+已用 nobody 身份在最小临时副本复现，随后删除默认绝对路径；现在仅显式设置
+`CLIM_SHADOW_EVIDENCE` 才尝试启用私有验收，无路径或不可访问时正常跳过。
+修复后同一非 root 复现命令成功，并继续核对真实 CI。
+归档里的 `source_snapshot.zip` 保留原实测版本；如需以普通用户运行该历史快照的测试，
+请显式设置 `CLIM_SHADOW_EVIDENCE=/tmp/not-supplied`，或使用已修复的当前仓库。
+
 ## 两次真实 Codex P0 烟测
 
 测量源码固定为 `eb55e4e3b64548508dddb75b3809d5af249b3b88`。

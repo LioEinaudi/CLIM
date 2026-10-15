@@ -24,7 +24,8 @@ jobs:
           git rev-parse HEAD > test-results/commit.txt
           python -VV > test-results/python.txt
           python -m pip freeze > test-results/packages.txt
-          python -m pytest --collect-only -q > test-results/collection.txt
+          set -o pipefail
+          python -m pytest --collect-only -q 2>&1 | tee test-results/collection.txt
       - name: Run all offline suites
         run: python scripts/run_repo_tests.py --out test-results/pytest.xml
       - name: Save results
