@@ -21,6 +21,8 @@ include = ["clim_agent_guard*"]
 
 [tool.pytest.ini_options]
 pythonpath = [".", "benchmarks/framework_pilot"]
+testpaths = ["tests", "examples/codex_boundary_pilot/tests", "examples/mcp_boundary_pilot/tests", "benchmarks/framework_pilot/tests", "benchmarks/coding_agent_pilot/tests", "benchmarks/developer_preview/tests", "benchmarks/shadow_v021/tests", "benchmarks/shadow_v021/handoff/test_shadow_effect_oracle.py"]
+addopts = "-ra"
 
 [project.scripts]
 clim = "clim_agent_guard.devpreview.cli:main"

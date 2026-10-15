@@ -187,6 +187,10 @@ def prepare(event, root, store, policy, key):
     if dirty_touched:signals.append('PREEXISTING_DIRTY_FILE_TOUCHED')
     if any(m['kind']=='symlink_path' for m in before.values()): signals += ['SYMLINK_TARGET_RISK','SYMLINK_EFFECT_UNVERIFIED']
     if p['risk_signals']:signals.append('RISK_SIGNAL')
+    if p['E_proposed'] is None and p['tool'] in ('Bash','exec_command','bash','shell_command'):
+        signals.append('UNINSPECTED_SHELL')
+    if p['protected_proposed']:
+        signals.append('DEFAULT_PROTECTION_CONFLICT')
     entry = {'schema':'clim-shadow-window/v0.2.1','mode':'shadow','session_id':event['session_id'],
              'tool_use_id':event['tool_use_id'],'started_at':datetime.now(timezone.utc).isoformat(),
              'policy_version':policy['_version'],'E_proposed':p['E_proposed'],
@@ -225,8 +229,10 @@ def finish(event,root,store,policy,key):
     if entry['policy_version']!=policy['_version']:gaps.append({'reason':'policy_changed'})
     signals=entry['signals'].copy()
     if observed:signals.append('EFFECT_OBSERVED')
-    protected=sorted(p for p in observed if match(p,policy['protected']))
-    if protected:signals.append('PROTECTED_TARGET_CHANGED')
+    protected=sorted(p for p in observed if match(p,policy['protected'])
+                     and not match(p,policy.get('explicit_overrides',[])))
+    if protected:
+        signals.extend(['PROTECTED_TARGET_CHANGED','DEFAULT_PROTECTION_CONFLICT'])
     r_auth=sorted(set(observed)-set(authority)) if authority is not None else None
     if r_auth:signals.append('OUTSIDE_AUTHORIZED_SCOPE')
     if any(g['reason']=='symlink_target_changed' for g in gaps):signals.append('TOCTOU_UNCERTAIN')

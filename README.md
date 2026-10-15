@@ -1,4 +1,48 @@
-# CLIM Agent Guard v0.1.3
+# CLIM Agent Guard
+
+## Developer Alpha: Shadow v0.2.1
+
+`clim init codex` installs project Hooks and a default sensitive-path policy.
+Review and trust the installed definitions in Codex `/hooks` before running a
+task. **Shadow observes and reports; it never blocks execution.** Guarded and Ask
+remain experimental. The CLI package is `0.2.1.dev0`.
+
+```bash
+python -m pip install -e '.[dev]'
+clim init codex --project /path/to/project
+clim report --project /path/to/project --today
+clim report --project /path/to/project --today --advanced
+```
+
+The basic report separates observed changes, lexical `RISK_SIGNAL` hints,
+`UNINSPECTED_SHELL` coverage and `DEFAULT_PROTECTION_CONFLICT`. Advanced reports
+retain historical policy hypotheses such as `WOULD_BLOCK`. These hypotheses are
+not Shadow denials. Default protected paths are policy references; task authority
+is `AUTHORITY_UNKNOWN` until independently registered by the host with
+`clim observe`. A protected-path change alone does not prove task-level overreach.
+
+Read [Known Limitations](docs/KNOWN_LIMITATIONS.md),
+[Shadow implementation notes](docs/shadow_v021.md) and the
+[October 14 S1–S10 results](docs/shadow_v021_results_20261014.md).
+
+### Quick verification (offline)
+
+```bash
+python -m pip install -e '.[dev]'
+python -m pytest --collect-only -q
+python scripts/run_repo_tests.py --out test-results/pytest.xml
+```
+
+This runs every offline suite in `tests/`, `examples/` and `benchmarks/`. A narrower
+`python -m pytest -q tests/` covers only the top-level tests. Counts come from
+pytest at the checked-out commit: the historical 140 tests are preserved, with
+new closeout regressions added. Three private Shadow archive tests skip when
+their review bundle is unavailable; set `CLIM_SHADOW_EVIDENCE` to that bundle to
+include them. Actual Codex sessions and API benchmarks are separate acceptance
+runs and require their own clients/accounts. CI records collected IDs and JUnit
+on Python 3.10 and 3.12.
+
+## Historical framework study (v0.1.3)
 
 ## 🛑 Valid Tool Calls, Invalid Authority
 

@@ -22,7 +22,8 @@ import time
 
 REPO=Path(__file__).resolve().parents[2]
 ANSI=re.compile(r'\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07\x1b]*(?:\x07|\x1b\\)|M)')
-FLAGS=['--no-daemon','-a','never','-m','gpt-6.1-sol','-c','model_reasoning_effort="medium"']
+FLAGS=['--no-daemon','-m','gpt-6.1-sol','-c','model_reasoning_effort="medium"']
+APPROVAL=['-c','approval_policy="on-request"']
 
 
 def save(path,obj):
@@ -32,7 +33,7 @@ def save(path,obj):
 def trust(record):
     base=Path(record['base']);master,slave=pty.openpty()
     fcntl.ioctl(slave,termios.TIOCSWINSZ,struct.pack('HHHH',45,180,0,0))
-    cmd=['codex',*FLAGS,'--no-alt-screen','-C',record['project'],'-s','workspace-write']
+    cmd=['codex',*FLAGS,*APPROVAL,'--no-alt-screen','-C',record['project'],'-s','workspace-write']
     def controlling_terminal():
         os.setsid();fcntl.ioctl(0,termios.TIOCSCTTY,0)
     proc=subprocess.Popen(cmd,stdin=slave,stdout=slave,stderr=slave,env={**os.environ,'TERM':'xterm-256color'},preexec_fn=controlling_terminal)
@@ -87,7 +88,7 @@ def execute(record):
         save(base/'target_before.json',oracle.capture(str(base/'target'),str(base/'target_inventory.json')))
     if record['shadow']:
         assert json.loads((base/'trust.json').read_text())['status']=='TRUSTED_ACTIVE'
-    cmd=['codex',*FLAGS,'exec','--json','-s','workspace-write','-C',str(project),'-']
+    cmd=['codex',*FLAGS,'exec',*APPROVAL,'--json','-s','workspace-write','-C',str(project),'-']
     started=datetime.now(timezone.utc).isoformat();clock=time.monotonic_ns();load_before=os.getloadavg()
     with (base/'prompt.txt').open('rb') as prompt,(base/'codex_stdout_private.jsonl').open('wb') as output,(base/'codex_stderr_private.txt').open('wb') as errors:
         proc=subprocess.run(cmd,stdin=prompt,stdout=output,stderr=errors,timeout=480)
@@ -95,6 +96,18 @@ def execute(record):
     save(base/'execution.json',{'started_at':started,'finished_at':datetime.now(timezone.utc).isoformat(),
          'argv':cmd,'exit_code':proc.returncode,'elapsed_seconds':elapsed,'load_before':load_before,'load_after':os.getloadavg(),
          'origin':'ACTUAL_CODEX_CLI','paired_arm':'shadow' if record['shadow'] else 'native'})
+    from permission_receipts import contexts_from_rollout, permission_receipt
+    with (base/'codex_stdout_private.jsonl').open() as stream:
+        thread=next(json.loads(line)['thread_id'] for line in stream
+                    if json.loads(line).get('type')=='thread.started')
+    sessions=Path(os.environ.get('CODEX_HOME',str(Path.home()/'.codex')))/'sessions'
+    rollouts=list(sessions.rglob('*'+thread+'*.jsonl'))
+    contexts=[context for path in rollouts for context in contexts_from_rollout(path)]
+    receipt=permission_receipt(contexts,'on-request',record['label'],
+        subprocess.run(['codex','--version'],capture_output=True,text=True,check=True).stdout.strip())
+    save(base/'permission_receipt.json',receipt)
+    if receipt['policy_mismatch']:
+        raise RuntimeError('Native approval policy differs from preregistered request: '+record['label'])
     save(base/'after.json',oracle.capture(str(project),str(base/'inventory.json')))
     before=oracle.load(base/'before.json');after=oracle.load(base/'after.json')
     proposals=[]

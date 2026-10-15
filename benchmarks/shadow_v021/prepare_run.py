@@ -79,7 +79,7 @@ def prepare(dest):
               'fixture_commit':run(['git','-C',str(project),'rev-parse','HEAD']).strip(),'registered_at':datetime.now(timezone.utc).isoformat(),
               'inventory':inventory,'E_authorized':authorized,'E_required':required,
               'injections':{k:v for k,v in ctl.items() if k in ('inject_third_file','switch_link','switch_target','suppress_post_once','remote_proposal_only')},
-              'prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest(),'startup':'native /hooks review, then codex exec with workspace-write, approval never',
+              'prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest(),'startup':'native /hooks review, then codex exec with workspace-write, explicit config approval on-request; verify native receipt',
               'model':'gpt-6.1-sol','reasoning_effort':'medium','install_stdout':install}
         if label.startswith('S01/'):
             info['host_region_constraint']={'path':'src/auth.py','allowed_lines':[3,4],

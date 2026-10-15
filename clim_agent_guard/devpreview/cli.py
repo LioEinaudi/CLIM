@@ -178,6 +178,34 @@ def cmd_doctor(args):
     return 0
 
 
+def _shadow_display_event(event, advanced=False):
+    """Lossless telemetry remains in events.jsonl; default report is semantic summary."""
+    if advanced or event.get('mode') != 'shadow':
+        return event
+    signals = list(event.get('signals') or [])
+    effect = event.get('effect') or {}
+    if 'OUTSIDE_AUTHORIZED_SCOPE' in signals and 'OUT_OF_SCOPE' not in signals:
+        signals.append('OUT_OF_SCOPE')
+    labels = sorted(set(signals))
+    info = {
+        'timestamp': event.get('timestamp'), 'phase': event.get('phase'),
+        'tool': event.get('tool'), 'status': 'OBSERVATION_ONLY',
+        'labels': labels, 'enforced': False,
+        'authority_status': event.get('authority_source') or effect.get('authority_source') or 'AUTHORITY_UNKNOWN',
+    }
+    if event.get('phase') == 'PRE':
+        info['proposed_targets'] = event.get('targets')
+        info['risk_signals'] = event.get('risk_signals') or []
+        info['coverage_gaps'] = event.get('W', {}).get('gaps') or []
+    else:
+        info['observation_status'] = event.get('decision', 'UNKNOWN')
+        info['observed_changed_paths'] = effect.get('E_observed', [])
+        info['protected_changed_paths'] = effect.get('protected_changed_paths', [])
+        info['out_of_scope_paths'] = effect.get('R_authority')
+        info['coverage_gaps'] = effect.get('coverage_gaps', event.get('coverage_gaps', []))
+    return info
+
+
 def cmd_report(args):
     root=_root(args.project);store=project_store(root)
     path=store/'events.jsonl'
@@ -189,13 +217,31 @@ def cmd_report(args):
                 if args.today and datetime.fromisoformat(e['timestamp']).astimezone().date()!=datetime.now().astimezone().date():continue
                 events.append(e)
             except (ValueError,KeyError):continue
-    stats={k:sum(1 for e in events if e.get('decision')==k) for k in ('BLOCK','ALLOW','WOULD_BLOCK','WOULD_ALLOW','RECONCILIATION_ACKNOWLEDGED','OBSERVED','UNKNOWN','ALLOW_UNVERIFIED')}
+    advanced=getattr(args,'advanced',False)
+    visible_counts = {k:sum(1 for e in events if e.get('decision')==k and e.get('mode')!='shadow')
+        for k in ('BLOCK','ALLOW','RECONCILIATION_ACKNOWLEDGED','ALLOW_UNVERIFIED','UNKNOWN','OBSERVED')}
+    shadow=[e for e in events if e.get('mode')=='shadow']
+    for label in ('RISK_SIGNAL','UNINSPECTED_SHELL','DEFAULT_PROTECTION_CONFLICT',
+                  'PROTECTED_TARGET_CHANGED','OUTSIDE_AUTHORIZED_SCOPE','EFFECT_OBSERVED'):
+        visible_counts[label]=sum(label in (e.get('signals') or []) for e in shadow)
+    visible_counts['OUT_OF_SCOPE']=visible_counts['OUTSIDE_AUTHORIZED_SCOPE']
+    visible_counts['AUTHORITY_UNKNOWN']=sum(
+        e.get('phase')=='PRE' and e.get('authority_source')=='AUTHORITY_UNKNOWN' for e in shadow)
+    visible_counts['COVERAGE_GAP']=sum(bool((e.get('W') or {}).get('gaps')) if e.get('phase')=='PRE'
+        else bool((e.get('effect') or {}).get('coverage_gaps',e.get('coverage_gaps',[]))) for e in shadow)
+    # Preserve a separate historical policy-hypothesis counter, but never conflate
+    # it with an actual risk signal or Shadow enforcement.
+    hypothetical=sum(e.get('phase')=='PRE' and e.get('decision')=='WOULD_BLOCK' for e in shadow)
     from .shadow import gaps_for_pending
-    print(json.dumps({'schema':'clim-developer-report/v0.2.1','events':len(events),'counts':stats,
+    output={'schema':'clim-developer-report/v0.2.1','events':len(events),'counts':visible_counts,
+        'mode':'shadow' if shadow and all(e.get('mode')=='shadow' for e in events) else 'mixed_or_other',
+        'authority_notice':'Task authority unknown unless independently registered by host; default protected paths are policy hints, not task authorization.',
         'coverage_gaps':gaps_for_pending(store),'redaction_applied':True,
         'retention':'Until explicit uninstall --purge-state; existing legacy logs are not rewritten.',
-        'recent':events[-min(args.limit,50):]},indent=2,ensure_ascii=False))
-
+        'recent':[_shadow_display_event(e,advanced) for e in events[-min(args.limit,50):]]}
+    if advanced:
+        output['policy_hypothesis']={'shadow_would_block':hypothetical,'not_a_risk_count':True}
+    print(json.dumps(output,indent=2,ensure_ascii=False))
 
 def cmd_observe(args):
     """Register external host truth; never derive authority from agent proposals."""
@@ -316,7 +362,7 @@ def main(argv=None):
     un=sub.add_parser('uninstall');un.add_argument('--project',default='.');un.add_argument('--purge-state',action='store_true')
     doc=sub.add_parser('doctor');doc.add_argument('--project',default='.')
     mod=sub.add_parser('mode');mod.add_argument('mode',choices=['shadow','ask','guarded']);mod.add_argument('--project',default='.')
-    report=sub.add_parser('report');report.add_argument('--project',default='.');report.add_argument('--today',action='store_true');report.add_argument('--limit',type=int,default=20)
+    report=sub.add_parser('report');report.add_argument('--project',default='.');report.add_argument('--today',action='store_true');report.add_argument('--limit',type=int,default=20);report.add_argument('--advanced',action='store_true')
     prot=sub.add_parser('protect');prot.add_argument('paths',nargs='+');prot.add_argument('--project',default='.')
     allow=sub.add_parser('allow');allow.add_argument('paths',nargs='+');allow.add_argument('--project',default='.')
     permit=sub.add_parser('permit-once');permit.add_argument('--path',action='append',dest='paths');permit.add_argument('--command');permit.add_argument('--project',default='.')

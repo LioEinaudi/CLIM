@@ -11,8 +11,11 @@ from typing import Any
 DEFAULT_DENY = [
     '.env', '.env.*', '**/.env', '**/.env.*',
     'config.prod.*', '**/config.prod.*',
+    '*.prod.*', '**/*.prod.*', 'production/**', '**/production/**',
     '**/prod/**', 'prod/**',
     '**/*.pem', '*.pem', '**/*.key', '*.key',
+    'id_rsa', '**/id_rsa', 'id_ed25519', '**/id_ed25519',
+    'id_ecdsa', '**/id_ecdsa', 'id_dsa', '**/id_dsa',
     '.git/**', '.codex/**', '.clim/**', '.clim.json',
 ]
 SKIP_DIRS = {'.git', '.codex', '.clim', 'node_modules', '.venv', 'venv', '__pycache__', 'dist', 'build'}

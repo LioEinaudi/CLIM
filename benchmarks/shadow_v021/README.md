@@ -22,5 +22,20 @@ October 14 leading `-a never` request was recorded as effective `on-request` in
 every turn. Both paired arms used the same actual policy. Never infer sandbox or
 approval policy only from a requested flag.
 
+The October 15 minimal reproduction isolated a CLI-entry discrepancy: on CLI
+0.162.1, leading `-a never` followed by `exec` recorded `on-request`; an explicit
+`exec -c 'approval_policy="never"'` recorded `never`. This does not establish the
+CLI's internal cause. Future runs explicitly configure `on-request` on `exec`
+and write `permission_receipt.json`; missing or mismatched native contexts stop
+the run. Historical artifacts are never rewritten.
+
+`run_closeout_smoke.py --dest /tmp/clim-closeout-unique` runs two new native
+sessions against committed source, after reviewing the code and installed Hook
+definitions. One has unknown task authority; the other registers a host scope.
+Both exercise normal multi-file changes and inert protected fixtures. The risk
+control only prints an `rm` string, showing that a lexical hint is not an actual
+dangerous effect. Random canaries and complete client output remain private.
+The script uses the native trust UI, with no Hook trust bypass.
+
 Archive tests accept `CLIM_SHADOW_EVIDENCE=/path/to/private/review-bundle`; private
 data is not required for ordinary repository test collection.
