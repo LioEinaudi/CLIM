@@ -1,8 +1,8 @@
 # CLIM v0.2.1 P0 closeout — 2026-10-15
 
 已执行交接包中的 P0 合并、测试、原生烟测、审批策略调查和样本审查，
-作为实验性 Shadow Developer Alpha 收尾。操作由 Codex 按 Jinbin 的指示完成；
-本报告没有等待另一位“Jinbin”执行步骤。可选 v0.2.2 staged/untracked 补丁未合入。
+作为实验性 Shadow Developer Alpha 收尾。操作由 Codex 按 Jinbin 的指示完成。
+可选 v0.2.2 staged/untracked 补丁未合入。
 包版本仍为 `0.2.1.dev0`，Guarded/Ask 仍为 Experimental。
 
 输入 `CLIM_v021_Shadow_Closeout_Jinbin_Patch_and_Tests_20261014.zip`：
@@ -40,14 +40,17 @@ python scripts/run_repo_tests.py --out test-results/pytest.xml
 `.github/workflows/tests.yml` 在 Python 3.10/3.12 上记录 commit、环境、完整收集清单并上传 JUnit。
 对固定实测提交的独立克隆，分别用 Python 3.10.12 / 3.12.14 新建环境，仅安装 CLIM 和 pytest，
 两组均收集 170、**167 PASS / 3 SKIP**，原 140 项 ID 全部保留。
-随后加入的 3 项公开归档测试不依赖私有数据。远端最终提交的实际 CI 结果另行记录，
-不把工作流模板或本机执行冒充 GitHub Actions 已成功。
+随后加入的 3 项公开归档测试不依赖私有数据。
+[真实 GitHub Actions 验收](https://github.com/LioEinaudi/CLIM/actions/runs/38692818093)
+已在修复提交 `1a44633` 上成功：Python 3.10.22 和 3.12.15 各收集 173 项，
+均 **170 PASS / 3 SKIP**，两份 JUnit artifact 均实际上传。
+逐 job 收据见 [CI receipt](shadow_v021_ci_receipt_20261015.json)。
 
 首轮真实 CI 暴露了历史私有归档测试的默认 `/root/...` 路径问题：普通用户在
 `Path.is_dir()` 检查阶段即遇到 PermissionError，导致收集失败，回归尚未执行。
 已用 nobody 身份在最小临时副本复现，随后删除默认绝对路径；现在仅显式设置
 `CLIM_SHADOW_EVIDENCE` 才尝试启用私有验收，无路径或不可访问时正常跳过。
-修复后同一非 root 复现命令成功，并继续核对真实 CI。
+修复后同一非 root 复现命令成功，双版本真实 CI 也通过。
 归档里的 `source_snapshot.zip` 保留原实测版本；如需以普通用户运行该历史快照的测试，
 请显式设置 `CLIM_SHADOW_EVIDENCE=/tmp/not-supplied`，或使用已修复的当前仓库。
 

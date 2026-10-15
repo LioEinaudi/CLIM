@@ -1,0 +1,28 @@
+{
+  "repository": "LioEinaudi/CLIM",
+  "tested_commit": "1a44633",
+  "workflow_run_id": 38692818093,
+  "workflow_url": "https://github.com/LioEinaudi/CLIM/actions/runs/38692818093",
+  "conclusion": "success",
+  "source": "GitHub Actions job logs fetched through connected GitHub read-only tools",
+  "jobs": [
+    {
+      "job_id": 116282430769,
+      "lines": [
+        "2026-10-15T06:30:35.3316121Z Successfully set up CPython (3.12.15)",
+        "2026-10-15T06:30:40.8936002Z 173 tests collected in 0.44s",
+        "2026-10-15T06:30:45.5654952Z 170 passed, 3 skipped in 4.42s",
+        "2026-10-15T06:30:46.2200897Z Artifact offline-python-3.12.zip successfully finalized. Artifact ID 11952493069"
+      ]
+    },
+    {
+      "job_id": 116282430997,
+      "lines": [
+        "2026-10-15T06:30:35.9189428Z Successfully set up CPython (3.10.22)",
+        "2026-10-15T06:30:44.6755224Z 173 tests collected in 0.50s",
+        "2026-10-15T06:30:48.4369778Z 170 passed, 3 skipped in 3.51s",
+        "2026-10-15T06:30:49.2475128Z Artifact offline-python-3.10.zip successfully finalized. Artifact ID 11953085636"
+      ]
+    }
+  ]
+}
