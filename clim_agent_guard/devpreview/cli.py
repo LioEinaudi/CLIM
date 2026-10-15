@@ -219,7 +219,9 @@ def cmd_report(args):
             except (ValueError,KeyError):continue
     advanced=getattr(args,'advanced',False)
     visible_counts = {k:sum(1 for e in events if e.get('decision')==k and e.get('mode')!='shadow')
-        for k in ('BLOCK','ALLOW','RECONCILIATION_ACKNOWLEDGED','ALLOW_UNVERIFIED','UNKNOWN','OBSERVED')}
+        for k in ('BLOCK','ALLOW','RECONCILIATION_ACKNOWLEDGED','ALLOW_UNVERIFIED')}
+    for status in ('UNKNOWN','OBSERVED'):
+        visible_counts[status]=sum(e.get('decision')==status for e in events)
     shadow=[e for e in events if e.get('mode')=='shadow']
     for label in ('RISK_SIGNAL','UNINSPECTED_SHELL','DEFAULT_PROTECTION_CONFLICT',
                   'PROTECTED_TARGET_CHANGED','OUTSIDE_AUTHORIZED_SCOPE','EFFECT_OBSERVED'):

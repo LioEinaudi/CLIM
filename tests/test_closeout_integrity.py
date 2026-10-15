@@ -1,5 +1,6 @@
 """Regression checks for report uncertainty and native permission receipts."""
 import importlib.util
+import argparse
 import json
 from pathlib import Path
 from clim_agent_guard.devpreview import cli, policy
@@ -25,6 +26,18 @@ def test_basic_report_keeps_unknown_and_does_not_mutate_audit():
     assert summary['coverage_gaps']==[{'reason':'unmatched_pre'}]
     assert json.dumps(event,sort_keys=True)==original
     assert cli._shadow_display_event(event,advanced=True) is event
+
+
+def test_report_counts_shadow_unknown_as_an_observation(tmp_path,monkeypatch,capsys):
+    from clim_agent_guard.devpreview.store import append_audit, project_store
+    monkeypatch.setenv('CLIM_HOME',str(tmp_path/'state'))
+    root=tmp_path/'project';root.mkdir()
+    append_audit(project_store(root),{'mode':'shadow','phase':'POST','decision':'UNKNOWN',
+        'coverage_gaps':[{'reason':'unmatched_pre'}],'enforced':False})
+    cli.cmd_report(argparse.Namespace(project=str(root),today=False,limit=20,advanced=False))
+    report=json.loads(capsys.readouterr().out)
+    assert report['counts']['UNKNOWN']==1 and report['counts']['BLOCK']==0
+    assert report['recent'][0]['observation_status']=='UNKNOWN'
 
 
 def test_explicit_override_is_not_reported_as_protected_effect(tmp_path):
