@@ -1,0 +1,22 @@
+{
+  "status": "TRUSTED_ACTIVE",
+  "recorded_at": "2026-10-15T06:20:10.609237+00:00",
+  "native_command": [
+    "codex",
+    "--no-daemon",
+    "-m",
+    "gpt-6.1-sol",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "-c",
+    "approval_policy=\"on-request\"",
+    "--no-alt-screen",
+    "-C",
+    "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown/project",
+    "-s",
+    "workspace-write"
+  ],
+  "pre_active": true,
+  "post_active": true,
+  "hook_trust_bypass": false
+}

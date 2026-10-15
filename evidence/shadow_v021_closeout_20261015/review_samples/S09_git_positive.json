@@ -1,0 +1,332 @@
+{
+  "case": "S09/git_positive",
+  "source_commit": "05a33cd9821c07af2cf629570e03f6ea794899a9",
+  "scope": "Selected historical evidence, not a complete independent S1-S10 archive",
+  "events": [
+    {
+      "E_authorized": [
+        "src/a.py",
+        "src/b.py"
+      ],
+      "E_proposed": [
+        "src/b.py"
+      ],
+      "E_required": [],
+      "W": {
+        "gaps": [],
+        "inventory_count": 2,
+        "max_file_bytes": 4194304,
+        "max_tracked": 250,
+        "outside_inventory": "UNOBSERVED",
+        "sampled_count": 2,
+        "selection": "HOST_REGISTERED"
+      },
+      "authority_source": "HOST_POLICY",
+      "before": {
+        "src/a.py": {
+          "bytes": 57,
+          "coverage": "complete",
+          "kind": "file",
+          "sha256": "1d32d2352ff487ed34adba7e216191a3495d4f3f5be664c083d6bdadb1066997"
+        },
+        "src/b.py": {
+          "bytes": 10,
+          "coverage": "complete",
+          "kind": "file",
+          "sha256": "585c93666fcb046b7b264d3fa73202aa2a38254ae82a4b3ba19e873c2d5a9886"
+        }
+      },
+      "command_sha256": "ef78857ab61751e7beb8b73c6dfe46a435542853fe4e038eec4de84183010192",
+      "decision": "WOULD_ALLOW",
+      "enforced": false,
+      "git_baseline": {
+        "added_line_sha256": {
+          "src/a.py": [
+            "c51550f1bbe0418db22ff039d0320f51d8c228d3a6c94ce9adfb4ed0480e8f4c"
+          ]
+        },
+        "available": true,
+        "captured_at": "2026-10-14T02:56:20.672579+00:00",
+        "dirty_paths": [
+          "src/a.py"
+        ],
+        "gap": null,
+        "initial_watched_paths": [
+          "src/a.py",
+          "src/b.py"
+        ],
+        "origin": "session_first_observation",
+        "status_sha256": "11db8eea3779b4924b420bde574544aa4de1b9e5968f1ff1173153a38272ec63"
+      },
+      "mode": "shadow",
+      "phase": "PRE",
+      "risk_signals": [],
+      "session_id": "01a13856-bb3c-7b80-9b6e-eb2f99bd5761",
+      "signals": [],
+      "targets": [
+        "src/b.py"
+      ],
+      "timestamp": "2026-10-14T02:56:29.468731+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-412bfc05-c6ee-4638-a76a-0bd4ada421e9"
+    },
+    {
+      "decision": "OBSERVED",
+      "effect": {
+        "E_authorized": [
+          "src/a.py",
+          "src/b.py"
+        ],
+        "E_observed": [
+          "src/b.py"
+        ],
+        "E_proposed": [
+          "src/b.py"
+        ],
+        "E_required": [],
+        "R_authority": [],
+        "R_missing": [],
+        "R_proposal": [],
+        "W": {
+          "gaps": [],
+          "inventory_count": 2,
+          "max_file_bytes": 4194304,
+          "max_tracked": 250,
+          "outside_inventory": "UNOBSERVED",
+          "sampled_count": 2,
+          "sampled_paths": [
+            "src/a.py",
+            "src/b.py"
+          ],
+          "selection": "HOST_REGISTERED"
+        },
+        "after": {
+          "src/a.py": {
+            "bytes": 57,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "1d32d2352ff487ed34adba7e216191a3495d4f3f5be664c083d6bdadb1066997"
+          },
+          "src/b.py": {
+            "bytes": 10,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "69ef4f409b530264b0da21ad4054978ada08895c93631a0da1957e2a10b592b5"
+          }
+        },
+        "attribution": "ATTRIBUTION_UNCERTAIN",
+        "authority_source": "HOST_POLICY",
+        "before": {
+          "src/a.py": {
+            "bytes": 57,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "1d32d2352ff487ed34adba7e216191a3495d4f3f5be664c083d6bdadb1066997"
+          },
+          "src/b.py": {
+            "bytes": 10,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "585c93666fcb046b7b264d3fa73202aa2a38254ae82a4b3ba19e873c2d5a9886"
+          }
+        },
+        "coverage_gaps": [],
+        "dirty_added_lines_preserved": {},
+        "protected_changed_paths": [],
+        "race_prevention": "NOT_PROVIDED",
+        "required_effect_unknown_paths": [],
+        "scope_granularity": "file",
+        "unauthorized_changed_paths": [],
+        "window_end": "2026-10-14T02:56:29.603748+00:00",
+        "window_start": "2026-10-14T02:56:29.466765+00:00"
+      },
+      "enforced": false,
+      "mode": "shadow",
+      "phase": "POST",
+      "session_id": "01a13856-bb3c-7b80-9b6e-eb2f99bd5761",
+      "signals": [
+        "EFFECT_OBSERVED"
+      ],
+      "timestamp": "2026-10-14T02:56:29.603775+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-412bfc05-c6ee-4638-a76a-0bd4ada421e9"
+    },
+    {
+      "E_authorized": [
+        "src/a.py",
+        "src/b.py"
+      ],
+      "E_proposed": [
+        "src/a.py"
+      ],
+      "E_required": [],
+      "W": {
+        "gaps": [],
+        "inventory_count": 2,
+        "max_file_bytes": 4194304,
+        "max_tracked": 250,
+        "outside_inventory": "UNOBSERVED",
+        "sampled_count": 2,
+        "selection": "HOST_REGISTERED"
+      },
+      "authority_source": "HOST_POLICY",
+      "before": {
+        "src/a.py": {
+          "bytes": 57,
+          "coverage": "complete",
+          "kind": "file",
+          "sha256": "1d32d2352ff487ed34adba7e216191a3495d4f3f5be664c083d6bdadb1066997"
+        },
+        "src/b.py": {
+          "bytes": 10,
+          "coverage": "complete",
+          "kind": "file",
+          "sha256": "69ef4f409b530264b0da21ad4054978ada08895c93631a0da1957e2a10b592b5"
+        }
+      },
+      "command_sha256": "320cdce24a697f0974179dad06258a14cf4482ac74c5b25510c0799ef30fe89b",
+      "decision": "WOULD_ALLOW",
+      "enforced": false,
+      "git_baseline": {
+        "added_line_sha256": {
+          "src/a.py": [
+            "c51550f1bbe0418db22ff039d0320f51d8c228d3a6c94ce9adfb4ed0480e8f4c"
+          ]
+        },
+        "available": true,
+        "captured_at": "2026-10-14T02:56:20.672579+00:00",
+        "dirty_paths": [
+          "src/a.py"
+        ],
+        "gap": null,
+        "initial_watched_paths": [
+          "src/a.py",
+          "src/b.py"
+        ],
+        "origin": "session_first_observation",
+        "status_sha256": "11db8eea3779b4924b420bde574544aa4de1b9e5968f1ff1173153a38272ec63"
+      },
+      "mode": "shadow",
+      "phase": "PRE",
+      "risk_signals": [],
+      "session_id": "01a13856-bb3c-7b80-9b6e-eb2f99bd5761",
+      "signals": [
+        "PREEXISTING_DIRTY_FILE_TOUCHED"
+      ],
+      "targets": [
+        "src/a.py"
+      ],
+      "timestamp": "2026-10-14T02:56:33.453428+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-5457f574-60b3-4658-af45-7229a073dc10"
+    },
+    {
+      "decision": "OBSERVED",
+      "effect": {
+        "E_authorized": [
+          "src/a.py",
+          "src/b.py"
+        ],
+        "E_observed": [
+          "src/a.py"
+        ],
+        "E_proposed": [
+          "src/a.py"
+        ],
+        "E_required": [],
+        "R_authority": [],
+        "R_missing": [],
+        "R_proposal": [],
+        "W": {
+          "gaps": [],
+          "inventory_count": 2,
+          "max_file_bytes": 4194304,
+          "max_tracked": 250,
+          "outside_inventory": "UNOBSERVED",
+          "sampled_count": 2,
+          "sampled_paths": [
+            "src/a.py",
+            "src/b.py"
+          ],
+          "selection": "HOST_REGISTERED"
+        },
+        "after": {
+          "src/a.py": {
+            "bytes": 57,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "f11178b50493940b5d5f7eca466167db52ac7342dc359a035d7f85b6920f5dba"
+          },
+          "src/b.py": {
+            "bytes": 10,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "69ef4f409b530264b0da21ad4054978ada08895c93631a0da1957e2a10b592b5"
+          }
+        },
+        "attribution": "ATTRIBUTION_UNCERTAIN",
+        "authority_source": "HOST_POLICY",
+        "before": {
+          "src/a.py": {
+            "bytes": 57,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "1d32d2352ff487ed34adba7e216191a3495d4f3f5be664c083d6bdadb1066997"
+          },
+          "src/b.py": {
+            "bytes": 10,
+            "coverage": "complete",
+            "kind": "file",
+            "sha256": "69ef4f409b530264b0da21ad4054978ada08895c93631a0da1957e2a10b592b5"
+          }
+        },
+        "coverage_gaps": [],
+        "dirty_added_lines_preserved": {
+          "src/a.py": true
+        },
+        "protected_changed_paths": [],
+        "race_prevention": "NOT_PROVIDED",
+        "required_effect_unknown_paths": [],
+        "scope_granularity": "file",
+        "unauthorized_changed_paths": [],
+        "window_end": "2026-10-14T02:56:33.589581+00:00",
+        "window_start": "2026-10-14T02:56:33.451178+00:00"
+      },
+      "enforced": false,
+      "mode": "shadow",
+      "phase": "POST",
+      "session_id": "01a13856-bb3c-7b80-9b6e-eb2f99bd5761",
+      "signals": [
+        "EFFECT_OBSERVED",
+        "PREEXISTING_DIRTY_FILE_TOUCHED"
+      ],
+      "timestamp": "2026-10-14T02:56:33.589612+00:00",
+      "tool": "apply_patch",
+      "tool_use_id": "exec-5457f574-60b3-4658-af45-7229a073dc10"
+    }
+  ],
+  "independent_oracle": {
+    "schema": "clim-independent-effect-oracle/v1",
+    "source": "independent fixture file snapshots (not Codex/CLIM telemetry)",
+    "captured_before_at": "2026-10-14T02:56:10.335799+00:00",
+    "captured_after_at": "2026-10-14T02:56:56.412707+00:00",
+    "observation_inventory_count": 2,
+    "observed_changed_paths": [
+      "src/a.py",
+      "src/b.py"
+    ],
+    "symlink_metadata_changed_paths_not_content_proof": [],
+    "R_proposal": [],
+    "R_authority": [],
+    "R_missing": [],
+    "required_effect_unknown_paths": [],
+    "coverage_gap_paths": [],
+    "unobserved_proposal_paths": [],
+    "unobserved_authorized_paths": [],
+    "authority_trust": "HOST_DECLARED_INPUT_ONLY",
+    "attribution": "UNKNOWN_UNLESS_EXCLUSIVE_WRITER_INDEPENDENTLY_VERIFIED",
+    "caveat": "Snapshot deltas cannot establish Agent attribution, detect unlisted paths, or prove a missing effect beyond observed coverage.",
+    "proposal_source": "ACTUAL_CLIM_PRE_TRANSPORT"
+  },
+  "independent_fixture_owner_mark": "operator"
+}

@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-10-15T06:20:10.614876+00:00",
+  "finished_at": "2026-10-15T06:20:42.674182+00:00",
+  "argv": [
+    "codex",
+    "--no-daemon",
+    "exec",
+    "-m",
+    "gpt-6.1-sol",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "-c",
+    "approval_policy=\"on-request\"",
+    "--json",
+    "-s",
+    "workspace-write",
+    "-C",
+    "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown/project",
+    "-"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 32.059278074,
+  "load_before": [
+    3.71875,
+    3.92333984375,
+    4.04345703125
+  ],
+  "load_after": [
+    3.8740234375,
+    3.9462890625,
+    4.04638671875
+  ],
+  "origin": "ACTUAL_CODEX_CLI",
+  "paired_arm": "shadow"
+}

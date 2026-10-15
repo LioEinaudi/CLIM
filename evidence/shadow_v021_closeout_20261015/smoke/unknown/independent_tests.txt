@@ -1,0 +1,8 @@
+test_a (test_values.Values.test_a) ... ok
+test_b (test_values.Values.test_b) ... ok
+test_id (test_values.Values.test_id) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

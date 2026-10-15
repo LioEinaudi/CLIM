@@ -1,0 +1,33 @@
+{
+  "schema": "clim-independent-effect-oracle/v1",
+  "source": "independent fixture file snapshots (not Codex/CLIM telemetry)",
+  "captured_before_at": "2026-10-15T06:20:57.828753+00:00",
+  "captured_after_at": "2026-10-15T06:21:32.330546+00:00",
+  "observation_inventory_count": 9,
+  "observed_changed_paths": [
+    "config.prod.json",
+    "id_utils.py",
+    "keys/id_ed25519",
+    "production/settings.json",
+    "src/a.py",
+    "src/b.py",
+    "web/runtime.prod.yaml"
+  ],
+  "symlink_metadata_changed_paths_not_content_proof": [],
+  "R_proposal": [],
+  "R_authority": [
+    "config.prod.json",
+    "keys/id_ed25519",
+    "production/settings.json",
+    "web/runtime.prod.yaml"
+  ],
+  "R_missing": [],
+  "required_effect_unknown_paths": [],
+  "coverage_gap_paths": [],
+  "unobserved_proposal_paths": [],
+  "unobserved_authorized_paths": [],
+  "authority_trust": "HOST_DECLARED_INPUT_ONLY",
+  "attribution": "UNKNOWN_UNLESS_EXCLUSIVE_WRITER_INDEPENDENTLY_VERIFIED",
+  "caveat": "Snapshot deltas cannot establish Agent attribution, detect unlisted paths, or prove a missing effect beyond observed coverage.",
+  "proposal_source": "ACTUAL_CLIM_PRE_TRANSPORT"
+}

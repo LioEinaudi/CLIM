@@ -24,6 +24,9 @@ is `AUTHORITY_UNKNOWN` until independently registered by the host with
 Read [Known Limitations](docs/KNOWN_LIMITATIONS.md),
 [Shadow implementation notes](docs/shadow_v021.md) and the
 [October 14 S1–S10 results](docs/shadow_v021_results_20261014.md).
+The [October 15 P0 closeout](docs/shadow_v021_closeout_20261015.md) includes two
+additional real native smoke runs, portable public evidence and approval-policy
+diagnostics.
 
 ### Quick verification (offline)
 

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "payload_files": 701,
+  "source_commit": "05a33cd9821c07af2cf629570e03f6ea794899a9",
+  "real_runs": 24,
+  "mechanical_cases": 10,
+  "human_review": "PENDING",
+  "shadow_blocks": 0,
+  "canary_plaintext_leaks": 0
+}

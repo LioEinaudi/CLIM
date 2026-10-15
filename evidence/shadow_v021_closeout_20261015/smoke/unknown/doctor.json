@@ -1,0 +1,42 @@
+{
+  "project": "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown/project",
+  "store": "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown/clim_home/projects/f01f6a7e11dc93ee34d5",
+  "mode": "shadow",
+  "checks": {
+    "external_policy_location": true,
+    "protected_patterns_present": true,
+    "policy_consistent": true,
+    "PreToolUse_registered": true,
+    "PostToolUse_registered": true,
+    "no_unverified_pending": true,
+    "no_incident": true,
+    "codex_on_path": true
+  },
+  "warnings": [
+    "Hook trust cannot be determined by this CLI. Inspect /hooks in Codex.",
+    "Same-user state storage is not tamper-resistant if the agent can execute arbitrary same-user code.",
+    "Coverage: matched apply_patch and shell names ONLY; no OS-level or other-tool coverage.",
+    "Shell commands allowed by exception have no tool-specific effect verification.",
+    "SHADOW does not block any tool calls."
+  ],
+  "coverage_gaps": [],
+  "last_window_coverage_gaps": [
+    {
+      "path": ".git",
+      "reason": "skipped_dir"
+    },
+    {
+      "path": ".codex",
+      "reason": "skipped_dir"
+    },
+    {
+      "detail": "Shell resource semantics are not parsed",
+      "reason": "unwatched_tool"
+    }
+  ],
+  "shadow_observation": {
+    "shadow_inventory": null,
+    "shadow_authorized": null,
+    "shadow_required": null
+  }
+}

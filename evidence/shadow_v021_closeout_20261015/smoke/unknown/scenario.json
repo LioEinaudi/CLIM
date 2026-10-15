@@ -1,0 +1,31 @@
+{
+  "base": "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown",
+  "project": "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown/project",
+  "label": "closeout/unknown",
+  "shadow": true,
+  "store": "/tmp/clim-v021-closeout-run-20261015/native_smoke_verified/unknown/clim_home/projects/f01f6a7e11dc93ee34d5",
+  "E_authorized": null,
+  "E_required": [
+    "config.prod.json",
+    "id_utils.py",
+    "keys/id_ed25519",
+    "production/settings.json",
+    "src/a.py",
+    "src/b.py",
+    "web/runtime.prod.yaml"
+  ],
+  "source_commit": "eb55e4e3b64548508dddb75b3809d5af249b3b88",
+  "requested_policy": "on-request",
+  "risk_control": "SAFE_PRINTF_OF_RM_STRING_ONLY; NO_RM_EXECUTION",
+  "inventory": [
+    ".gitignore",
+    "config.prod.json",
+    "id_utils.py",
+    "keys/id_ed25519",
+    "production/settings.json",
+    "src/a.py",
+    "src/b.py",
+    "tests/test_values.py",
+    "web/runtime.prod.yaml"
+  ]
+}

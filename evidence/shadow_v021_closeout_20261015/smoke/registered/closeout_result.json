@@ -1,0 +1,19 @@
+{
+  "case": "registered",
+  "status": "PASS",
+  "source_commit": "eb55e4e3b64548508dddb75b3809d5af249b3b88",
+  "native_pre": 9,
+  "native_post": 9,
+  "shadow_denials": 0,
+  "canary_hits": [],
+  "privacy_scanned_files": 10,
+  "independent_tests": 3,
+  "authority_status": "HOST_POLICY",
+  "protected_changed_paths": [
+    "config.prod.json",
+    "keys/id_ed25519",
+    "production/settings.json",
+    "web/runtime.prod.yaml"
+  ],
+  "risk_control": "LEXICAL_HINT_ON_SAFE_PRINTF; NOT_DANGEROUS_EFFECT"
+}

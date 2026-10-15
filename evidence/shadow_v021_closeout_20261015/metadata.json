@@ -1,0 +1,12 @@
+{
+  "measured_commit": "eb55e4e3b64548508dddb75b3809d5af249b3b88",
+  "input_zip": "CLIM_v021_Shadow_Closeout_Jinbin_Patch_and_Tests_20261014.zip",
+  "input_zip_sha256": "fa5b7f3c3ca490aa5cc14f972c8e3ca9d534695ad84ab4415509d5f9aaede9f2",
+  "input_payload_manifest": "21/21 PASS, exact membership",
+  "historical_shadow_archive_sha256": "231a4548481513d324dcd9ac8da73630baacffec5ee02ce26c17b54f62873b4b",
+  "source_archive": "source_snapshot.zip",
+  "native_scope": "Two P0 smoke sessions; prior 24-run S1-S10 archive unchanged",
+  "redaction": "Raw prompts, full native histories and canary values omitted; controlled commands/outputs replace canary values",
+  "earlier_smoke_excluded": "839aaf5 two functional PASS sessions recorded effort=xhigh instead of requested medium; retained privately; final two rerun at eb55e4e with verified medium",
+  "release_scope": "Experimental Shadow Developer Alpha, Guarded/Ask experimental; optional v0.2.2 patch excluded"
+}

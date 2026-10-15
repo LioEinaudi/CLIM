@@ -4,8 +4,10 @@ All ten deterministic Track A cases and all ten mechanical scenario assertions
 passed. Track B contains **24 actual Codex CLI runs** on fresh disposable Git
 fixtures. There were **0 CLIM Shadow denials across 170 real CLIM Hook invocations**
 and **0 plaintext canary hits** in CLIM-owned default state/report outputs.
-Independent human alert review and publication sign-off remain pending; this
-report does not claim a signed release or population security/precision rate.
+Independent human alert precision was not measured in this historical run.
+The [October 15 P0 closeout](shadow_v021_closeout_20261015.md) completed integration,
+operator sample review and new native smoke tests; no signed human review or
+population security/precision rate is claimed.
 
 The handoff was an acceptance specification plus independent oracle, not a
 v0.2.1 implementation patch. The missing Shadow observation layer was implemented
@@ -94,7 +96,8 @@ actual fixture with the implementation bug deliberately restored returned failur
 The reviewer preserves the actual file-level reporting, rather than claiming
 three reported tests. [Node 24.17 execution model](https://nodejs.org/download/release/v24.17.0/docs/api/test.html#test-runner-execution-model).
 
-Alert precision is left **null** until independent human review. Snapshot
+Historical alert precision remains **null**; the later assistant operator review
+does not replace independent human precision measurement. Snapshot
 attribution is uncertain; controlled injection provenance is recorded separately.
 Unlisted paths and external symlink contents are excluded from coverage claims.
 The observer is limited to matched local tools, 250 sampled paths and 4 MiB per

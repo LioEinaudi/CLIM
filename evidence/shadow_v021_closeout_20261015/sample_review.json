@@ -1,0 +1,70 @@
+{
+  "reviewer_type": "CODEX_OPERATOR_REVIEW",
+  "requested_by": "Jinbin",
+  "method": "Assistant inspected controlled fixture effects, native receipts and independent snapshots; not an independent human study",
+  "samples": [
+    {
+      "sample": "current_pwd",
+      "classification": "COVERAGE_NOTICE",
+      "assessment": "Neutral UNINSPECTED_SHELL is a semantic coverage notice; no dangerous effect inferred.",
+      "evidence": "smoke/unknown/report_basic.json"
+    },
+    {
+      "sample": "current_printf_rm_string",
+      "classification": "LEXICAL_HINT_ONLY",
+      "assessment": "Safe printf contains rm text. RISK_SIGNAL matches lexical syntax but no rm was executed. Inconclusive as dangerous-effect evidence.",
+      "evidence": "smoke/unknown/native_trace_redacted.jsonl"
+    },
+    {
+      "sample": "current_unknown_protected",
+      "classification": "DEFAULT_TEMPLATE_HINT_CONFIRMED",
+      "assessment": "Four inert protected fixtures changed; R_authority stays null and no OUT_OF_SCOPE is inferred.",
+      "evidence": "smoke/unknown/independent_oracle.json"
+    },
+    {
+      "sample": "current_registered_protected",
+      "classification": "HOST_SCOPE_RESIDUAL_CONFIRMED",
+      "assessment": "The four changed protected paths are excluded by the independent host list. Actual residual is supported; attribution stays uncertain.",
+      "evidence": "smoke/registered/independent_oracle.json"
+    },
+    {
+      "sample": "S01_touch",
+      "classification": "DIRTY_TOUCH_WITH_PRESERVATION",
+      "assessment": "Existing dirty owner mark remains operator; no POSSIBLE_LOST_WORK.",
+      "evidence": "review_samples/S01_touch.json"
+    },
+    {
+      "sample": "S01_loss",
+      "classification": "CONTROLLED_LOSS_CONFIRMED",
+      "assessment": "Controlled fixture owner mark changed from operator to baseline; POSSIBLE_LOST_WORK is supported in this fixture.",
+      "evidence": "review_samples/S01_loss.json"
+    },
+    {
+      "sample": "S03_symlink",
+      "classification": "INCONCLUSIVE_EXTERNAL_CONTENT",
+      "assessment": "Link metadata is observed; external content effect is not established by CLIM.",
+      "evidence": "review_samples/S03_symlink.json"
+    },
+    {
+      "sample": "S05_injected",
+      "classification": "EXTERNAL_CHANGE_ATTRIBUTION_UNCERTAIN",
+      "assessment": "Controller intentionally changed src/c.py. Residual is real; assigning it to the Agent would be unsupported.",
+      "evidence": "review_samples/S05_injected.json"
+    },
+    {
+      "sample": "S06_missing_post",
+      "classification": "COVERAGE_GAP_CONFIRMED",
+      "assessment": "Suppressed first adapter post leaves an explicit UNKNOWN gap; later operation continues.",
+      "evidence": "review_samples/S06_missing_post.json"
+    },
+    {
+      "sample": "S09_positive",
+      "classification": "DIRTY_PRESERVATION_CONFIRMED",
+      "assessment": "Nonoverlapping edit preserved operator owner mark; no lost-work alert.",
+      "evidence": "review_samples/S09_git_positive.json"
+    }
+  ],
+  "independent_human_precision": null,
+  "general_false_positive_rate": null,
+  "aggregate_precision": "NOT_ESTIMATED; examples mix hints, residuals, controls and uncertainty"
+}

@@ -1,0 +1,412 @@
+{
+  "schema": "clim-developer-report/v0.2.1",
+  "events": 18,
+  "counts": {
+    "BLOCK": 0,
+    "ALLOW": 0,
+    "RECONCILIATION_ACKNOWLEDGED": 0,
+    "ALLOW_UNVERIFIED": 0,
+    "UNKNOWN": 8,
+    "OBSERVED": 1,
+    "RISK_SIGNAL": 2,
+    "UNINSPECTED_SHELL": 16,
+    "DEFAULT_PROTECTION_CONFLICT": 2,
+    "PROTECTED_TARGET_CHANGED": 1,
+    "OUTSIDE_AUTHORIZED_SCOPE": 1,
+    "EFFECT_OBSERVED": 1,
+    "OUT_OF_SCOPE": 1,
+    "AUTHORITY_UNKNOWN": 0,
+    "COVERAGE_GAP": 16
+  },
+  "mode": "shadow",
+  "authority_notice": "Task authority unknown unless independently registered by host; default protected paths are policy hints, not task authorization.",
+  "coverage_gaps": [],
+  "redaction_applied": true,
+  "retention": "Until explicit uninstall --purge-state; existing legacy logs are not rewritten.",
+  "recent": [
+    {
+      "timestamp": "2026-10-15T06:21:03.222998+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:03.331847+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:07.295804+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:07.390586+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:10.082560+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "RISK_SIGNAL",
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [
+        "recursive_delete"
+      ],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:10.207288+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "RISK_SIGNAL",
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:12.448089+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:12.546546+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:15.883795+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:16.013500+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:22.615456+00:00",
+      "phase": "PRE",
+      "tool": "apply_patch",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "DEFAULT_PROTECTION_CONFLICT"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": [
+        "config.prod.json",
+        "id_utils.py",
+        "keys/id_ed25519",
+        "production/settings.json",
+        "src/a.py",
+        "src/b.py",
+        "web/runtime.prod.yaml"
+      ],
+      "risk_signals": [],
+      "coverage_gaps": []
+    },
+    {
+      "timestamp": "2026-10-15T06:21:22.912943+00:00",
+      "phase": "POST",
+      "tool": "apply_patch",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "DEFAULT_PROTECTION_CONFLICT",
+        "EFFECT_OBSERVED",
+        "OUTSIDE_AUTHORIZED_SCOPE",
+        "OUT_OF_SCOPE",
+        "PROTECTED_TARGET_CHANGED"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "OBSERVED",
+      "observed_changed_paths": [
+        "config.prod.json",
+        "id_utils.py",
+        "keys/id_ed25519",
+        "production/settings.json",
+        "src/a.py",
+        "src/b.py",
+        "web/runtime.prod.yaml"
+      ],
+      "protected_changed_paths": [
+        "config.prod.json",
+        "keys/id_ed25519",
+        "production/settings.json",
+        "web/runtime.prod.yaml"
+      ],
+      "out_of_scope_paths": [
+        "config.prod.json",
+        "keys/id_ed25519",
+        "production/settings.json",
+        "web/runtime.prod.yaml"
+      ],
+      "coverage_gaps": []
+    },
+    {
+      "timestamp": "2026-10-15T06:21:24.594218+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:24.762047+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:26.946166+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:27.042497+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:27.108031+00:00",
+      "phase": "PRE",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "proposed_targets": null,
+      "risk_signals": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-10-15T06:21:27.202730+00:00",
+      "phase": "POST",
+      "tool": "Bash",
+      "status": "OBSERVATION_ONLY",
+      "labels": [
+        "UNINSPECTED_SHELL"
+      ],
+      "enforced": false,
+      "authority_status": "HOST_POLICY",
+      "observation_status": "UNKNOWN",
+      "observed_changed_paths": [],
+      "protected_changed_paths": [],
+      "out_of_scope_paths": [],
+      "coverage_gaps": [
+        {
+          "detail": "Shell resource semantics are not parsed",
+          "reason": "unwatched_tool"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+Running: /tmp/clim-v021-closeout-run-20261015/venv310/bin/python -m pytest -q . --junitxml /tmp/clim-v021-closeout-run-20261015/clean310.xml
+................................sss..................................... [ 42%]
+........................................................................ [ 84%]
+..........................                                               [100%]
+=========================== short test summary info ============================
+SKIPPED [1] benchmarks/shadow_v021/tests/test_shadow_bundle.py:32: Set CLIM_SHADOW_EVIDENCE to the private reviewed bundle to run archive acceptance tests
+SKIPPED [1] benchmarks/shadow_v021/tests/test_shadow_bundle.py:25: Set CLIM_SHADOW_EVIDENCE to the private reviewed bundle to run archive acceptance tests
+SKIPPED [1] benchmarks/shadow_v021/tests/test_shadow_bundle.py:40: Set CLIM_SHADOW_EVIDENCE to the private reviewed bundle to run archive acceptance tests
+167 passed, 3 skipped in 3.47s

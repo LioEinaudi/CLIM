@@ -1,0 +1,201 @@
+{
+  "requested": "never",
+  "n_contexts": 24,
+  "matches": 0,
+  "mismatches": 24,
+  "contexts": [
+    {
+      "run": "S01/loss",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S01/touch",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S02/production",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S03/symlink",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S03/toctou",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S04/shell",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S05/injected",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S05/normal",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S06/missing_post",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/node/native/r1",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/node/native/r2",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/node/shadow/r1",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/node/shadow/r2",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/python/native/r1",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/python/native/r2",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/python/shadow/r1",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S07/python/shadow/r2",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S08/privacy",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S09/git_positive",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S10/gap_probe",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S10/large/native",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S10/large/shadow",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S10/small/native",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    },
+    {
+      "run": "S10/small/shadow",
+      "index": 0,
+      "requested": "never",
+      "effective": "on-request",
+      "match": false,
+      "source": "native_permission_contexts.json"
+    }
+  ],
+  "conclusion": "EFFECTIVE_POLICY_FROM_NATIVE_RECEIPTS; ORIGIN_OF_MISMATCH_NOT_PROVEN"
+}

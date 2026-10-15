@@ -1,0 +1,131 @@
+[
+  {
+    "run_id": "parent_never",
+    "cli_version": "0.162.1",
+    "argv": [
+      "codex",
+      "--no-daemon",
+      "-a",
+      "never",
+      "exec",
+      "--json",
+      "-s",
+      "workspace-write",
+      "-m",
+      "gpt-6.1-sol",
+      "-c",
+      "model_reasoning_effort=\"medium\"",
+      "-C",
+      "/tmp/clim-v021-closeout-run-20261015/policy_probes/parent_never/project",
+      "-"
+    ],
+    "requested_policy": "never",
+    "effective_policy": [
+      "on-request"
+    ],
+    "effective_source": "NATIVE_TURN_CONTEXT; configuration origin under investigation",
+    "policy_mismatch": true,
+    "thread_id": "01a13e31-97f2-7373-991a-8a007ba73a08",
+    "contexts": [
+      {
+        "approval_policy": "on-request",
+        "sandbox_policy": {
+          "type": "workspace-write",
+          "network_access": false,
+          "exclude_tmpdir_env_var": false,
+          "exclude_slash_tmp": false
+        },
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      }
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 7.878156049177051
+  },
+  {
+    "run_id": "config_never",
+    "cli_version": "0.162.1",
+    "argv": [
+      "codex",
+      "--no-daemon",
+      "exec",
+      "-c",
+      "approval_policy=\"never\"",
+      "--json",
+      "-s",
+      "workspace-write",
+      "-m",
+      "gpt-6.1-sol",
+      "-c",
+      "model_reasoning_effort=\"medium\"",
+      "-C",
+      "/tmp/clim-v021-closeout-run-20261015/policy_probes/config_never/project",
+      "-"
+    ],
+    "requested_policy": "never",
+    "effective_policy": [
+      "never"
+    ],
+    "effective_source": "NATIVE_TURN_CONTEXT; configuration origin under investigation",
+    "policy_mismatch": false,
+    "thread_id": "01a13e31-b6ba-7cf0-9583-d6599064ba8e",
+    "contexts": [
+      {
+        "approval_policy": "never",
+        "sandbox_policy": {
+          "type": "workspace-write",
+          "network_access": false,
+          "exclude_tmpdir_env_var": false,
+          "exclude_slash_tmp": false
+        },
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      }
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 8.679276120848954
+  },
+  {
+    "run_id": "config_on_request",
+    "cli_version": "0.162.1",
+    "argv": [
+      "codex",
+      "--no-daemon",
+      "exec",
+      "-c",
+      "approval_policy=\"on-request\"",
+      "--json",
+      "-s",
+      "workspace-write",
+      "-m",
+      "gpt-6.1-sol",
+      "-c",
+      "model_reasoning_effort=\"medium\"",
+      "-C",
+      "/tmp/clim-v021-closeout-run-20261015/policy_probes/config_on_request/project",
+      "-"
+    ],
+    "requested_policy": "on-request",
+    "effective_policy": [
+      "on-request"
+    ],
+    "effective_source": "NATIVE_TURN_CONTEXT; configuration origin under investigation",
+    "policy_mismatch": false,
+    "thread_id": "01a13e31-d8a5-76a1-a658-899675b026cb",
+    "contexts": [
+      {
+        "approval_policy": "on-request",
+        "sandbox_policy": {
+          "type": "workspace-write",
+          "network_access": false,
+          "exclude_tmpdir_env_var": false,
+          "exclude_slash_tmp": false
+        },
+        "model": "gpt-6.1-sol",
+        "effort": "medium"
+      }
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 9.93055912014097
+  }
+]
