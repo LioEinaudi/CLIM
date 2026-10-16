@@ -1,21 +1,33 @@
 # CLIM Agent Guard
 
+**See what your coding agent actually changed — not just what it said it would change.**
+
+CLIM Shadow is a local, observation-first tool for Codex. It compares supported tool requests with observed file changes, flags sensitive-path modifications, and makes coverage gaps explicit.
+
+**Developer Alpha v0.2.1** · Shadow does not intentionally block tool calls · No CLIM telemetry service · Guarded mode is experimental.
+
 ## Developer Alpha: Shadow v0.2.1
 
 `clim init codex` installs project Hooks and a default sensitive-path policy.
-Review and trust the installed definitions in Codex `/hooks` before running a
-task. **Shadow observes and reports; it never blocks execution.** Guarded and Ask
-remain experimental. The CLI package is `0.2.1.dev0`.
+Guarded and Ask remain experimental. The CLI package is `0.2.1.dev0`.
 
 ```bash
-python -m pip install -e '.[dev]'
-clim init codex --project /path/to/project
-clim report --project /path/to/project --today
-clim report --project /path/to/project --today --advanced
+git clone https://github.com/LioEinaudi/CLIM.git
+cd CLIM
+python -m pip install -e .
+clim init codex --project /path/to/your/project
+```
+
+Open a Codex session in `/path/to/your/project`, inspect the installed definitions
+with `/hooks`, and review and trust them. Complete a coding task so CLIM can
+observe actual tool calls and file changes, then generate the report:
+
+```bash
+clim report --project /path/to/your/project --today
 ```
 
 The basic report separates observed changes, lexical `RISK_SIGNAL` hints,
-`UNINSPECTED_SHELL` coverage and `DEFAULT_PROTECTION_CONFLICT`. Advanced reports
+`UNINSPECTED_SHELL` coverage and `DEFAULT_PROTECTION_CONFLICT`. Advanced reports (`--advanced`)
 retain historical policy hypotheses such as `WOULD_BLOCK`. These hypotheses are
 not Shadow denials. Default protected paths are policy references; task authority
 is `AUTHORITY_UNKNOWN` until independently registered by the host with
