@@ -110,23 +110,71 @@ def capture(root, paths):
 
 
 def git_dirty(root, paths):
-    result = {'available':False,'dirty_paths':[],'added_line_sha256':{},'gap':None}
-    try:
-        proc = subprocess.run(['git','-C',str(root),'diff','--name-only','-z','--no-renames'],
-                              capture_output=True,timeout=2,check=True)
-        if len(proc.stdout)>1_000_000: raise ValueError('Git output bound')
-        dirty = sorted(set(proc.stdout.decode(errors='strict').split('\x00'))-{''})
-        result.update(available=True,dirty_paths=dirty,status_sha256=digest(proc.stdout))
-        for name in sorted(set(paths)&set(dirty)):
-            proc = subprocess.run(['git','-C',str(root),'diff','--no-ext-diff','--no-textconv',
-                                   '--unified=0','--',name],capture_output=True,timeout=2,check=True)
-            if len(proc.stdout)>MAX_FILE_SIZE:raise ValueError('Git diff bound')
-            result['added_line_sha256'][name] = sorted(set(digest(line[1:]) for line in proc.stdout.splitlines()
-                   if line.startswith(b'+') and not line.startswith(b'+++')))
-        return result
-    except (OSError,ValueError,subprocess.SubprocessError):
-        result['gap']='git_baseline_unavailable';return result
+    """Session-first Git working-tree evidence; includes staged and untracked paths.
 
+    This is bounded best-effort observation, not ownership attribution or
+    line-level protection. Ignored files and external actors are not covered.
+    """
+    result = {'available':False,'dirty_paths':[],'added_line_sha256':{},
+              'dirty_kinds':{},'gap':None}
+    def git(*args):
+        out = subprocess.run(['git','--literal-pathspecs','-C',str(root),*args],capture_output=True,
+                             timeout=2,check=True).stdout
+        if len(out) > 1_000_000: raise ValueError('Git output bound')
+        return out
+    def decode(raw):
+        return set(raw.decode('utf-8',errors='strict').split('\0'))-{''}
+    try:
+        # Status supplies overall baseline fingerprint. Separate NUL-terminated
+        # plumbing commands avoid error-prone rename parsing and capture untracked.
+        status = git('status','--porcelain=v1','-z','--untracked-files=all')
+        unstaged = decode(git('diff','--relative','--name-only','-z','--no-renames'))
+        staged = decode(git('diff','--cached','--relative','--name-only','-z','--no-renames'))
+        untracked = decode(git('ls-files','--others','--exclude-standard','-z'))
+        dirty = unstaged | staged | untracked
+        result.update(available=True,dirty_paths=sorted(dirty),
+                      status_sha256=digest(status),status_source='porcelain_v1_z')
+        try:
+            git('rev-parse','--verify','HEAD')
+            has_head = True
+        except subprocess.CalledProcessError:
+            has_head = False
+        for name in sorted(set(paths)&dirty):
+            kinds=[]
+            if name in staged:kinds.append('STAGED')
+            if name in unstaged:kinds.append('UNSTAGED')
+            if name in untracked:kinds.append('UNTRACKED')
+            result['dirty_kinds'][name]=kinds
+            try:
+                if name in untracked or not has_head:
+                    meta=path_meta(root,name)
+                    if meta.get('kind') == 'missing':
+                        result['added_line_sha256'][name] = []
+                        continue
+                    if meta.get('coverage')!='complete':
+                        result['gap']='git_dirty_line_evidence_partial'
+                        continue
+                    data=(root/name).read_bytes()
+                    if len(data)>MAX_FILE_SIZE:
+                        result['gap']='git_dirty_line_evidence_partial'
+                        continue
+                    lines=[digest(line) for line in data.splitlines()]
+                else:
+                    # HEAD reflects combined index + worktree changes; unlike
+                    # bare `git diff` it includes staged-only changes.
+                    raw=git('diff','HEAD','--relative','--no-ext-diff','--no-textconv',
+                            '--unified=0','--',name)
+                    if len(raw)>MAX_FILE_SIZE:
+                        result['gap']='git_dirty_line_evidence_partial'
+                        continue
+                    lines=[digest(line[1:]) for line in raw.splitlines()
+                           if line.startswith(b'+') and not line.startswith(b'+++')]
+                result['added_line_sha256'][name]=sorted(set(lines))
+            except (OSError,ValueError,subprocess.SubprocessError):
+                result['gap']='git_dirty_line_evidence_partial'
+        return result
+    except (OSError,UnicodeError,ValueError,subprocess.SubprocessError):
+        result['gap']='git_baseline_unavailable';return result
 
 def risk(command):
     if not isinstance(command,str):return []
@@ -179,6 +227,8 @@ def prepare(event, root, store, policy, key):
         atomic_write(store/'shadow_sessions.json',sessions)
     if not baseline['available']:
         coverage['gaps'].append({'reason':'git_baseline_unavailable'})
+    elif baseline.get('gap'):
+        coverage['gaps'].append({'reason':baseline['gap']})
     signals = []
     dirty_touched = sorted(set(p['E_proposed'] or []) & set(baseline['dirty_paths']))
     for path in dirty_touched:
@@ -200,13 +250,41 @@ def prepare(event, root, store, policy, key):
     pending=read_json(store/'pending.json',{})
     pending[key]=entry
     atomic_write(store/'pending.json',pending)
+    notice = pre_notice(event, store, policy, p)
     append_audit(store,{'phase':'PRE','mode':'shadow','tool':p['tool'],'session_id':event['session_id'],
                  'tool_use_id':event['tool_use_id'],'decision':'WOULD_BLOCK' if p['policy_would_block'] else 'WOULD_ALLOW',
                  'enforced':False,'targets':p['E_proposed'],'E_proposed':p['E_proposed'],
                  'E_authorized':authority,'E_required':required,'authority_source':entry['authority_source'],
                  'command_sha256':p['command_sha256'],'signals':signals,'risk_signals':p['risk_signals'],
-                 'W':coverage,'git_baseline':baseline,'before':before})
-    return {}
+                 'W':coverage,'git_baseline':baseline,'before':before,
+                 'proposal':{'protected_proposed':p['protected_proposed']},
+                 'notice_issued':bool(notice)})
+    return notice
+
+
+def pre_notice(event, store, policy, proposed):
+    """Opt-in native UI notice; no permission decision, input rewrite or context.
+
+    Only explicit protected apply_patch targets qualify. Shell lexical hints never
+    notify. Deduplicate target sets and cap at eight notices per native session.
+    State is same-user, best-effort spam control, not a security mechanism.
+    """
+    if not policy.get('shadow_notices', False) or proposed['tool'] != 'apply_patch' or not proposed['protected_proposed']:
+        return {}
+    path = store/'shadow_notice_seen.json'
+    state = read_json(path, {})
+    session = digest(event['session_id'])
+    seen = state.setdefault(session, [])
+    signature = digest(json.dumps(proposed['protected_proposed'], sort_keys=True))
+    if signature in seen or len(seen) >= 8:
+        return {}
+    seen.append(signature)
+    # Retain recent sessions only; truncation may permit later repeat notices.
+    atomic_write(path, dict(list(state.items())[-128:]))
+    return {'systemMessage': 'CLIM Pre-Execution Risk Notice: apply_patch explicitly proposes '
+            f"{len(proposed['protected_proposed'])} default-protected target(s). "
+            'Proposal only; no completed effect or authority violation is established. '
+            'Shadow continues. Inspect clim report --format card.'}
 
 
 def finish(event,root,store,policy,key):

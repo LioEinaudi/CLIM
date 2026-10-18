@@ -235,6 +235,11 @@ def cmd_report(args):
     # it with an actual risk signal or Shadow enforcement.
     hypothetical=sum(e.get('phase')=='PRE' and e.get('decision')=='WOULD_BLOCK' for e in shadow)
     from .shadow import gaps_for_pending
+    if getattr(args,'format','json') == 'card':
+        from .reconciliation import build_review, render_card
+        report=build_review(events, gaps_for_pending(store), max_items=min(args.limit, 50))
+        print(render_card(report))
+        return
     output={'schema':'clim-developer-report/v0.2.1','events':len(events),'counts':visible_counts,
         'mode':'shadow' if shadow and all(e.get('mode')=='shadow' for e in events) else 'mixed_or_other',
         'authority_notice':'Task authority unknown unless independently registered by host; default protected paths are policy hints, not task authorization.',
@@ -263,6 +268,16 @@ def cmd_observe(args):
         policy['_version']+=1
         atomic_write(store/'policy.json',policy)
     print('Host Shadow observation registered. Authority is independent of tool proposals; Shadow does not enforce it.')
+
+
+def cmd_notices(args):
+    root=_root(args.project);store=project_store(root)
+    with locked(store):
+        policy=config_at(store)
+        policy['shadow_notices']=args.state=='on'
+        policy['_version']+=1
+        atomic_write(store/'policy.json',policy)
+    print('Experimental Shadow pre-execution notices '+args.state+'. No permission decisions are added.')
 
 
 def cmd_reconcile(args):
@@ -304,7 +319,8 @@ def cmd_uninstall(args):
         if args.purge_state:
             # Require explicit opt-in; do not delete unrelated files in store.
             allowed_files={'policy.json','ledger.json','pending.json','one_time.json',
-                           'events.jsonl','hook_events.jsonl','incident.json','shadow_sessions.json'}
+                           'events.jsonl','hook_events.jsonl','incident.json','shadow_sessions.json',
+                           'shadow_notice_seen.json'}
             for p in store.iterdir():
                 if p.is_file() and not p.is_symlink() and p.name in allowed_files:
                     p.unlink()
@@ -364,19 +380,21 @@ def main(argv=None):
     un=sub.add_parser('uninstall');un.add_argument('--project',default='.');un.add_argument('--purge-state',action='store_true')
     doc=sub.add_parser('doctor');doc.add_argument('--project',default='.')
     mod=sub.add_parser('mode');mod.add_argument('mode',choices=['shadow','ask','guarded']);mod.add_argument('--project',default='.')
-    report=sub.add_parser('report');report.add_argument('--project',default='.');report.add_argument('--today',action='store_true');report.add_argument('--limit',type=int,default=20);report.add_argument('--advanced',action='store_true')
+    report=sub.add_parser('report');report.add_argument('--project',default='.');report.add_argument('--today',action='store_true');report.add_argument('--limit',type=int,default=20);report.add_argument('--advanced',action='store_true');report.add_argument('--format',choices=['json','card'],default='json')
     prot=sub.add_parser('protect');prot.add_argument('paths',nargs='+');prot.add_argument('--project',default='.')
     allow=sub.add_parser('allow');allow.add_argument('paths',nargs='+');allow.add_argument('--project',default='.')
     permit=sub.add_parser('permit-once');permit.add_argument('--path',action='append',dest='paths');permit.add_argument('--command');permit.add_argument('--project',default='.')
     rec=sub.add_parser('reconcile');rec.add_argument('--project',default='.');rec.add_argument('--acknowledge',action='store_true')
     obs=sub.add_parser('observe');obs.add_argument('--project',default='.')
     obs.add_argument('--inventory',required=True);obs.add_argument('--authorized');obs.add_argument('--required')
+    notices=sub.add_parser('notices');notices.add_argument('state',choices=['on','off']);notices.add_argument('--project',default='.')
     args=p.parse_args(argv)
     try:
         if args.cmd=='demo':cmd_demo(args)
         elif args.cmd=='init':cmd_init(args)
         elif args.cmd=='uninstall':cmd_uninstall(args)
         elif args.cmd=='observe':cmd_observe(args)
+        elif args.cmd=='notices':cmd_notices(args)
         elif args.cmd=='doctor':return cmd_doctor(args)
         elif args.cmd=='mode':cmd_mode(args)
         elif args.cmd=='report':cmd_report(args)

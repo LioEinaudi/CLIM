@@ -1,0 +1,25 @@
+{
+  "files": {
+    "DEMO_SYNTHETIC_OUTPUT.txt": "2affb2451c00ef1baf96130ba279e1ce47186602381c71c59bb2f91d3acfb6a9",
+    "JINBIN_HANDOFF_SPRINT_V03_ZH.md": "754ef54915b9cb79e7ccfac1300db1993be399b134d4f549f32c1e0e2c098b26",
+    "README_BEGIN_HERE_ZH.md": "24b53790dbee1bdf88619fe7fc9edbb09ad4710de26e385cfdd1eac4d1254854",
+    "VALIDATION_20261018.md": "c91975e169afb40ab678d5b3e0ac86fce5671ed7bc8a47bdf59dd2010d89ac5a",
+    "changed_files/benchmarks/shadow_v021/tests/test_v03_execution_reconciliation.py": "bafc7fc6686ec6b09818af30e6ba72d0a0a354559e448905b17d3643b0de8949",
+    "changed_files/benchmarks/shadow_v03/README.md": "af67834e13ac59ece729b61c2812cd944981b0f96ddbd7996cfc972ceb4dfc66",
+    "changed_files/benchmarks/shadow_v03/demo_reconciliation.py": "46b198a8dabb2c83370b3c6187b49d509c24dfefba52d1ae92dde119185b5962",
+    "changed_files/clim_agent_guard/devpreview/cli.py": "d88bc52e88eadb1584ace31d92bcf73c3ba826f571f00affa81fb9a70bb27aad",
+    "changed_files/clim_agent_guard/devpreview/reconciliation.py": "d41f173b4c93141b2159bff5a753623c86d2183d9a71608631185d4c4c8027eb",
+    "changed_files/clim_agent_guard/devpreview/shadow.py": "4457bc4e0f8726d1633ab235febcf20e3ae39020446ec56f01ff65a2d94f618a",
+    "changed_files/docs/v03_execution_reconciliation_sprint_draft.md": "72f81199c6170638eadd5b43cb9bc03665f0cb4b81a6049aa308c373b695f38c",
+    "patch_check_result.log": "c16c68f86ee0c4e8cfd0af3f76078be45441ee151395fbde5800145c08e189b5",
+    "patches/0001-Prototype-additive-CLI-execution-reconciliation-card.patch": "1e312eb9f207ebce375299a46c1ae4a3a8182aea2f083faec47b4233df474a0b",
+    "patches/0002-Extend-session-Git-dirty-baseline-to-staged-and-untr.patch": "5d74ac1b602ce1f62c400a6ac8e5ca462a51b14d8a54dfbc62d9ce0c08f55ccb",
+    "patches/0003-Add-maintainer-scale-deterministic-fixtures-demo-and.patch": "d6c1dbd8850ceb5a2eec93e5954455cc55bf98893b0cf57f4f0b46711a8148a3",
+    "patches/combined-preview.patch": "326d21dbeb1b6340772e9c966d80e293469c8d16a45b74a9dc0a999500d6bbf4",
+    "test_all_verified.log": "7575126291cb943590b7a1aa13d961ad04f0daea210761dadb35e6ac2e0b32b5",
+    "verify_bundle.py": "5bfab17a5a8f80ce9b3bba52e36b9c1b108481614a2d6f91eb477163eaada9ba"
+  },
+  "source_head": "5f754d1050389cd0e88bbd4e95e6873f56def90e",
+  "source_snapshot": "eb55e4e3b64548508dddb75b3809d5af249b3b88",
+  "type": "CLIM_v03_sprint_source_bundle"
+}
