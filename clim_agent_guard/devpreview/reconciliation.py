@@ -222,6 +222,14 @@ def render_card(report: dict) -> str:
         f"Uncertain windows: {report['counts'].get('UNCERTAIN_WINDOWS',0)}   Pending markers: {report['pending_gap_count']}",
         'Observation only. Not proof of authorship, authorization, or code quality.',
         'Issue totals (windows): ' + (', '.join(f'{k}={v}' for k,v in report['counts'].items()) or '(none)'),
+        'DISPLAY POLICY (review priority, NOT a security severity or deny decision):',
+        '  PROMINENT: host-scope residuals, protected/undeclared observed changes,',
+        '             possible lost work, protected proposals, broken Hook pairing,',
+        '             conflicts and substantive coverage limitations.',
+        '  SAMPLE/COLLAPSE: routine windows, neutral Shell gaps, lexical-only hints.',
+        '             Up to 2 neutral windows shown; all remain in original audit.',
+        '  LIVE NOTICE: OFF by default. Optional for protected apply_patch proposals;',
+        '             never a Shadow denial and not guaranteed in headless JSON.',
         '-' * 74,
     ]
     items = report['selected_items']
