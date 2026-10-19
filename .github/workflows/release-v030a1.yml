@@ -1,0 +1,63 @@
+name: Publish v0.3.0-alpha.1 preview
+
+on:
+  push:
+    tags:
+      - v0.3.0-alpha.1
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'LioEinaudi/CLIM'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify exact tag, package and successful main CI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'v0.3.0-alpha.1'
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git rev-parse "$GITHUB_REF^{commit}")" = "$GITHUB_SHA"
+          python3 - <<'PY'
+          import hashlib, pathlib, tomllib
+          root = pathlib.Path('.')
+          assert tomllib.loads((root/'pyproject.toml').read_text())['project']['version'] == '0.3.0a1'
+          assert 'Developer Alpha v0.3.0a1' in (root/'README.md').read_text()
+          assert hashlib.sha256((root/'clim_agent_guard/core.py').read_bytes()).hexdigest() == '33752c4e5c734b0b6ce0c381dc5cdc8a49626f1f6bed966d3716909e517e2dca'
+          assert "TAG='CLIM Developer Preview v0.2'" in (root/'clim_agent_guard/devpreview/cli.py').read_text()
+          PY
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/tests.yml/runs?branch=main&event=push&head_sha=$GITHUB_SHA&status=success" > "$RUNNER_TEMP/main-ci.json"
+          python3 - <<'PY'
+          import json, os, pathlib
+          runs = json.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/'main-ci.json').read_text())['workflow_runs']
+          matches = [r for r in runs if r['head_sha'] == os.environ['GITHUB_SHA'] and r['head_branch'] == 'main' and r['event'] == 'push' and r['conclusion'] == 'success']
+          assert matches, 'Exact final commit has no successful main offline regression run'
+          run = max(matches, key=lambda r: r['id'])
+          notes = pathlib.Path('docs/releases/v0.3.0-alpha.1.md').read_text()
+          notes += '\n\nVerified tag/source commit: `' + os.environ['GITHUB_SHA'] + '`.\n'
+          notes += 'Python 3.10 / 3.12 main CI: ' + run['html_url'] + '\n'
+          payload = {'tag_name':'v0.3.0-alpha.1', 'target_commitish':os.environ['GITHUB_SHA'],
+                     'name':'CLIM v0.3.0-alpha.1 — Developer Alpha / Preview', 'body':notes,
+                     'draft':False, 'prerelease':True, 'make_latest':'false'}
+          (pathlib.Path(os.environ['RUNNER_TEMP'])/'release.json').write_text(json.dumps(payload))
+          PY
+      - name: Create prerelease with public source only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method POST "repos/$GITHUB_REPOSITORY/releases" \
+            --input "$RUNNER_TEMP/release.json" \
+            --jq '.html_url' | tee "$RUNNER_TEMP/release-url.txt"
+          printf 'Published Developer Alpha prerelease: %s\n' "$(cat "$RUNNER_TEMP/release-url.txt")" >> "$GITHUB_STEP_SUMMARY"

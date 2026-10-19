@@ -4,12 +4,12 @@
 
 CLIM Shadow is a local, observation-first tool for Codex. It compares supported tool requests with observed file changes, flags sensitive-path modifications, and makes coverage gaps explicit.
 
-**Developer Alpha v0.2.1** · Shadow does not intentionally block tool calls · No CLIM telemetry service · Guarded mode is experimental.
+**Developer Alpha v0.3.0a1** · Shadow does not intentionally block tool calls · No CLIM telemetry service · Guarded mode is experimental.
 
-## Developer Alpha: Shadow v0.2.1
+## Developer Alpha: Shadow v0.3.0a1
 
 `clim init codex` installs project Hooks and a default sensitive-path policy.
-Guarded and Ask remain experimental. The CLI package is `0.2.1.dev0`.
+Guarded and Ask remain experimental. The CLI package is `0.3.0a1`.
 
 ```bash
 git clone https://github.com/LioEinaudi/CLIM.git
