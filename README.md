@@ -1,5 +1,9 @@
 # CLIM Agent Guard
 
+> **Linux Community Alpha (opt-in): [Intercept out-of-scope Codex patches](https://github.com/LioEinaudi/CLIM/tree/experimental/contract-observer-alpha).** Your task may need one folder, yet an `apply_patch` can target another. Register a stage boundary and CLIM can **ask Codex's native Host to refuse supported out-of-stage patches before execution**. [Controlled Linux text evidence](https://github.com/LioEinaudi/CLIM/blob/experimental/contract-observer-alpha/docs/CONTROLLED_LINUX_ALPHA_CASE.md).
+>
+> **Experimental, not a security boundary.** Limited Linux `apply_patch` path verified; Shell/alternate tools and failed Hooks are not comprehensively blocked. Windows/macOS **NOT_TESTED**. The existing `main` checkout still documents Shadow behavior; opt-in refusal requires the linked Alpha build.
+
 **See what your coding agent actually changed — not just what it said it would change.**
 
 CLIM Shadow is a local, observation-first tool for Codex. It compares supported tool requests with observed file changes, flags sensitive-path modifications, and makes coverage gaps explicit.
