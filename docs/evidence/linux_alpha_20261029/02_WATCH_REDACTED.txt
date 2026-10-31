@@ -1,0 +1,14 @@
+Real Watch frame after controlled denial; window IDs and receipt redacted.
+
+CLIM Contract Live · LOCAL EVIDENCE / HOST UNVERIFIED
+Task: clim-game-alpha-rerun  Stage: mechanics  Contract: MECH_STAGE_1
+M1 Exec: pending=0 recovered/unknown=0
+M2 Obs (shown): complete=1 partial=0 unknown=0 | Hook gaps shown=12
+Authorized active scope: src/game/mechanics/**
+Denial requests (recent 2000 events; Host unverified):
+[DENIAL_REQUESTED] 2026-10-29T09:01:33.978166+00:00 | CONTRACT_SCOPE_CONFLICT | Receipt: [SAME_RECEIPT_REDACTED]
+[OBSERVED] [WINDOW_ID_REDACTED] | WITHIN_DECLARED_SCOPE | coverage=COMPLETE_BOUNDED
+  Changed in bounded watch set: src/game/mechanics/player.py, src/game/mechanics/test_player.py
+  Attribution: CAUSE_UNKNOWN (no unique writer proven)
+[UNKNOWN] Shell coverage (shown sample): 6 distinct Hook windows; 12 gap events (Pre=6, Post=6); reasons: SHELL_EFFECT_UNINSPECTED=6, SHELL_TARGETS_UNVERIFIED=6. Shell effects are NOT verified or blocked by this gate.
+Scope conflict != proven writer; Hook gaps != completed observations.

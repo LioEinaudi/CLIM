@@ -1,0 +1,10 @@
+{
+  "schema": "clim-contract-spec/v1",
+  "task_id": "game-first-experience",
+  "allowed": ["src/game/**"],
+  "denied": [],
+  "stages": {
+    "mechanics": {"max_allowed": ["src/game/mechanics/**"], "predecessors": []},
+    "ui": {"max_allowed": ["src/game/ui/**"], "predecessors": ["mechanics"]}
+  }
+}

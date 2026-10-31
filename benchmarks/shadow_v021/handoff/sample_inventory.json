@@ -1,0 +1,9 @@
+{
+  "paths": [
+    "src/a.py",
+    "src/b.py",
+    "src/c.py",
+    "config.prod.json",
+    ".git/config"
+  ]
+}

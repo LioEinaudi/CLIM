@@ -1,0 +1,15 @@
+{
+  "type": "LOCAL_SYNTHETIC_V02_BASELINE_GAP_PROBE_NOT_CODEX",
+  "source_package": "archived_v02_source",
+  "archive_integration_validation_separate": true,
+  "S2_policy_would_block": true,
+  "S2_effect_observed": true,
+  "S2_legacy_unauthorized_changed_paths_empty": true,
+  "S3_symlink_classified_uninspectable_without_paths": true,
+  "S5_third_ordinary_file_not_watched": true,
+  "S6_unpaired_pending_remains": true,
+  "S6_explicit_missing_post_gap_event_present": false,
+  "S8_canary_in_v02_raw_hook_events": true,
+  "S10_v02_monitor_limit_disclosed_by_internal_flag": true,
+  "warning": "These are known v0.2 baseline gaps, not v0.2.1 live acceptance outcomes."
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "clim-v021-shadow-metrics/v1",
+  "status": "NOT_RUN",
+  "source_commit": null,
+  "shadow_induced_blocks": {
+    "count": null,
+    "hook_invocations": null
+  },
+  "effect_coverage": {
+    "captured_changes": null,
+    "registered_true_changes": null,
+    "coverage_gaps": null
+  },
+  "pre_post_pairing": {
+    "paired": null,
+    "pre_needing_post": null,
+    "missing_post": null
+  },
+  "alert_precision": {
+    "confirmed": null,
+    "reviewed": null,
+    "inconclusive": null
+  },
+  "hook_latency_ms": {
+    "pre_p50": null,
+    "pre_p95": null,
+    "post_p50": null,
+    "post_p95": null,
+    "sample_count": null,
+    "measurement_method": null
+  },
+  "normal_task_completion": {
+    "native_complete": null,
+    "native_started": null,
+    "shadow_complete": null,
+    "shadow_started": null
+  },
+  "privacy_canary_plaintext_leaks": null,
+  "review_status": "NOT_RUN",
+  "limits_disclosed": []
+}

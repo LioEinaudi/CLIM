@@ -1,0 +1,23 @@
+{
+  "source_zip_sha256": "3f0d7e1fa8a0a411f81549ac543ca9105ad0419b446e842447487bdd2f41a37e",
+  "top_level_manifest": "18/18 PASS",
+  "nested": [
+    {
+      "prefix": "CLIM_v03_Execution_Reconciliation_Sprint_Jinbin_20261018",
+      "matched": 16,
+      "missing": [
+        "JINBIN_HANDOFF_SPRINT_V03_ZH.md",
+        "README_BEGIN_HERE_ZH.md"
+      ]
+    },
+    {
+      "prefix": "CLIM_v03_Execution_Reconciliation_Sprint_Jinbin_20261018/CLIM_v03_Execution_Reconciliation_Sprint_Jinbin_20261018",
+      "matched": 16,
+      "missing": [
+        "JINBIN_HANDOFF_SPRINT_V03_ZH.md",
+        "README_BEGIN_HERE_ZH.md"
+      ]
+    }
+  ],
+  "decision": "Use verified top-level payload; retain original ZIP unchanged"
+}

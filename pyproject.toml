@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clim-agent-guard"
+version = "0.3.0a2"
+description = "Deterministic execution-integrity guard for stateful agents"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+langgraph = ["langgraph>=0.3"]
+e2e = ["langgraph>=0.3", "openai>=1.0"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["clim_agent_guard*"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "benchmarks/framework_pilot"]
+testpaths = ["tests", "examples/codex_boundary_pilot/tests", "examples/mcp_boundary_pilot/tests", "benchmarks/framework_pilot/tests", "benchmarks/coding_agent_pilot/tests", "benchmarks/developer_preview/tests", "benchmarks/shadow_v021/tests", "benchmarks/shadow_v021/handoff/test_shadow_effect_oracle.py"]
+addopts = "-ra"
+
+[project.scripts]
+clim = "clim_agent_guard.devpreview.cli:main"

@@ -1,0 +1,20 @@
+{
+  "scope": "handoff_package_members_except_manifest",
+  "sha256": {
+    "CLIM_v0.2.1_S1-S10_Shadow_Acceptance.md": "ae7d3cbf1ab441c2e84e2bed40fcf7dc1adaeadd03f3f2998deb300a2a06372d",
+    "METRICS_TEMPLATE.json": "9f43091f8c965d80cc0243a540281c5ce9764bfd18f9a9b42916413b882b30ee",
+    "README_交给Jinbin.md": "5e91675b262e33c0d61be27820f18386df346a3deda896c3ab0e26d568214b92",
+    "S1-S10_plan.json": "6c7d1ca7433ea2b9db320a3c02829d7c963f0dfa2a7c2a6a958b7b18ebf294a9",
+    "SUMMARY_TEMPLATE.csv": "e7106fdc3f0bcd741317a65e2594c51de47819c48e1bc9910a39130bb0d3b6e0",
+    "check_matrix.py": "64af817dbba60b2f944b71d2a723743bb8ca70f50ad71eeff661841b7f20fb6c",
+    "sample_authorized.json": "7aa4d341b86b1589e8e9f6ebdeece3a3856b3f4269e4ec914da2bc3ddf7b6872",
+    "sample_inventory.json": "966f4d3d7d82fe17a102c2c974ce3c835b2b28c98ee183963619d4fd80dcfd52",
+    "sample_proposed.json": "7aa4d341b86b1589e8e9f6ebdeece3a3856b3f4269e4ec914da2bc3ddf7b6872",
+    "sample_required.json": "7aa4d341b86b1589e8e9f6ebdeece3a3856b3f4269e4ec914da2bc3ddf7b6872",
+    "shadow_effect_oracle.py": "a977309e65517a8ff96f4efc5aea9e30cc57400dc8ded194c5f42851688f33d2",
+    "test_shadow_effect_oracle.py": "148cadf5100412f334108d7084d9de4d242ef5d83f727e15461433281d5ff63e",
+    "v02_archived_evidence_verification.json": "fc0e7a8824155e22bddfb33d6ae50d8233017b01b3bbd1705453c9d74f9728bc",
+    "v02_baseline_gap_probe.json": "5eae5375c52778ba243734a39a8b71591d099290542001116ad4a308ede59e4b",
+    "v02_baseline_probe.py": "ab2502e8e97e22230ec3cd08407b72a62b8bfbab415a4cd998dc6301ea905bc8"
+  }
+}

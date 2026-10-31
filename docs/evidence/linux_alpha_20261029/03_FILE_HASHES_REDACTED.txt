@@ -1,0 +1,49 @@
+Independent operator snapshots; comparison covers sampled times, not all intermediate writes.
+
+before_denial
+{
+  "src/game/mechanics/player.py": {
+    "exists": true,
+    "sha256": "7b55c79b333cf5cb4314ea62240ed45fa34ee75e3d73560302f33eeb64372615"
+  },
+  "src/game/ui/menu.py": {
+    "exists": true,
+    "sha256": "f293c8d4ba782cdf60c9f3cbff4a25dd1b611ba93b4563014201b9bda17c3bcd"
+  }
+}
+
+after_denial
+{
+  "src/game/mechanics/player.py": {
+    "exists": true,
+    "sha256": "7b55c79b333cf5cb4314ea62240ed45fa34ee75e3d73560302f33eeb64372615"
+  },
+  "src/game/ui/menu.py": {
+    "exists": true,
+    "sha256": "f293c8d4ba782cdf60c9f3cbff4a25dd1b611ba93b4563014201b9bda17c3bcd"
+  }
+}
+
+after_mechanics
+{
+  "src/game/mechanics/player.py": {
+    "exists": true,
+    "sha256": "cb3e095aebf767fd7172b8d9e41bf8ab416d1edb9763598868503b7fb2779a35"
+  },
+  "src/game/ui/menu.py": {
+    "exists": true,
+    "sha256": "f293c8d4ba782cdf60c9f3cbff4a25dd1b611ba93b4563014201b9bda17c3bcd"
+  }
+}
+
+after_ui (after operator switched to UI stage)
+{
+  "src/game/mechanics/player.py": {
+    "exists": true,
+    "sha256": "cb3e095aebf767fd7172b8d9e41bf8ab416d1edb9763598868503b7fb2779a35"
+  },
+  "src/game/ui/menu.py": {
+    "exists": true,
+    "sha256": "1f0875e6cd5f5ec33421466ed01f5208f4150b92f61beb56b233f2a61d7dcf1f"
+  }
+}
