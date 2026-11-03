@@ -100,6 +100,19 @@ class AttemptCaptureTests(unittest.TestCase):
         self.assertTrue(row['clim_denial_requested'])
         self.assertEqual(row['requested_receipt_sha256'], hashlib.sha256(receipt.encode()).hexdigest())
 
+    def test_capture_records_eof_marker_without_storing_patch(self):
+        self.configure()
+        event = self.event('tool-eof', pilot.OUTSIDE)
+        event['tool_input']['command'] = event['tool_input']['command'].replace(
+            '*** End Patch', '*** End of File\n*** End Patch')
+        capture._record(self.operator, self.project, json.dumps(event).encode(), b'{}', 10, 20)
+        raw = (self.operator/'pretool-capture.jsonl').read_text()
+        row = json.loads(raw)
+        self.assertIs(row['patch_end_of_file_marker'], True)
+        self.assertEqual(row['target'], pilot.OUTSIDE)
+        self.assertNotIn('*** Begin Patch', raw)
+        self.assertNotIn('*** End of File', raw)
+
     def test_receipt_linked_attempts_are_deduplicated_and_scoped(self):
         self.configure()
         receipt = 'clim-deny-' + 'b' * 32

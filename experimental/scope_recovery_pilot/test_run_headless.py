@@ -29,7 +29,7 @@ class HeadlessRunnerTests(unittest.TestCase):
         self.operator = self.fixture/'operator'
         self.runtime = self.fixture/'runtime'
         (self.runtime/'bin').mkdir(parents=True)
-        (self.runtime/'bin/python').write_text('#!/bin/sh\nprintf "0.3.0a2\\n"\n')
+        (self.runtime/'bin/python').write_text('#!/bin/sh\nprintf "0.3.0a2+scopefix.20261103\\n"\n')
         (self.runtime/'bin/python').chmod(0o700)
         (self.runtime/'bin/clim').write_text('#!/bin/sh\nexit 0\n')
         (self.runtime/'bin/clim').chmod(0o700)

@@ -101,6 +101,22 @@ def test_malformed_envelope_absolute_escape_and_move_target_unknown(ready):
     assert declared_targets({'command':cmd},p)==['src/api/a.py','src/client/b.py']
 
 
+@pytest.mark.parametrize(('path', 'expected'), [
+    ('src/api/a.py', 'OBSERVED_PRE'),
+    ('src/client/b.py', 'DENY_REQUESTED'),
+])
+def test_valid_end_of_file_hunk_preserves_scope_decision(ready, path, expected):
+    project, _ = ready
+    event = payload(path)
+    event['tool_input']['command'] = event['tool_input']['command'].replace(
+        '*** End Patch', '*** End of File\n*** End Patch')
+    assert declared_targets(event['tool_input'], project) == [path]
+    result = process_event(event, 'PreToolUse', project, enable_enforcement=True)
+    assert result['status'] == expected
+    if expected == 'DENY_REQUESTED':
+        assert pre_denial_output(result['enforcement'])['hookSpecificOutput']['permissionDecision'] == 'deny'
+
+
 def test_replay_is_idempotent_and_mismatch_not_authorized(ready):
     p,rt=ready
     w=_window_id('session-1','tool-1')

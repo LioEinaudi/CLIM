@@ -2,12 +2,14 @@
 
 This is a separate Linux experiment based on CLIM `v0.3.0a2`, not part of the released CLIM command or its default Hook. It asks what can actually be observed after a **controlled** out-of-stage Codex patch request. It does not claim that the model drifted spontaneously, stopped, wasted tokens, or crossed a production security boundary.
 
+Review found that the released `0.3.0a2` parser treats the valid `*** End of File` patch hunk marker as unsupported; the observer then emits no denial. This experimental branch recognizes that marker and identifies its locally built package as `0.3.0a2+scopefix.20261103`. The original release and its tag are unchanged. The fix has offline coverage, not native Host verification, and other unsupported inputs and Shell remain outside the guard's coverage.
+
 **Native status: NOT YET VERIFIED.** Offline tests and synthetic examples are not evidence that a Codex Host ran or refused a tool call. Do not publish a real boundary result until the actual Host response, matching CLIM receipt and independent file snapshots have been reviewed.
 
 ## Components
 
 - `pilot.py` prepares a new disposable Git fixture, records bounded independent snapshots, parses Codex JSONL, and creates a short `share.md` plus local `result.json` and `technical.md`. Snapshot inputs and report outputs must remain outside the project. Snapshots bind to the same project using a local path digest; old snapshots without that digest need to be recreated.
-- `attempt_capture.py` optionally wraps **only the installed CLIM PreToolUse handler in this fixture**. It forwards the delegate's stdout, stderr and exit status, and records only per-run HMACed IDs, a fixture-only target, timings, and a hash of a CLIM *requested* denial receipt. It never turns that request into a Host denial. It does not alter CLIM's global/default Hook or trust a Hook. It observes only matched PreToolUse calls; Shell is not interpreted or blocked by this adapter.
+- `attempt_capture.py` optionally wraps **only the installed CLIM PreToolUse handler in this fixture**. It forwards the delegate's stdout, stderr and exit status, and records only per-run HMACed IDs, a fixture-only target, timings, a boolean indicating the hunk marker, and a hash of a CLIM *requested* denial receipt. It never turns that request into a Host denial. It does not alter CLIM's global/default Hook or trust a Hook. It observes only matched PreToolUse calls; Shell is not interpreted or blocked by this adapter.
 - `review_manifest.py` records hashes of the project Hook, adapter, `pilot.py` dependency and installed CLIM runtime so the runner can detect changes after the operator's review. These hashes do not prove human review or Host enforcement.
 - `run_headless.py` runs a fixed in-scope or controlled-conflict `codex exec --json` task with `workspace-write`, `on-request` approvals, ephemeral sessions and a 180-second default wall-clock limit (maximum 300). It requires the caller to attest that a human reviewed the exact Hook. That attestation is not proof of enforcement. A forced stop is labeled `HARNESS_TIMEOUT`, never a CLIM token guard.
 - `verify_run_link.py` can correlate a separately captured **real** Host denial with one headless turn using the unique receipt hash, HMACed session identity, runner time bounds, and JSONL thread/turn boundaries. The generated link includes a local HMAC to detect accidental edits. Mismatch or missing evidence remains `UNKNOWN`; this is local correlation, not an authenticated attestation, since the operator holds the key. It never reads Codex's private session database.
@@ -18,7 +20,7 @@ The statement in `pilot.py`'s generated metadata that its offline harness does n
 
 ## Prepare a disposable fixture
 
-Use a new path and a separately installed CLIM `0.3.0a2` runtime. The commands below change only the new fixture and its operator directory; they do not change the user's global Codex configuration.
+Use a new path and a separately installed runtime built from this experimental branch, with version `0.3.0a2+scopefix.20261103`. The commands below change only the new fixture and its operator directory; they do not change the user's global Codex configuration.
 
 ```bash
 CLIM_PILOT=/path/to/CLIM/experimental/scope_recovery_pilot
@@ -26,7 +28,7 @@ CLIM_FIXTURE=/tmp/clim-scope-retry-pilot-001
 python3 "$CLIM_PILOT/pilot.py" prepare --root "$CLIM_FIXTURE" --acknowledge-disposable
 CLIM_PROJECT="$CLIM_FIXTURE/project"
 CLIM_OPERATOR="$CLIM_FIXTURE/operator"
-CLIM_RUNTIME=/path/to/venv-containing-clim-0.3.0a2
+CLIM_RUNTIME=/path/to/venv-containing-clim-0.3.0a2+scopefix.20261103
 export CLIM_HOME="$CLIM_OPERATOR/clim-state"
 export PATH="$CLIM_RUNTIME/bin:$PATH"
 python3 "$CLIM_PILOT/pilot.py" snapshot --project "$CLIM_PROJECT" --out "$CLIM_OPERATOR/before.json"

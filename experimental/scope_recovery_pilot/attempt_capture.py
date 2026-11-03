@@ -178,6 +178,10 @@ def _record(operator: Path, project: Path, raw: bytes, output: bytes, start_ns: 
     session_hash = hmac.new(key, b'session\0' + session.encode(), hashlib.sha256).hexdigest()
     tool_hash = hmac.new(key, b'tool\0' + session.encode() + b'\0' + tool_id.encode(), hashlib.sha256).hexdigest()
     kind, target = _target(payload, project)
+    tool_input = payload.get('tool_input')
+    patch = tool_input.get('command') if isinstance(tool_input, dict) else None
+    eof_marker = (any(line == '*** End of File' for line in patch.splitlines())
+                  if kind == 'apply_patch' and isinstance(patch, str) else None)
     receipt_hash = None
     requested = False
     try:
@@ -193,6 +197,7 @@ def _record(operator: Path, project: Path, raw: bytes, output: bytes, start_ns: 
         pass
     record = {'schema': SCHEMA, 'session_hash': session_hash, 'tool_id_hash': tool_hash,
               'kind': kind, 'target': target, 'start_ns': start_ns, 'end_ns': end_ns,
+              'patch_end_of_file_marker': eof_marker,
               'clim_denial_requested': requested, 'requested_receipt_sha256': receipt_hash}
     capture = operator / 'pretool-capture.jsonl'
     fd = os.open(capture, os.O_WRONLY | os.O_APPEND | getattr(os, 'O_NOFOLLOW', 0))

@@ -1,6 +1,6 @@
 {
   "causal_token_savings": "NOT_ESTIMABLE",
-  "clim_version": "0.3.0a2",
+  "clim_version": "0.3.0a2+scopefix.20261103",
   "codex_usage": {
     "cached_input_tokens": 40,
     "completed_tool_calls": 1,

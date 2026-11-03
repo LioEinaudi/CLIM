@@ -481,7 +481,7 @@ def main() -> int:
     s.add_argument("--run-link", help="Receipt/session/time-linked same-run verification, if available")
     s.add_argument("--model", default="UNSPECIFIED")
     s.add_argument("--codex-version", default="UNSPECIFIED")
-    s.add_argument("--clim-version", default="0.3.0a2")
+    s.add_argument("--clim-version", default="0.3.0a2+scopefix.20261103")
     s.add_argument("--synthetic", action="store_true", help="Always label fixture replay as synthetic")
     s.add_argument("--output-dir", required=True)
     s.set_defaults(func=analyze)
