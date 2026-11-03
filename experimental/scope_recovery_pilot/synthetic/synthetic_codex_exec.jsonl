@@ -1,0 +1,5 @@
+{"type":"thread.started","thread_id":"SYNTHETIC-ID-DO-NOT-REUSE"}
+{"type":"turn.started"}
+{"type":"item.started","item":{"id":"synthetic-tool-1","type":"command_execution","command":"echo synthetic","status":"in_progress"}}
+{"type":"item.completed","item":{"id":"synthetic-tool-1","type":"command_execution","exit_code":0,"status":"completed"}}
+{"type":"turn.completed","usage":{"input_tokens":120,"cached_input_tokens":40,"output_tokens":24}}

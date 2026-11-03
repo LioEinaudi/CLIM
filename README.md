@@ -1,12 +1,14 @@
 # CLIM — Intercept Out-of-Scope Codex Patches
 
+**Linux Community Alpha package version: `0.3.0a3`.**
+
 **Your task needs one folder. A Codex patch can still target another.**
 
 Asked Codex to work in one part of your project, but encountered a proposed edit elsewhere? **CLIM** lets you register which files belong to the current stage. With experimental enforcement **explicitly enabled**, it asks the **native Codex Host** to refuse a supported out-of-stage `apply_patch` **before execution**. CLIM also records local request/observation evidence so you can inspect what was attempted and what was observed.
 
 ### A real Linux test, in three text frames
 
-The following is a **controlled** Codex CLI test. The operator deliberately requested a stage-conflicting patch; it is **not evidence of spontaneous agent drift**.
+The following is an earlier **controlled** Codex CLI test of the October 29 UX v3 source. The operator deliberately requested a stage-conflicting patch; it is **not evidence of spontaneous agent drift** or proof that a later build has been tested.
 
 **1 · Outside-stage request** — Allowed stage: `src/game/mechanics/**`. The actual Codex tool request targeted `src/game/ui/menu.py`.
 
@@ -24,9 +26,13 @@ The following is a **controlled** Codex CLI test. The operator deliberately requ
 
 **Requires:** Linux, Python 3.10+, local Codex CLI with project Hook support, a terminal. Not available for web-only Codex sessions.
 
+Once the `v0.3.0a3` tag is published, install that fixed version:
+
 ```bash
-python -m pip install 'git+https://github.com/LioEinaudi/CLIM.git@v0.3.0a2'
+python -m pip install 'git+https://github.com/LioEinaudi/CLIM.git@v0.3.0a3'
 ```
+
+`v0.3.0a2` has a known coverage gap for valid patches containing `*** End of File`; the `0.3.0a3` source fixes that specific parser case.
 
 Create a fresh, non-production repository containing `src/game/mechanics/`; then, from its root:
 
@@ -49,6 +55,10 @@ To return to ordinary observation mode:
 ```bash
 clim codex install-hook --project .
 ```
+
+### Codex Scope & Retry Check
+
+The [experimental Scope & Retry Check](experimental/scope_recovery_pilot/README.md) runs a controlled fixture and reports the Host decision, observed follow-up and whole-turn usage with explicit coverage limits. It does not attribute tokens to a refusal or claim token savings.
 
 ### What CLIM is—and is not
 

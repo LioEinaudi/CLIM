@@ -67,6 +67,9 @@ def declared_targets(tool_input: Any, project: Path) -> list[str]:
             path = line[len('*** Delete File: '):]
         elif line.startswith('*** Move to: '):
             path = line[len('*** Move to: '):]
+        elif line == '*** End of File':
+            # A valid hunk terminator, not another target declaration.
+            continue
         else:
             raise ContractError('M3B_PATCH_SYNTAX_UNKNOWN')
         # Resource validation also rejects whitespace/control ambiguities and
