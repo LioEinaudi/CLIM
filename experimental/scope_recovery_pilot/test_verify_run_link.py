@@ -63,6 +63,27 @@ class RunLinkTests(unittest.TestCase):
         self.events.write_text(self.events.read_text()+'\n')
         self.assertEqual(pilot.same_run_link(link,self.events,self.host),'UNKNOWN')
 
+    def test_generated_card_uses_the_same_linked_evidence_as_result_json(self):
+        link = self.operator/'run-link.json'
+        link.write_text(json.dumps(verify_run_link.verify(self.args())))
+        before = self.operator/'before.json'
+        after = self.operator/'after.json'
+        pilot.write_json(before, pilot.collect_snapshot(self.project))
+        pilot.write_json(after, pilot.collect_snapshot(self.project))
+        output = self.operator/'report'
+        pilot.analyze(argparse.Namespace(before=str(before), after=str(after), events=str(self.events),
+            host_feedback=str(self.host), watch_feedback=None, attempts=None, run_link=str(link),
+            model='UNSPECIFIED', codex_version='synthetic', clim_version='0.3.0a3',
+            synthetic=True, output_dir=str(output)))
+        result = json.loads((output/'result.json').read_text())
+        share = (output/'share.md').read_text()
+        self.assertEqual(result['codex_usage']['native_run_total_tokens'], 12)
+        self.assertEqual(share, pilot.render_share(result))
+        self.assertTrue(share.startswith('CONTROLLED TEST · SINGLE RUN · NO TOKEN SAVINGS CLAIM\n'))
+        self.assertIn('Same-turn tokens: **12**', share)
+        self.assertIn('tokens_after_denial = **NOT_AVAILABLE**', share)
+        self.assertNotIn(self.receipt, share)
+
     def test_other_session_or_incomplete_run_cannot_be_linked(self):
         self.write_events('other-session');self.write_meta()
         result=verify_run_link.verify(self.args())

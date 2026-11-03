@@ -117,6 +117,17 @@ def test_valid_end_of_file_hunk_preserves_scope_decision(ready, path, expected):
         assert pre_denial_output(result['enforcement'])['hookSpecificOutput']['permissionDecision'] == 'deny'
 
 
+def test_unknown_patch_with_eof_marker_is_not_misreported_as_blocked(ready):
+    project, _ = ready
+    event = payload()
+    event['tool_input']['command'] = event['tool_input']['command'].replace(
+        '*** End Patch', '*** End of File\n*** Unknown Header: test\n*** End Patch')
+    result = process_event(event, 'PreToolUse', project, enable_enforcement=True)
+    assert result['status'] == 'UNKNOWN'
+    assert result['reason'] == 'M3B_PATCH_SYNTAX_UNKNOWN'
+    assert not pre_denial_output(result.get('enforcement'))
+
+
 def test_replay_is_idempotent_and_mismatch_not_authorized(ready):
     p,rt=ready
     w=_window_id('session-1','tool-1')

@@ -228,7 +228,7 @@ class PilotTests(unittest.TestCase):
         out = self.root/'reports'
         pilot.analyze(argparse.Namespace(before=str(before), after=str(after), events=str(events),
                      host_feedback=str(native), watch_feedback=None, attempts=None,
-                     model='test-model', codex_version='0.165.0', clim_version='0.3.0a2',
+                     model='test-model', codex_version='0.165.0', clim_version='0.3.0a3',
                      synthetic=True, output_dir=str(out)))
         report = json.loads((out/'result.json').read_text())
         self.assertEqual(report['codex_usage']['total_tokens'], 115)
@@ -236,9 +236,14 @@ class PilotTests(unittest.TestCase):
         self.assertIsNone(report['codex_usage']['native_run_total_tokens'])
         self.assertEqual(report['post_refusal']['tokens_after_denial'], 'NOT_AVAILABLE')
         self.assertTrue(report['synthetic'])
-        self.assertIn('SYNTHETIC', (out/'share.md').read_text())
-        self.assertNotIn('115', (out/'share.md').read_text())
-        self.assertNotIn('clim-deny-', (out/'share.md').read_text())
+        share = (out/'share.md').read_text()
+        self.assertTrue(share.startswith('CONTROLLED TEST · SINGLE RUN · NO TOKEN SAVINGS CLAIM\n'))
+        for field in ('Host decision:', 'Post-refusal behavior:', 'Repeated target attempts:',
+                      'Same-turn tokens:', 'tokens_after_denial = **NOT_AVAILABLE**', 'cached input'):
+            self.assertIn(field, share)
+        self.assertIn('SYNTHETIC', share)
+        self.assertNotIn('115', share)
+        self.assertNotIn('clim-deny-', share)
 
 
 if __name__ == '__main__':

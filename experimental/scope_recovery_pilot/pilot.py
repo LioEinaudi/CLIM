@@ -351,6 +351,25 @@ def status(v) -> str:
     return "NOT_AVAILABLE" if v is None else str(v)
 
 
+def render_share(result: dict) -> str:
+    """Render only the same structured result written to result.json."""
+    host, files = result["native_host"], result["independent_files"]
+    follow_up, tokens = result["post_refusal"], result["codex_usage"]
+    prefix = ("SYNTHETIC / DO NOT POST AS REAL RESULTS" if result["synthetic"] else
+              "USER-SUPPLIED EVIDENCE / NOT INDEPENDENTLY AUDITED")
+    total = tokens["native_run_total_tokens"]
+    shown_total = f"{total:,}" if type(total) is int else status(total)
+    lines = ["CONTROLLED TEST · SINGLE RUN · NO TOKEN SAVINGS CLAIM",
+             f"### Codex Scope & Retry Check — {prefix}",
+             f"- Versions: Codex **{result['codex_version']}** · CLIM **{result['clim_version']}**",
+             f"- Host decision: **{host['decision']}** (receipt match: {host['receipt_match']})",
+             f"- Post-refusal behavior: **{follow_up['post_refusal_behavior']}** (captured Hook events only)",
+             f"- Repeated target attempts: **{status(follow_up['repeated_target_attempts'])}** (captured events only)",
+             f"- Same-turn tokens: **{shown_total}** (`{tokens['status']}`; same-run link: {tokens['same_native_run']}; input includes cached input when reported); tokens_after_denial = **{follow_up['tokens_after_denial']}**",
+             f"- Sampled outside file: **{files['outside_target']}**; in-scope control: **{files['in_scope_control']}**; task outcome: **{result['task_outcome']}**"]
+    return "\n".join(lines) + "\n"
+
+
 def same_run_link(path: Path | None, events: Path | None, host: Path | None) -> str:
     """Accept only a locally checked link bound to these exact evidence files."""
     if path is None or events is None or host is None:
@@ -430,13 +449,7 @@ def analyze(args: argparse.Namespace) -> None:
                   "Harness does not auto-trust Hooks, invoke Codex, or bypass sandbox settings"]}
     write_json(out / "result.json", result)
     prefix = "SYNTHETIC / DO NOT POST AS REAL RESULTS" if args.synthetic else "USER-SUPPLIED EVIDENCE / NOT INDEPENDENTLY AUDITED"
-    lines = [f"### Codex Scope & Retry Check — {prefix} (controlled conflict)",
-             f"- Host refusal: **{host['decision']}** (`{host['source']}`)",
-             f"- Outside file at sampled snapshots: **{files['outside_target']}**",
-             f"- Later captured attempts: **{follow_up['post_refusal_behavior']}**; same target: **{status(follow_up['repeated_target_attempts'])}**",
-             f"- Same-run completed-turn tokens: **{status(tokens['native_run_total_tokens'])}** (`{tokens['status']}`; link: {tokens['same_native_run']}); post-refusal tokens: **NOT_AVAILABLE**",
-             f"- In-scope control: **{files['in_scope_control']}**; task outcome: **NOT_ASSESSED**"]
-    (out / "share.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (out / "share.md").write_text(render_share(result), encoding="utf-8")
     tech = ["# Local technical record (metadata only)", "", prefix,
             "", "## Evidence provenance", f"- Host text: {host['source']}",
             f"- Receipt consistency: {host['receipt_match']}",
@@ -481,7 +494,7 @@ def main() -> int:
     s.add_argument("--run-link", help="Receipt/session/time-linked same-run verification, if available")
     s.add_argument("--model", default="UNSPECIFIED")
     s.add_argument("--codex-version", default="UNSPECIFIED")
-    s.add_argument("--clim-version", default="0.3.0a2+scopefix.20261103")
+    s.add_argument("--clim-version", default="0.3.0a3")
     s.add_argument("--synthetic", action="store_true", help="Always label fixture replay as synthetic")
     s.add_argument("--output-dir", required=True)
     s.set_defaults(func=analyze)

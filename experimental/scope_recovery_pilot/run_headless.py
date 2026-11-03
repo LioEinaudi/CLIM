@@ -74,8 +74,8 @@ def run(args: argparse.Namespace) -> dict:
     python = runtime/'bin/python'
     version = subprocess.check_output([str(python), '-c',
         "from importlib.metadata import version; print(version('clim-agent-guard'))"], text=True, timeout=10).strip()
-    if version != '0.3.0a2+scopefix.20261103':
-        raise ValueError('Expected the locally patched CLIM 0.3.0a2+scopefix.20261103 runtime')
+    if version != '0.3.0a3':
+        raise ValueError('Expected the CLIM 0.3.0a3 runtime')
     codex = shutil.which('codex')
     if not codex:
         raise ValueError('codex CLI not found')
